@@ -11,20 +11,20 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: "/საწყისი",
+        path: "საწყისი",
         component: HomeComponent
     },
     {
-        path: "/რეისები",
+        path: "რეისები",
         component: TrainsComponent
     },{
-        path: "/მგზავრთა მონაცემები",
+        path: "მგზავრთა მონაცემები",
         component: CustomersComponent
     },{
-        path: "/გადახდა",
+        path: "გადახდა",
         component: PaymentComponent
     },{
-        path: "/ჯავშნები",
+        path: "ჯავშნები",
         component: TktCheckReturnComponent
     },
 ];

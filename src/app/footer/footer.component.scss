@@ -1,0 +1,17 @@
+@use "helper-collector" as *;
+
+footer{
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    bottom: 0px;
+    padding: 0px 120px;
+
+    p{
+        font-size: 17px;
+
+        span{
+            color: $footerColors-1;
+        }
+    }
+}
