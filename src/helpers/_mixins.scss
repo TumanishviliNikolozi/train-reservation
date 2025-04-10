@@ -16,3 +16,13 @@
     justify-content: $justify;
     align-items: $align;
 }
+
+@mixin display-flex-justify-content($justify){
+    display: flex;
+    justify-content: $justify;
+}
+
+@mixin display-flex-align-items($align){
+    display: flex;
+    align-items: $align;
+}
