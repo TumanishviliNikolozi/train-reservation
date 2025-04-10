@@ -1,0 +1,4 @@
+@use "helper-collector" as *;
+p{
+    @include display-flex-all-center;
+}
