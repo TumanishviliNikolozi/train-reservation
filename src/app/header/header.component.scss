@@ -10,12 +10,15 @@ header{
     top: 0px;
 
     nav{
-        width: 90%;
+        width: 100%;
         @include display-flex-align-items(center);
 
         ul{
+            width: 100%;
             @include display-flex-align-items(center);
             gap: 30px;
+            justify-content: space-between;
+
             li{
                 list-style-type: none;
 

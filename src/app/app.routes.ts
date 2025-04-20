@@ -17,14 +17,17 @@ export const routes: Routes = [
     {
         path: "რეისები",
         component: TrainsComponent
-    },{
+    },
+    {
         path: "მგზავრთა მონაცემები",
         component: CustomersComponent
-    },{
+    },
+    {
         path: "გადახდა",
         component: PaymentComponent
-    },{
+    },
+    {
         path: "ჯავშნები",
         component: TktCheckReturnComponent
-    },
+    }
 ];

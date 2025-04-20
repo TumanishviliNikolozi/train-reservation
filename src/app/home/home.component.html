@@ -1,1 +1,41 @@
-<p>home works!</p>
+<section class="bg-gradiant">
+    <div class="bg-gradiant-text">
+        <h1><span>შეიძინეთ მატარებლის ბილეთები ონლაინ</span></h1>
+        <p><span>გისურვებთ ბედნიერ მგზავრობას</span></p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+        <h2><span>დაჯავშნეთ მატარებლის ბილეთი</span></h2>
+        <div class="input-holder">
+            <label for="whereFrom"></label>
+            <select [(ngModel)]="whereFrom" name="whereFrom" id="whereFrom" required>
+                <option value="" selected>საიდან</option>
+                @for(station of myStations; track station){
+                    <option [value]="station.name">{{station.name}}</option>
+                }
+            </select>
+        </div>
+        <div class="input-holder">
+            <label for="destination"></label>
+            <select [(ngModel)]="destination" name="destination" id="destination" required>
+                <option value="" selected>სად</option>
+                @for(station of myStations; track station){
+                    <option [value]="station.name">{{station.name}}</option>
+                }
+            </select>
+        </div>
+        <div class="input-holder">
+            <label for="date"></label>
+            <input [(ngModel)]="date" name="date" type="date" id="date" required>
+        </div>
+        <div class="input-holder">
+            <label for="passengers"></label>
+            <input [(ngModel)]="passengers" name="passengers" type="number" id="passengers" required>
+        </div>
+
+        <button type="submit">მატარებლის მოძებნა</button>
+    </form>
+</section>
+
+
+
