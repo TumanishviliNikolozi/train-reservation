@@ -4,41 +4,55 @@
         <p><span>გისურვებთ ბედნიერ მგზავრობას</span></p>
     </div>
 
-    <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
         <h2><span>დაჯავშნეთ მატარებლის ბილეთი</span></h2>
-
-        <div class="input-holder">
+    
+        <div class="input-holder" #departureElement>
             <input type="hidden" name="whereFrom" [(ngModel)]="whereFrom" #whereFromModel="ngModel" required>
             <div class="selection" data-value="whereFrom" [class.invalid]="whereFromModel.invalid && whereFromModel.touched">
-                <p>{{whereFrom === ""? "საიდან" : whereFrom}}</p>
-                <div class="select-dropdown">
+                <p (click)="toggleDepartureClass()">{{whereFrom === ""? "საიდან" : whereFrom}}</p>
+                <div class="select-arrow" (click)="toggleDepartureClass()" [class.active-arrow]="isActiveDeparture()">
+                    <i class="fa-solid fa-square-caret-down"></i>
+                </div>
+                <div class="select-dropdown" [class.active-dropdown]="isActiveDeparture()">
                     @for(station of myStations; track station){
-                        <div (click)="startingStation(station.name); whereFromModel.control.markAsTouched()">{{station.name}}</div>
+                        <div class="city-name" (click)="startingStation(station.name); whereFromModel.control.markAsTouched(); toggleDepartureClass()">{{station.name}}</div>
                     }
                 </div>
             </div>
         </div>
-
-        <div class="input-holder">
+    
+        <div class="input-holder" #ArrivalElement>
             <input type="hidden" name="destination" [(ngModel)]="destination" #destinationModel="ngModel" required>
             <div class="selection" data-value="destination" [class.invalid]="destinationModel.invalid && destinationModel.touched">
-                <p>{{destination === ""? "საიდან" : destination}}</p>
-                <div class="select-dropdown">
+                <p (click)="toggleArrivalClass()">{{destination === ""? "საიდან" : destination}}</p>
+                <div class="select-arrow"  (click)="toggleArrivalClass()" [class.active-arrow]="isActiveArrival()">
+                    <i class="fa-solid fa-square-caret-down"></i>
+                </div>
+                <div class="select-dropdown" [class.active-dropdown]="isActiveArrival()">
                     @for(station of myStations; track station){
-                        <div (click)="endingStation(station.name); destinationModel.control.markAsTouched()">{{station.name}}</div>
+                        <div class="city-name" (click)="endingStation(station.name); destinationModel.control.markAsTouched(); toggleArrivalClass()">{{station.name}}</div>
                     }
                 </div>
             </div>
         </div>
         <div class="input-holder">
-            <label for="date"></label>
-            <input [(ngModel)]="date" name="date" type="date" id="date" required>
+            <div class="calendar-container">
+                <!-- <label for="date"><i class="fa-solid fa-calendar-days"></i></label> -->
+                <input type="date" id="date" [(ngModel)]="date" name="date" required>
+            </div>
         </div>
         <div class="input-holder">
-            <label for="passengers"></label>
-            <input [(ngModel)]="passengers" name="passengers" type="number" id="passengers" required>
+            <!-- <label for="passengers"></label>
+            <input type="number" class="guest-input" id="passengers" [(ngModel)]="passengers" name="passengers" required> -->
+            
+            <div class="inc-dec-container">
+                <div class="decrement" (click)="passengerNumber(-1)"><i class="fa-solid fa-minus"></i></div>
+                <p>{{passengers}}</p>
+                <div class="increment" (click)="passengerNumber(1)"><i class="fa-solid fa-plus"></i></div>
+            </div>
         </div>
-
+    
         <button type="submit" [disabled]="form.invalid">მატარებლის მოძებნა</button>
         <button type="reset" (click)="reset()">ახლიდან</button>
     </form>

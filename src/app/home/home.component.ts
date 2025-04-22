@@ -1,18 +1,22 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, ElementRef, NgModule, signal, viewChild, HostListener } from '@angular/core';
 import { APIsService } from '../services/apis.service';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
+
 export class HomeComponent {
-  constructor(public service:APIsService, private router:Router){
+  constructor(private service:APIsService, private router:Router){
     this.AllStations();
   }
+
+  // ------------- importing API info from servises --------------
 
   public myStations:any;
 
@@ -23,6 +27,8 @@ export class HomeComponent {
     })
   }
 
+  // ------------- importing API info from servises (end) --------------
+
 
 
   public whereFrom:string = "";
@@ -30,19 +36,31 @@ export class HomeComponent {
   public date:string = "";
   public passengers:number = 1;
 
+  passengerNumber(passenger:number){
+    // console.log(passenger)
+    this.passengers += passenger;
+
+    if(this.passengers < 1){
+      this.passengers = 1;
+    }
+    // console.log(this.passengers)
+  }
+
   startingStation(name:any){
     this.whereFrom = name;
+    console.log(this.whereFrom);
   }
 
   endingStation(name:any){
     this.destination = name;
+    console.log(this.destination);
   }
 
   onSubmit(){
-    console.log(this.whereFrom)
-    console.log(this.destination)
-    console.log(this.date)
-    console.log(this.passengers)
+    console.log(this.whereFrom);
+    console.log(this.destination);
+    console.log(this.date);
+    console.log(this.passengers);
 
     // this.router.navigate(['/რეისები'], {
     //   queryParams: {
@@ -61,6 +79,47 @@ export class HomeComponent {
     this.passengers = 1;
   }
 
+
+
+
+
+  // --------------------- dropdown manus ---------------------
+
+  departureDropdown = viewChild<ElementRef>('departureElement');
+  arrivalDropdown = viewChild<ElementRef>('ArrivalElement');
+
+  isActiveDeparture = signal(false);
+  isActiveArrival = signal(false)
+
+  toggleDepartureClass(){
+    this.isActiveDeparture.update((value) => !value);
+    // console.log(this.isActiveDeparture())
+  }
+
+  toggleArrivalClass(){
+    this.isActiveArrival.update((value) => !value);
+    // console.log(this.isActiveArrival())
+  }
+
+  @HostListener('document:click', ['$event'])
+
+  handleOutsideClick(event: MouseEvent){
+    // console.log('CLICK:', event.target);
+    const departureDropdownContainer = this.departureDropdown();
+    const arrivalDropdownContainer = this.arrivalDropdown();
+
+    const departureClickedInside = departureDropdownContainer?.nativeElement.contains(event.target);
+    const arrivalClickedInside = arrivalDropdownContainer?.nativeElement.contains(event.target);
+
+    // console.log('Inside?', clickedInside);
+    if(!departureClickedInside){
+      this.isActiveDeparture.set(false);
+    }
+
+    if(!arrivalClickedInside){
+      this.isActiveArrival.set(false);
+    }
+  }
   
 
 }
