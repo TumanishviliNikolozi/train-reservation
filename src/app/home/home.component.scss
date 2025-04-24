@@ -7,8 +7,8 @@
     top: -100px;
     padding-top: 170px;
     background: linear-gradient(89.58deg,
-    rgba(117, 168, 226, 0.3) 0.34%, 
-    rgba(255, 255, 255, 0) 99.64%);
+    $gradiantColor-1 0.34%, 
+    $primaryColor-1 99.64%);
 
     .bg-gradiant-text{
         max-width: 1280px;

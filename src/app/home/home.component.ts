@@ -1,12 +1,12 @@
 import { Component, ElementRef, NgModule, signal, viewChild, HostListener } from '@angular/core';
 import { APIsService } from '../services/apis.service';
-import { FormControl, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -62,14 +62,14 @@ export class HomeComponent {
     console.log(this.date);
     console.log(this.passengers);
 
-    // this.router.navigate(['/რეისები'], {
-    //   queryParams: {
-    //     whereFrom: this.whereFrom,
-    //     destination:this.destination,
-    //     date:this.date,
-    //     passengers:this.passengers
-    //   }
-    // })
+    this.router.navigate(['/რეისები'], {
+      queryParams: {
+        whereFrom: this.whereFrom,
+        destination:this.destination,
+        date:this.date,
+        passengers:this.passengers
+      }
+    })
   }
 
   reset(){
