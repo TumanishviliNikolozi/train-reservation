@@ -11,7 +11,7 @@ import { WeekDay } from '@angular/common';
   styleUrl: './trains.component.scss'
 })
 export class TrainsComponent implements OnInit{
-  constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private api:HttpClient){
+  constructor(private router:Router, private route:ActivatedRoute, private api:HttpClient){
 
   }
 
@@ -21,6 +21,8 @@ export class TrainsComponent implements OnInit{
   public passengers!:number;
 
   public trains:any[] = [];
+
+  public ifEmptyTrains:boolean = false;
 
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
@@ -33,7 +35,7 @@ export class TrainsComponent implements OnInit{
       
       // console.log(this.whereFrom)
       // console.log(this.destination)
-      // console.log(this.date)
+      console.log('Oninit',this.date)
       
     })
 
@@ -45,12 +47,15 @@ export class TrainsComponent implements OnInit{
   }
 
 
+  // -------------------- train filter --------------------------
+
   fetchTrains(){
     const trainLink = 'https://railway.stepprojects.ge/api/departures';
     let params = new HttpParams()
     .set('source', this.whereFrom)
     .set('destination', this.destination)
     .set('date', this.date);
+    console.log('Date:', this.date)
 
     this.api.get<any[]>(trainLink, {params}).subscribe((response:any[]) => {
       console.log("ApiResponse", response);
@@ -62,7 +67,11 @@ export class TrainsComponent implements OnInit{
           train.date === wantedWeekDay
         );
       })?.[0]?.trains || []
-      console.log(this.trains)
+      console.log(this.trains);
+
+      if(this.trains.length === 0){
+        this.ifEmptyTrains = true;
+      }
     },
     (error) => {
       console.error("TrainsError:", error)
@@ -78,6 +87,20 @@ export class TrainsComponent implements OnInit{
     // console.log(weekDay)
     // console.log(typeof(weekDay))
     return weekDay
+  }
+
+
+
+  // ----------------- info to reservation ------------------
+
+  chosenTrainInfo(trainInfo:any){
+    this.router.navigate(['/მგზავრთა მონაცემები'], {
+      queryParams:{
+        trainInfo: JSON.stringify(trainInfo),
+        rawDate: this.date,
+        passengers: this.passengers
+      }
+    })
   }
   
 }

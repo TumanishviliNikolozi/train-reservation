@@ -8,9 +8,12 @@ footer{
     padding: 0px 120px;
 
     p{
-        font-size: 17px;
+        max-width: 2000px;
+        @include width-height-100;
+        margin: 0px auto;
 
         span{
+            font-size: 17px;
             color: $footerColors-1;
         }
     }

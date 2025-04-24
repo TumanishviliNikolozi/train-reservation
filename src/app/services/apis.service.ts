@@ -33,6 +33,10 @@ export class APIsService {
     return this.apis.get("https://railway.stepprojects.ge/api/departures");
   }
 
+  getDepartureById(from:string, to:string, date:any){
+    return this.apis.get(`https://railway.stepprojects.ge/api/getdeparture?from=${from}&to=${to}&date=${date}`)
+  }
+
   getAllTickets(){
     return this.apis.get("https://railway.stepprojects.ge/api/tickets");
   }

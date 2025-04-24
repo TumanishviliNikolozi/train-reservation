@@ -1,10 +1,10 @@
 @use "helper-collector" as *;
 
-header{
+.page-title{
     width: 100%;
-    height: 300px;
+    height: 270px;
     @include display-flex-justify-content(center);
-    margin-bottom: 200px;
+    margin-bottom: 150px;
     background-color: $backgroundColor-3;
 
     h1{
@@ -14,7 +14,130 @@ header{
         
         span{
             font-family: roboto;
-            color: white;
+            color: $primaryColor-1;
+        }
+    }
+}
+
+main{
+    max-width: 1280px;
+    @include width-height-100;
+    margin: 0px auto 100px;
+
+    .main-title{
+        width: 100%;
+        height: 50px;
+        @include display-flex-all-center;
+        margin-bottom: 15px;
+
+        h2{
+            color: $primaryColor-4;
+            font-size: 25px;
+            font-weight: 200;
+        }
+    }
+
+    .train-list-header{
+        width: 100%;
+        height: 50px;
+        display: grid;
+        grid-template-columns: 35% 25% 25% 15%;
+        border: 1px solid $borderColor-3;
+
+        p{
+            @include width-height-100;
+            @include display-flex-align-items(center);
+            padding-left: 20px;
+
+            span{
+                color: $primaryColor-4;
+            }
+        }
+    }
+
+    .train-list{
+        width: 100%;
+        min-height: 500px;
+        height: 100%;
+        position: relative;
+
+        .each-train{
+            width: 100%;
+            height: 130px;
+            display: grid;
+            grid-template-columns: 35% 25% 25% 15%;
+            margin-bottom: 30px;
+            background-color: $backgroundColor-4;
+
+            .train-info-segment{
+                @include width-height-100;
+                @include display-flex-align-items(center);
+
+                p{
+                    width: 100%;
+                    padding: 25px;
+                    @include display-flex-direction-column(center, start);
+                    gap: 10px;
+                    border-right: 1px dashed $borderColor-3;
+
+                    span{
+                        font-size: 18px;
+                        color: $primaryColor-4;
+                        font-family: roboto;
+                    }
+                }
+            }
+
+            .train-batton-segment{
+                @include width-height-100;
+                @include display-flex-all-center;
+
+                button{
+                    width: 65%;
+                    height: 50px;
+                    background-color: $buttonColor-1;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 20px;
+                    color: $primaryColor-1;
+                    font-weight: 200;
+                    cursor: pointer;
+                    transition: 0.3s ease;
+
+                    &:hover{
+                        transition: 0.3s ease;
+                        background-color: $buttonHoverColor-1;
+                    }
+                }
+            }
+        }
+
+        .no-trains{
+            @include display-flex-all-center;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: $backgroundColor-4;
+
+            p{
+                max-width: 200px;
+                width: 100%;
+                text-align: center;
+                @include display-flex-direction-column(start, center);
+
+                i{
+                    margin-bottom: 20px;
+                    font-size: 55px;
+                    color: $warningColor-1;
+                }
+
+                span{
+                    font-size: 25px;
+                    color: $primaryColor-4;
+                }
+            }
         }
     }
 }

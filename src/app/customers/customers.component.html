@@ -1,1 +1,74 @@
-<p>customers works!</p>
+<header class="page-title">
+    <h1><span>მგზავრების მონაცემები</span></h1>
+</header>
+
+<main>
+    <section class="personal-info-container">
+        <header class="main-title">
+            <h2><span>შეიყვანეთ თქვენი მონაცემები</span></h2>
+        </header>
+
+        <section class="each-train">
+            <div class="train-info-segment">
+                <p>
+                    <span>#{{trainInfo.number}}</span>
+                    <span>{{trainInfo.name}} <span>Express</span></span>
+                </p>
+            </div>
+            <div class="train-info-segment">
+                <p>
+                    <span>{{trainInfo.departure}}</span>
+                    <span>{{trainInfo.from}}</span>
+                </p>
+            </div>
+            <div class="train-info-segment">
+                <p>
+                    <span>{{trainInfo.arrive}}</span>
+                    <span>{{trainInfo.to}}</span>
+                </p>
+            </div>
+        </section>
+
+        <div class="dotted-line"></div>
+
+        <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="sendTKTInfo()">
+            <header class="form-header">
+                <h3><span>საკონტაქტო ინფორმაცია</span></h3>
+            </header>
+
+            <section class="contact-info-container">
+                <input type="email" name="email" formControlName="email" autocomplete="off" placeholder="მეილი">
+                <input type="number" name="phoneNumber" formControlName="phoneNumber" autocomplete="off" placeholder="ტელეფონის ნომერი">
+            </section>
+
+            <div class="passenger-info-title">
+                <h3><span>მგზავრების ინფორმაცია</span></h3>
+            </div>
+
+            <section class="passenger-info-container" formArrayName="people">
+                @for(passenger of people.controls; track passenger; let i = $index){
+                    <div class="passenger-info" [formGroupName]="i">
+                        <p class="passenger-count"><span>მგზავრი {{i + 1}}</span></p>
+
+                        <div class="passenger-inputs">
+                            <div class="passenger-place">
+                                <span>ადგილი:</span>
+                                <span>ჩასვი</span>
+                            </div>
+
+                            <input type="text" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
+                            <input type="text" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
+                            <input type="number" name="idNumber" formControlName="idNumber" autocomplete="off" placeholder="პირადი ნომერი">
+
+                            <button>ადგილის არჩევა</button>
+                        </div>
+                    </div>
+                }
+            </section>
+        </form>
+    </section>
+
+    <section class="invoice-container">
+
+    </section>
+</main>

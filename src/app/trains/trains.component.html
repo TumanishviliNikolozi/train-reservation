@@ -1,14 +1,51 @@
-<header>
+<header class="page-title">
     <h1><span>აირჩიეთ სასურველი მატარებელი</span></h1>
 </header>
 
-<h2><span>მატარებლების ჩამონათვალი</span></h2>
-
-<section>
-    <div class="train-list-header">
+<main>
+    <header class="main-title">
+        <h2><span>მატარებლების ჩამონათვალი</span></h2>
+    </header>
+    <section class="train-list-header">
         <p><span>მატარებლის სახელი</span></p>
         <p><span>გამგზავრება</span></p>
         <p><span>ჩასვლა</span></p>
         <p></p>
-    </div>
-</section>
+    </section>
+
+    <section class="train-list">
+        @for(train of trains; track train){
+            @if(train){
+                <section class="each-train">
+                    <div class="train-info-segment">
+                        <p>
+                            <span>#{{train.number}}</span>
+                            <span>{{train.name}} <span>Express</span></span>
+                        </p>
+                    </div>
+                    <div class="train-info-segment">
+                        <p>
+                            <span>{{train.departure}}</span>
+                            <span>{{train.from}}</span>
+                        </p>
+                    </div>
+                    <div class="train-info-segment">
+                        <p>
+                            <span>{{train.arrive}}</span>
+                            <span>{{train.to}}</span>
+                        </p>
+                    </div>
+                    <div class="train-batton-segment">
+                        <button (click)="chosenTrainInfo(train)">დაჯავშნა</button>
+                    </div>
+                </section>
+            }
+        }
+        <div class="no-trains" [style.display]="ifEmptyTrains? 'flex' : 'none'">
+            <p>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>მატარებელი ვერ მოიძებნა!</span>
+            </p>
+        </div>
+    </section>
+</main>

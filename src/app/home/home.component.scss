@@ -16,21 +16,27 @@
         margin: 0px auto;
 
         h1{
-            // font-family: roboto;
             margin-bottom: 15px;
+
+            span{
+                font-family: roboto;
+            }
+        }
+
+        p span{
+            font-family: roboto;
         }
     }
 
     form{
         max-width: 1280px;
         width: 100%;
-        // margin: 0px auto;
         position: absolute;
         bottom: -50px;
         left: 50%;
         transform: translateX(-50%);
         display: grid;
-        grid-template-columns: 15% 15% 20% 20% 15% 15%;
+        grid-template-columns: repeat(5, 20%);
         background-color: $buttonTextColor-1;
         padding: 20px;
         border: none;
@@ -69,6 +75,7 @@
                     right: 10px;
                     @include display-flex-all-center;
                     cursor: pointer;
+                    transition: 0.2s;
 
                     i{
                         font-size: 23px;
@@ -77,14 +84,19 @@
                 }
 
                 .active-arrow{
+                    transition: 0.2s;
                     transform: rotate(180deg);
+                    
+                    i{
+                        color: $buttonHoverColor-1;
+                    }
                 }
 
                 .select-dropdown{
                     width: 100%;
                     position: absolute;
                     top: 55px;
-                    background-color: white;
+                    background-color: $backgroundColor-1;
                     border: 1px solid $borderColor-1;
                     display: none;
 
@@ -101,6 +113,8 @@
                 .active-dropdown{
                     display: block;
                 }
+
+                
             }
 
             // input[type="date"]::-webkit-calendar-picker-indicator {
@@ -148,15 +162,43 @@
                     border: 1px solid $borderColor-1;
                     @include display-flex-all-center;
                     cursor: pointer;
+                    transition: 0.1s ease-in-out;
 
                     i{
                         font-size: 23px;
                         color: $buttonColor-1;
+                        transition: 0.1s ease;
+                    }
+
+                    &:hover{
+                        transition: 0.1s ease-in-out;
+                        background-color: $backgroundColor-4;
+
+                        i{
+                            transition: 0.1s ease-in-out;
+                            color: $buttonHoverColor-1;
+                        }
                     }
                 }
             }
+        }
 
-            
+        .submit-button{
+            width: auto;
+            height: 100%;
+            margin: 0px 10px;
+            background-color: $buttonColor-1;
+            border: 1px solid $borderColor-1;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            color: $primaryColor-1;
+            font-size: 17px;
+            cursor: pointer;
+
+            &:hover{
+                transition: 0.3s ease-in-out;
+                background-color: $buttonHoverColor-1;
+            }
         }
     }
 }

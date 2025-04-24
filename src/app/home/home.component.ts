@@ -65,9 +65,9 @@ export class HomeComponent {
     this.router.navigate(['/რეისები'], {
       queryParams: {
         whereFrom: this.whereFrom,
-        destination:this.destination,
-        date:this.date,
-        passengers:this.passengers
+        destination: this.destination,
+        date: this.date,
+        passengers: this.passengers
       }
     })
   }
