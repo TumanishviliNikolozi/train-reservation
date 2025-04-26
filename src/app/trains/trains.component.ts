@@ -35,7 +35,7 @@ export class TrainsComponent implements OnInit{
       
       // console.log(this.whereFrom)
       // console.log(this.destination)
-      console.log('Oninit',this.date)
+      // console.log('Oninit',this.date)
       
     })
 
@@ -55,10 +55,10 @@ export class TrainsComponent implements OnInit{
     .set('source', this.whereFrom)
     .set('destination', this.destination)
     .set('date', this.date);
-    console.log('Date:', this.date)
+    // console.log('Date:', this.date)
 
     this.api.get<any[]>(trainLink, {params}).subscribe((response:any[]) => {
-      console.log("ApiResponse", response);
+      // console.log("ApiResponse", response);
       const wantedWeekDay = this.weekDayTransformer(this.date)
       this.trains = response.filter(train => {
         return (
@@ -67,7 +67,7 @@ export class TrainsComponent implements OnInit{
           train.date === wantedWeekDay
         );
       })?.[0]?.trains || []
-      console.log(this.trains);
+      // console.log(this.trains);
 
       if(this.trains.length === 0){
         this.ifEmptyTrains = true;

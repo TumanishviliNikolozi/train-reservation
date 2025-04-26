@@ -3,35 +3,35 @@
 </header>
 
 <main>
-    <section class="personal-info-container">
-        <header class="main-title">
-            <h2><span>შეიყვანეთ თქვენი მონაცემები</span></h2>
-        </header>
+    <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="sendTKTInfo()">
+        <section class="info-gathering">
+            <header class="main-title">
+                <h2><span>შეიყვანეთ თქვენი მონაცემები</span></h2>
+            </header>
+    
+            <section class="each-train">
+                <div class="train-info-segment">
+                    <p>
+                        <span>#{{trainInfo.number}}</span>
+                        <span>{{trainInfo.name}} <span>Express</span></span>
+                    </p>
+                </div>
+                <div class="train-info-segment">
+                    <p>
+                        <span>{{trainInfo.departure}}</span>
+                        <span>{{trainInfo.from}}</span>
+                    </p>
+                </div>
+                <div class="train-info-segment">
+                    <p>
+                        <span>{{trainInfo.arrive}}</span>
+                        <span>{{trainInfo.to}}</span>
+                    </p>
+                </div>
+            </section>
+    
+            <div class="dotted-line"></div>
 
-        <section class="each-train">
-            <div class="train-info-segment">
-                <p>
-                    <span>#{{trainInfo.number}}</span>
-                    <span>{{trainInfo.name}} <span>Express</span></span>
-                </p>
-            </div>
-            <div class="train-info-segment">
-                <p>
-                    <span>{{trainInfo.departure}}</span>
-                    <span>{{trainInfo.from}}</span>
-                </p>
-            </div>
-            <div class="train-info-segment">
-                <p>
-                    <span>{{trainInfo.arrive}}</span>
-                    <span>{{trainInfo.to}}</span>
-                </p>
-            </div>
-        </section>
-
-        <div class="dotted-line"></div>
-
-        <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="sendTKTInfo()">
             <header class="form-header">
                 <h3><span>საკონტაქტო ინფორმაცია</span></h3>
             </header>
@@ -60,15 +60,30 @@
                             <input type="text" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
                             <input type="number" name="idNumber" formControlName="idNumber" autocomplete="off" placeholder="პირადი ნომერი">
 
-                            <button>ადგილის არჩევა</button>
+                            <button (click)="getTrainById(trainInfo.id)">ადგილის არჩევა</button>
                         </div>
                     </div>
                 }
             </section>
-        </form>
-    </section>
-
-    <section class="invoice-container">
-
-    </section>
+        </section>
+        
+        <section class="invoice-section">
+            <div class="invoice-container">
+                <header class="invoice-title">
+                    <h3><span>ინვოისი</span></h3>
+                </header>
+                <div class="invoice-price">
+                    <p class="place-price-title">
+                        <span>ადგილი</span>
+                        <span>ფასი</span>
+                    </p>
+                    <div class="invoise-devider"></div>
+                    <p class="full-amount">
+                        <span>სულ:</span>
+                        <span>{{calculateFullPrice()}}</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </form>
 </main>

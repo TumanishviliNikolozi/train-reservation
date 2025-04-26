@@ -48,12 +48,12 @@ export class HomeComponent {
 
   startingStation(name:any){
     this.whereFrom = name;
-    console.log(this.whereFrom);
+    // console.log(this.whereFrom);
   }
 
   endingStation(name:any){
     this.destination = name;
-    console.log(this.destination);
+    // console.log(this.destination);
   }
 
   onSubmit(){

@@ -17,6 +17,7 @@ export class CustomersComponent implements OnInit{
   public trainInfo:any;
   public date!:string
   public passengers!:number;
+  public trainById:any;
 
   public formPersonalInfo!:FormGroup;
 
@@ -72,7 +73,17 @@ export class CustomersComponent implements OnInit{
   get people(): FormArray{
     return this.formPersonalInfo.get('people') as FormArray;
   }
+
+  getTrainById(trainId:any){
+    this.services.getTrainsById(trainId).subscribe((data:any) => {
+      this.trainById = data;
+      console.log(this.trainById);
+    })
+  }
   
+  calculateFullPrice(){
+
+  }
 
   sendTKTInfo(){
 
