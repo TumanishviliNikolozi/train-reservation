@@ -8,4 +8,24 @@ import { Component } from '@angular/core';
 })
 export class TktCheckReturnComponent {
 
+  
+      // this.route.queryParams.subscribe(params => {
+      //   if(params){
+      //     if(params['trainInfo']){
+      //       this.trainInfo = JSON.parse(params['trainInfo'])
+      //     }
+  
+      //     if(params['rawDate']){
+      //       this.date = params['rawDate']
+      //     }
+  
+      //     if (params['passengers']) {
+      //       this.passengers = +params['passengers'];
+      //     }
+      //   }
+  
+      //   console.log('trainInfo: ', this.trainInfo);
+      //   console.log('rawDare: ', this.date)
+      //   console.log('Passengers', this.passengers);
+      // })
 }

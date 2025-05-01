@@ -14,35 +14,36 @@ export class CustomersComponent implements OnInit{
 
   }
 
+  public vagonImages:string[] = [
+    "https://railway.stepprojects.ge/images/firstWagon.png",
+    "https://railway.stepprojects.ge/images/midWagon.png",
+    "https://railway.stepprojects.ge/images/lastWagon.png"
+  ]
+
   public trainInfo:any;
   public date!:string
   public passengers!:number;
+
   public trainById:any;
+  public wagonById:any;
+  public wagonSeats:any[] = [];
 
   public formPersonalInfo!:FormGroup;
 
-  public departureInfo:any;
+  public showPopup:boolean = false;
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      if(params){
-        if(params['trainInfo']){
-          this.trainInfo = JSON.parse(params['trainInfo'])
-        }
 
-        if(params['rawDate']){
-          this.date = params['rawDate']
-        }
+    if(history.state){
+      this.trainInfo = history.state.trainInfo;
+      this.date = history.state.rawDate;
+      this.passengers = +history.state.passengers;
 
-        if (params['passengers']) {
-          this.passengers = +params['passengers'];
-        }
-      }
+      // console.log('trainInfo: ', this.trainInfo);
+      // console.log('rawDare: ', this.date);
+      // console.log('Passengers', this.passengers);
+    }
 
-      console.log('trainInfo: ', this.trainInfo);
-      console.log('rawDare: ', this.date)
-      console.log('Passengers', this.passengers);
-    })
 
     this.formPersonalInfo = new FormGroup({
       trainId: new FormControl(this.trainInfo.id),
@@ -75,10 +76,25 @@ export class CustomersComponent implements OnInit{
   }
 
   getTrainById(trainId:any){
+    this.showPopup = true;
+
     this.services.getTrainsById(trainId).subscribe((data:any) => {
       this.trainById = data;
-      console.log(this.trainById);
+      console.log('get train:', this.trainById);
     })
+  }
+
+  getWagonById(vagonId:number){
+    this.services.getVagonsById(vagonId).subscribe((data:any) => {
+      this.wagonById = data;
+      this.wagonSeats = this.wagonById.seats;
+      console.log('hole wagon info:',this.wagonById);
+      console.log('wagon seats:',this.wagonSeats);
+    })
+  }
+
+  closePopup(){
+    this.showPopup = false;
   }
   
   calculateFullPrice(){
@@ -88,4 +104,8 @@ export class CustomersComponent implements OnInit{
   sendTKTInfo(){
 
   }
+
+  // console(formPersonalInfo:any){
+  //   console.log(formPersonalInfo.value)
+  // }
 }

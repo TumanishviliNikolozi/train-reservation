@@ -95,8 +95,8 @@ export class TrainsComponent implements OnInit{
 
   chosenTrainInfo(trainInfo:any){
     this.router.navigate(['/მგზავრთა მონაცემები'], {
-      queryParams:{
-        trainInfo: JSON.stringify(trainInfo),
+      state:{
+        trainInfo: trainInfo,
         rawDate: this.date,
         passengers: this.passengers
       }

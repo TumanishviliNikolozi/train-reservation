@@ -83,7 +83,34 @@
                         <span>{{calculateFullPrice()}}</span>
                     </p>
                 </div>
+
+                <!-- <div (click)="console(formPersonalInfo)">click</div> -->
             </div>
+        </section>
+
+        <section class="popup-container" [style.display]="showPopup? 'flex' : 'none'">
+            <section class="popup-card">
+                <div class="popup-cls" (click)="closePopup()">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+                
+                <section class="get-seats-container">
+                    <div class="vagon-container">
+                        @for (vagon of vagonImages; track $index; let i = $index) {
+                            <div class="wagon-img-name">
+                                <img [src]="vagon" [alt]="" (click)="getWagonById(trainById.vagons[i].id)">
+                                <div class="vagon-name-holder">
+                                    <span>{{trainById.vagons[i].name}}</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="seat-container">
+                        @for (item of wagonById; track $index) {}
+                    </div>
+                </section>
+            </section>
         </section>
     </form>
 </main>
+

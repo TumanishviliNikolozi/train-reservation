@@ -25,8 +25,8 @@ export class APIsService {
     return this.apis.get("https://railway.stepprojects.ge/api/vagons");
   }
 
-  getVagonsById(){
-    // return this.apis.get(`https://railway.stepprojects.ge/api/getvagon/${}`);
+  getVagonsById(vagonId:number){
+    return this.apis.get(`https://railway.stepprojects.ge/api/getvagon/${vagonId}`);
   }
 
   getAllDepartures(){
