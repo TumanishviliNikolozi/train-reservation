@@ -85,12 +85,33 @@ export class CustomersComponent implements OnInit{
   }
 
   getWagonById(vagonId:number){
+    // console.log(vagonId)
     this.services.getVagonsById(vagonId).subscribe((data:any) => {
       this.wagonById = data;
-      this.wagonSeats = this.wagonById.seats;
-      console.log('hole wagon info:',this.wagonById);
-      console.log('wagon seats:',this.wagonSeats);
+      this.wagonSeats = this.wagonById[0].seats;
+      console.log('hole wagon info:', this.wagonById);
+      console.log('wagon seats:', this.wagonSeats);
     })
+  }
+
+  sendSeatInfo(seat:any){
+    let nextAvailableIndex = -1;
+    const peopleArray = this.people;
+
+    nextAvailableIndex = peopleArray.controls.findIndex(control => !control.get('seatId')?.value);
+
+    if (nextAvailableIndex !== -1) {
+      peopleArray.at(nextAvailableIndex).patchValue({
+        seatId: seat.seatId,
+      });
+
+      console.log(`Seat assigned to person ${nextAvailableIndex + 1}`);
+    } else {
+      alert('All passengers already have assigned seats!');
+    }
+
+    console.log(this.formPersonalInfo.value.people);
+    this.showPopup = false;
   }
 
   closePopup(){
@@ -105,7 +126,7 @@ export class CustomersComponent implements OnInit{
 
   }
 
-  // console(formPersonalInfo:any){
-  //   console.log(formPersonalInfo.value)
-  // }
+  console(formPersonalInfo:any){
+    console.log(formPersonalInfo.value)
+  }
 }

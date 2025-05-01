@@ -84,7 +84,7 @@
                     </p>
                 </div>
 
-                <!-- <div (click)="console(formPersonalInfo)">click</div> -->
+                <div (click)="console(formPersonalInfo)">click</div>
             </div>
         </section>
 
@@ -95,19 +95,28 @@
                 </div>
                 
                 <section class="get-seats-container">
-                    <div class="vagon-container">
-                        @for (vagon of vagonImages; track $index; let i = $index) {
-                            <div class="wagon-img-name">
-                                <img [src]="vagon" [alt]="" (click)="getWagonById(trainById.vagons[i].id)">
-                                <div class="vagon-name-holder">
-                                    <span>{{trainById.vagons[i].name}}</span>
+                    @if(showPopup === true){
+                        <div class="vagon-container">
+                            @for (vagon of vagonImages; track $index; let i = $index) {
+                                <div class="wagon-img-name">
+                                    @if(trainById){
+                                        <img [src]="vagon" [alt]="" (click)="getWagonById(trainById.vagons[i].id)">
+                                        <div class="vagon-name-holder">
+                                            <span>{{trainById.vagons[i].name}}</span>
+                                        </div>
+                                    }
                                 </div>
-                            </div>
-                        }
-                    </div>
-                    <div class="seat-container">
-                        @for (item of wagonById; track $index) {}
-                    </div>
+                            }
+                        </div>
+                        <div class="seat-container">
+                            @if(wagonById){
+                                @for (seat of wagonSeats; track $index; let i = $index) {
+                                    <button type="button" (click)="sendSeatInfo(seat)">{{seat.number}}</button>
+                                    
+                                }
+                            }
+                        </div>
+                }
                 </section>
             </section>
         </section>
