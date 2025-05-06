@@ -53,14 +53,14 @@
                         <div class="passenger-inputs">
                             <div class="passenger-place">
                                 <span>ადგილი:</span>
-                                <span>{{selectedSeatNumber}}</span>
+                                <span>{{selectedSeatNumber[i]}}</span>
                             </div>
 
                             <input type="text" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
                             <input type="text" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
                             <input type="text" pattern="^[0-9]{11}$" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
 
-                            <button type="button" (click)="getTrainById(trainInfo.id)">ადგილის არჩევა</button>
+                            <button type="button" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">ადგილის არჩევა</button>
                         </div>
                     </div>
                 }

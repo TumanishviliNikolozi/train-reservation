@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CustomersComponent implements OnInit{
   constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient){
-
+    this.getWagons();
   }
 
   public vagonImages:string[] = [
@@ -25,15 +25,22 @@ export class CustomersComponent implements OnInit{
   public date!:string
   public passengers!:number;
 
+  public getFullWagonList:any;
+
   public trainById:any;
+  public selectedPassengerIndex!:number;
   public wagonById:any;
   public wagonSeats:any[] = [];
   public sortedWagonSeats:any[] = [];
   public selectedSeat:any;
-  public selectedSeatNumber:string = '';
+  public selectedSeatNumber:string[] = [];
   public wagonName:string = '';
 
-
+  public selectedSeatIds: Map<number, string> = new Map();
+  public existingSeatId:any;
+  public previousWagon:any;
+  public previousSeat:any;
+  public totalPrice:number = 0;
 
 
   public formPersonalInfo!:FormGroup;
@@ -93,6 +100,20 @@ export class CustomersComponent implements OnInit{
     })
   }
 
+  getWagons(){
+    this.services.getAllVagons().subscribe((data:any) => {
+      this.getFullWagonList = data;
+      console.log(this.getFullWagonList)
+    })
+  }
+
+  getPassengerIndex(event:Event, index:number){
+    event.preventDefault();
+    this.selectedPassengerIndex = index;
+  }
+
+  
+
   getWagonById(vagonId:number){
     // console.log(vagonId)
     this.services.getVagonsById(vagonId).subscribe((data:any) => {
@@ -124,7 +145,47 @@ export class CustomersComponent implements OnInit{
     console.log('selected seat:', this.selectedSeat);
 
     if(this.selectedSeat){
-      this.selectedSeatNumber = this.selectedSeat.number;
+      this.selectedSeatNumber[this.selectedPassengerIndex] = this.selectedSeat.number;
+      console.log('selected seat number:', this.selectedSeatNumber);
+
+      if(this.selectedPassengerIndex !== null && this.selectedPassengerIndex !== undefined){
+        if(this.selectedSeatIds.has(this.selectedPassengerIndex)){
+          this.existingSeatId = this.selectedSeatIds.get(this.selectedPassengerIndex);
+          console.log('existing seat id:', this.existingSeatId);
+
+          if(this.existingSeatId){
+            this.previousWagon = this.getFullWagonList.find((wagon:any)=>{
+              return wagon.seats.some((seat:any)=>seat.seatId === this.existingSeatId);
+            });
+            console.log('previous wagon:',this.previousWagon);
+            console.log('previous wagon seats:',this.previousWagon.seats);
+
+            if(this.previousWagon){
+              this.previousSeat = this.previousWagon.seats.find((seat:any) => {
+                return seat.seatId === this.existingSeatId;
+              })
+              console.log('previous seat:', this.previousSeat);
+
+              if(this.previousSeat){
+                this.totalPrice -= this.previousSeat.price;
+                console.log('total price:', this.totalPrice);
+              }
+            }
+          }
+        }
+
+        const passengers = this.formPersonalInfo.get('people') as FormArray;
+        const passenger = passengers.at(this.selectedPassengerIndex) as FormGroup; 
+
+        passenger.get('seatId')?.setValue(this.selectedSeat.seatId);
+
+        this.selectedSeatIds.set(
+          this.selectedPassengerIndex, this.selectedSeat.seatId
+        );
+        this.totalPrice += this.selectedSeat.price;
+        console.log('end total price:', this.totalPrice);
+
+      }
     }
     // let nextAvailableIndex = -1;
     // const peopleArray = this.people;
@@ -143,6 +204,21 @@ export class CustomersComponent implements OnInit{
 
     // console.log(this.formPersonalInfo.value.people);
     this.showPopup = false;
+  }
+
+  preventClose(event:Event){
+    event.stopPropagation()
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event:Event){
+    if(this.showPopup){
+      let clickedInside = (event.target as HTMLElement).closest(".popup-card");
+      if(!clickedInside){
+        this.showPopup = !this.showPopup;
+        console.log("click outside", this.showPopup)
+      }
+    }
   }
 
   closePopup(){
