@@ -253,6 +253,8 @@ main{
             bottom: 0px;
             @include display-flex-all-center;
             background-color: $popupBackgroundColor;
+            z-index: 899;
+            padding: 150px 0px 100px;
 
             .popup-card{
                 background-color: white;
@@ -330,6 +332,63 @@ main{
                                     color: $primaryColor-1;
                                 }
                             }
+                        }
+                    }
+
+                    .wagon-name{
+                        width: auto;
+                        height: 40px;
+                        margin: 30px 0px 10px;
+                        @include display-flex-all-center;
+                        background-color: $trainBackgroundColor-1;
+                        border-radius: 8px;
+                    }
+
+                    .seat-container{
+                        width: 100%;
+                        padding: 0px 30px 0px;
+                        display: grid;
+                        grid-template-columns: repeat(5, 1fr);
+                        grid-template-rows: repeat(12, 1fr);
+
+                        .select-seat{
+                            margin: 3px;
+                        }
+
+                        .vagon-start{
+                            grid-column: 1/6;
+                            grid-template-rows: 1/2;
+
+                            p{
+                                grid-column: 1/3;
+                            }
+                        }
+
+                        .vagon-end{
+                            grid-column: 1/6;
+                            grid-template-rows: 12/13;
+
+                            p{
+                                grid-column: 4/6;
+                            }
+                        }
+
+                        .vagon-start, .vagon-end{
+                            width: 100%;
+                            height: 40px;
+                            display: grid;
+                            grid-template-columns: repeat(5, 1fr);
+
+                            p{
+                                @include width-height-100;
+                                @include display-flex-all-center;
+                            }
+                        }
+
+                        .seat-space{
+                            grid-column: 3/4;
+                            grid-row: 2/12;
+                            @include width-height-100;
                         }
                     }
                 }

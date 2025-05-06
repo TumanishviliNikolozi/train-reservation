@@ -41,11 +41,8 @@ export class APIsService {
     return this.apis.get("https://railway.stepprojects.ge/api/tickets");
   }
 
-  // postTicketRegister():void{
-  //   this.apis.post(
-  //     "https://railway.stepprojects.ge/api/tickets/register",
-  //     null
-  //   )
+  // postTicketRegister(formValue:any){
+  //   return this.apis.post("https://railway.stepprojects.ge/api/tickets/register", formValue)
   // }
 
   getTicketCheckStatusById(){

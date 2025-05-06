@@ -3,7 +3,7 @@
 </header>
 
 <main>
-    <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="sendTKTInfo()">
+    <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="onSubmit()">
         <section class="info-gathering">
             <header class="main-title">
                 <h2><span>შეიყვანეთ თქვენი მონაცემები</span></h2>
@@ -38,7 +38,7 @@
 
             <section class="contact-info-container">
                 <input type="email" name="email" formControlName="email" autocomplete="off" placeholder="მეილი">
-                <input type="number" name="phoneNumber" formControlName="phoneNumber" autocomplete="off" placeholder="ტელეფონის ნომერი">
+                <input type="tel" pattern="^[0-9]{9}$" inputmode="numeric" name="phoneNumber" formControlName="phoneNumber" autocomplete="tel" placeholder="ტელეფონის ნომერი">
             </section>
 
             <div class="passenger-info-title">
@@ -53,14 +53,14 @@
                         <div class="passenger-inputs">
                             <div class="passenger-place">
                                 <span>ადგილი:</span>
-                                <span>ჩასვი</span>
+                                <span>{{selectedSeatNumber}}</span>
                             </div>
 
                             <input type="text" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
                             <input type="text" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
-                            <input type="number" name="idNumber" formControlName="idNumber" autocomplete="off" placeholder="პირადი ნომერი">
+                            <input type="text" pattern="^[0-9]{11}$" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
 
-                            <button (click)="getTrainById(trainInfo.id)">ადგილის არჩევა</button>
+                            <button type="button" (click)="getTrainById(trainInfo.id)">ადგილის არჩევა</button>
                         </div>
                     </div>
                 }
@@ -83,6 +83,8 @@
                         <span>{{calculateFullPrice()}}</span>
                     </p>
                 </div>
+
+                <button type="submit" [disabled]="formPersonalInfo.invalid">დაჯავშნა</button>
 
                 <div (click)="console(formPersonalInfo)">click</div>
             </div>
@@ -108,15 +110,24 @@
                                 </div>
                             }
                         </div>
+                        <div class="wagon-name">
+                            <p>აირჩიე ვაგონი: {{wagonName}}</p>
+                        </div>
                         <div class="seat-container">
                             @if(wagonById){
-                                @for (seat of wagonSeats; track $index; let i = $index) {
-                                    <button type="button" (click)="sendSeatInfo(seat)">{{seat.number}}</button>
-                                    
+                                <div class="vagon-start">
+                                    <p><span>საპირფარეშო</span></p>
+                                </div>
+                                @for (seat of sortedWagonSeats; track $index; let i = $index) {
+                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)">{{seat.number}}</button>
                                 }
+                                <div class="seat-space"></div>
+                                <div class="vagon-end">
+                                    <p><span>საპირფარეშო</span></p>
+                                </div>
                             }
                         </div>
-                }
+                    }
                 </section>
             </section>
         </section>
