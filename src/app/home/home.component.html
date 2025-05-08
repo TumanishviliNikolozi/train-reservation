@@ -10,13 +10,13 @@
         <div class="input-holder" #departureElement>
             <input type="hidden" name="whereFrom" [(ngModel)]="whereFrom" #whereFromModel="ngModel" required>
             <div class="selection" data-value="whereFrom" [class.invalid]="whereFromModel.invalid && whereFromModel.touched">
-                <p (click)="toggleDepartureClass()">{{whereFrom === ""? "საიდან" : whereFrom}}</p>
+                <p (click)="toggleDepartureClass()">{{whereFrom === ""? "საიდან?" : whereFrom}}</p>
                 <div class="select-arrow" (click)="toggleDepartureClass()" [class.active-arrow]="isActiveDeparture()">
                     <i class="fa-solid fa-square-caret-down"></i>
                 </div>
                 <div class="select-dropdown" [class.active-dropdown]="isActiveDeparture()">
                     @for(station of myStations; track station){
-                        <div class="city-name" (click)="startingStation(station.name); whereFromModel.control.markAsTouched(); toggleDepartureClass()">{{station.name}}</div>
+                        <div class="city-name" (click)="startingStation(station.name); whereFromModel.control.markAsTouched(); toggleDepartureClass()"><span>{{station.name}}</span></div>
                     }
                 </div>
             </div>
@@ -25,27 +25,24 @@
         <div class="input-holder" #ArrivalElement>
             <input type="hidden" name="destination" [(ngModel)]="destination" #destinationModel="ngModel" required>
             <div class="selection" data-value="destination" [class.invalid]="destinationModel.invalid && destinationModel.touched">
-                <p (click)="toggleArrivalClass()">{{destination === ""? "საიდან" : destination}}</p>
+                <p (click)="toggleArrivalClass()">{{destination === ""? "სად?" : destination}}</p>
                 <div class="select-arrow"  (click)="toggleArrivalClass()" [class.active-arrow]="isActiveArrival()">
                     <i class="fa-solid fa-square-caret-down"></i>
                 </div>
                 <div class="select-dropdown" [class.active-dropdown]="isActiveArrival()">
                     @for(station of myStations; track station){
-                        <div class="city-name" (click)="endingStation(station.name); destinationModel.control.markAsTouched(); toggleArrivalClass()">{{station.name}}</div>
+                        <div class="city-name" (click)="endingStation(station.name); destinationModel.control.markAsTouched(); toggleArrivalClass()"><span>{{station.name}}</span></div>
                     }
                 </div>
             </div>
         </div>
         <div class="input-holder">
             <div class="calendar-container">
-                <!-- <label for="date"><i class="fa-solid fa-calendar-days"></i></label> -->
-                <input type="date" id="date" [(ngModel)]="date" name="date" required>
+                <label for="date"><i class="fa-solid fa-calendar-days"></i></label>
+                <input type="text" class="flat-picker" #dateInput id="date" [(ngModel)]="date" name="date" placeholder="როდის?" required> 
             </div>
         </div>
         <div class="input-holder">
-            <!-- <label for="passengers"></label>
-            <input type="number" class="guest-input" id="passengers" [(ngModel)]="passengers" name="passengers" required> -->
-            
             <div class="inc-dec-container">
                 <div class="decrement" (click)="passengerNumber(-1)"><i class="fa-solid fa-minus"></i></div>
                 <p>{{passengers}}</p>

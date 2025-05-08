@@ -1,19 +1,37 @@
-import { Component, ElementRef, NgModule, signal, viewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, NgModule, signal, viewChild, HostListener, AfterViewInit } from '@angular/core';
 import { APIsService } from '../services/apis.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
+import flatpickr from 'flatpickr';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, RouterModule],
+  standalone: true,
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   constructor(private service:APIsService, private router:Router){
     this.AllStations();
+  }
+
+  public dateInput = viewChild<ElementRef>('dateInput');
+  public flatCalendar:any;
+  public today:Date = new Date();
+
+  ngAfterViewInit(): void {
+    this.flatCalendar = this.dateInput()?.nativeElement
+
+    if(this.flatCalendar){
+      flatpickr(this.flatCalendar, {
+        dateFormat: 'Y-m-d',
+        altFormat: 'F j, Y',
+        minDate: this.today
+      });
+    }
   }
 
   // ------------- importing API info from servises --------------
@@ -84,6 +102,8 @@ export class HomeComponent {
 
 
   // --------------------- dropdown manus ---------------------
+
+  
 
   departureDropdown = viewChild<ElementRef>('departureElement');
   arrivalDropdown = viewChild<ElementRef>('ArrivalElement');

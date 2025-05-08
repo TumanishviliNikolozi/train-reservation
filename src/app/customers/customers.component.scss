@@ -10,11 +10,10 @@
     h1{
         max-width: 1280px;
         @include width-height-100;
-        padding-top: 100px;
+        padding: 100px 40px 0px;
         
         span{
-            font-family: roboto;
-            color: $primaryColor-1;
+            @include font-option(roboto, $primaryColor-1, 1.9rem, 300);
         }
     }
 }
@@ -29,7 +28,6 @@ main{
         grid-template-columns: repeat(4, 1fr);
         gap: 25px;
         width: 100%;
-        
 
         .info-gathering{
             width: 100%;
@@ -41,14 +39,12 @@ main{
 
             .main-title{
                 width: 100%;
-                height: 50px;
+                min-height: 50px;
                 @include display-flex-align-items(center);
                 margin-bottom: 15px;
         
                 h2{
-                    color: $primaryColor-4;
-                    font-size: 25px;
-                    font-weight: 200;
+                    @include font-option(roboto, $primaryColor-4, 1.5rem, 200);
                 }
             }
     
@@ -72,9 +68,7 @@ main{
                         border-right: 1px dashed $borderColor-3;
     
                         span{
-                            font-size: 18px;
-                            color: $primaryColor-4;
-                            font-family: roboto;
+                            @include font-option(roboto, $primaryColor-4, 1.2rem, 100);
                         }
                     }
                 }
@@ -89,9 +83,7 @@ main{
                         background-color: $buttonColor-1;
                         border: none;
                         border-radius: 8px;
-                        font-size: 20px;
-                        color: $primaryColor-1;
-                        font-weight: 200;
+                        @include font-option(roboto, $buttonTextColor-1, 1.3rem, 200);
                         cursor: pointer;
                         transition: 0.3s ease;
     
@@ -125,9 +117,7 @@ main{
                 margin-bottom: 15px;
         
                 h3{
-                    color: $primaryColor-4;
-                    font-size: 25px;
-                    font-weight: 200;
+                    @include font-option(roboto, $primaryColor-4, 1.6rem, 200);
                 }
             }
 
@@ -148,7 +138,7 @@ main{
                     @include width-height-100;
                     padding: 10px 20px;
                     border: 1px solid $borderColor-3;
-                    font-size: 18px;
+                    @include font-option(roboto, $primaryColor-4, 1.1rem, 100);
                     outline: none;
                 }
             }
@@ -160,9 +150,7 @@ main{
                 margin-bottom: 25px;
         
                 h3{
-                    color: $primaryColor-4;
-                    font-size: 25px;
-                    font-weight: 200;
+                    @include font-option(roboto, $primaryColor-4, 1.6rem, 200);
                 }
             }
 
@@ -178,8 +166,7 @@ main{
                         @include display-flex-align-items(center);
 
                         span{
-                            font-size: 20px;
-                            font-family: roboto;
+                            @include font-option(roboto, $primaryColor-4, 1.3rem, 200);
                         }
                     }
 
@@ -197,9 +184,7 @@ main{
                             border: none;
 
                             span{
-                                font-size: 16px;
-                                color: $primaryColor-1;
-                                font-family: roboto;
+                                @include font-option(roboto, $buttonTextColor-1, 1rem, 100);
                             }
                         }
 
@@ -212,7 +197,7 @@ main{
                             @include width-height-100;
                             padding: 10px 15px;
                             border: 1px solid $borderColor-3;
-                            font-size: 16px;
+                            @include font-option(roboto, $primaryColor-4, 1rem, 100);
                             outline: none;
                         }
 
@@ -221,10 +206,8 @@ main{
                             padding: 0px 25px;
                             border: none;
                             background-color: $backgroundColor-3;
-                            color: $primaryColor-1;
                             text-align: center;
-                            font-size: 16px;
-                            font-family: roboto;
+                            @include font-option(roboto, $buttonTextColor-1, 1rem, 100);
                             cursor: pointer;
                         }
                     }
@@ -257,13 +240,14 @@ main{
             padding: 150px 0px 100px;
 
             .popup-card{
+                max-width: 550px;
+                width: 100%;
                 background-color: white;
                 position: relative;
                 border-radius: 8px;
 
                 .popup-cls{
                     width: 100%;
-                    // height: 40px;
                     @include display-flex-justify-content(end);
                     padding: 10px;
                     border-bottom: 1px solid $borderColor-3;
@@ -329,7 +313,7 @@ main{
                                 border-radius: 20px;
 
                                 span{
-                                    color: $primaryColor-1;
+                                    @include font-option(roboto, $primaryColor-1, 1.1rem, 100);
                                 }
                             }
                         }
@@ -342,17 +326,25 @@ main{
                         @include display-flex-all-center;
                         background-color: $trainBackgroundColor-1;
                         border-radius: 8px;
+
+                        p{
+                            @include font-option(roboto, $primaryColor-4, 1.3rem, 200);
+                        }
                     }
 
                     .seat-container{
                         width: 100%;
-                        padding: 0px 30px 0px;
+                        padding: 0px 15px 0px;
                         display: grid;
                         grid-template-columns: repeat(5, 1fr);
                         grid-template-rows: repeat(12, 1fr);
+                        border-left: 15px solid $borderColor-3;
+                        border-right: 15px solid $borderColor-3;
 
                         .select-seat{
                             margin: 3px;
+                            @include font-option(roboto, $primaryColor-4, 1.1rem, 100);
+                            
                         }
 
                         .vagon-start{
@@ -382,6 +374,8 @@ main{
                             p{
                                 @include width-height-100;
                                 @include display-flex-all-center;
+                                @include font-option(roboto, $primaryColor-4, 1.1rem, 100);
+                                background-color: $backgroundColor-4;
                             }
                         }
 
@@ -389,6 +383,7 @@ main{
                             grid-column: 3/4;
                             grid-row: 2/12;
                             @include width-height-100;
+
                         }
                     }
                 }

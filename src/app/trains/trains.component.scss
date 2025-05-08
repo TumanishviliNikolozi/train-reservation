@@ -13,8 +13,7 @@
         padding-top: 100px;
         
         span{
-            font-family: roboto;
-            color: $primaryColor-1;
+            @include font-option(roboto, $primaryColor-1, 30px, 300);
         }
     }
 }
@@ -31,9 +30,7 @@ main{
         margin-bottom: 15px;
 
         h2{
-            color: $primaryColor-4;
-            font-size: 25px;
-            font-weight: 200;
+            @include font-option(roboto, $primaryColor-4, 25px, 300);
         }
     }
 
@@ -50,7 +47,7 @@ main{
             padding-left: 20px;
 
             span{
-                color: $primaryColor-4;
+                @include font-option(roboto, $primaryColor-4, 17px, 100);
             }
         }
     }
@@ -81,9 +78,7 @@ main{
                     border-right: 1px dashed $borderColor-3;
 
                     span{
-                        font-size: 18px;
-                        color: $primaryColor-4;
-                        font-family: roboto;
+                        @include font-option(roboto, $primaryColor-4, 18px, 100);
                     }
                 }
             }
@@ -98,9 +93,7 @@ main{
                     background-color: $buttonColor-1;
                     border: none;
                     border-radius: 8px;
-                    font-size: 20px;
-                    color: $primaryColor-1;
-                    font-weight: 200;
+                    @include font-option(roboto, $buttonTextColor-1, 20px, 200);
                     cursor: pointer;
                     transition: 0.3s ease;
 
@@ -134,8 +127,7 @@ main{
                 }
 
                 span{
-                    font-size: 25px;
-                    color: $primaryColor-4;
+                    @include font-option(roboto, $primaryColor-4, 25px, 100);
                 }
             }
         }

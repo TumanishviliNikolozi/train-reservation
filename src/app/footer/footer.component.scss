@@ -13,8 +13,7 @@ footer{
         margin: 0px auto;
 
         span{
-            font-size: 17px;
-            color: $footerColors-1;
+            @include font-option(roboto, $footerColors-1, 18px, 100);
         }
     }
 }

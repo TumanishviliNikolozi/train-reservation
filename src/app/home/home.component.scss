@@ -19,12 +19,12 @@
             margin-bottom: 15px;
 
             span{
-                font-family: roboto;
+                @include font-option(roboto, $primaryColor-2, 30px, 300);
             }
         }
 
         p span{
-            font-family: roboto;
+            @include font-option(roboto, $primaryColor-4, 20px, 100);
         }
     }
 
@@ -46,6 +46,8 @@
         h2{
             grid-column: 1/7;
             margin-bottom: 30px;
+            padding: 0px 10px;
+            @include font-option(roboto, $primaryColor-4, 25px, 300);
         }
 
         .input-holder{
@@ -61,6 +63,7 @@
 
                 p{
                     @include width-height-100;
+                    @include font-option(roboto, $primaryColor-4, 17px, 100);
                     display: grid;
                     align-items: center;
                     padding-left: 20px;
@@ -107,6 +110,10 @@
                         align-items: center;
                         padding-left: 20px;
                         cursor: pointer;
+
+                        span{
+                            @include font-option(roboto, $primaryColor-4, 17px, 100);
+                        }
                     }
                 }
 
@@ -117,20 +124,16 @@
                 
             }
 
-            // input[type="date"]::-webkit-calendar-picker-indicator {
-            //     display: none;
-            //     -webkit-appearance: none;
-            // }
-
             .calendar-container{
                 @include width-height-100;
                 position: relative;
 
                 input{
                     @include width-height-100;
-                    
+                    @include font-option(roboto, $primaryColor-4, 17px, 100);
                     padding: 0px 20px;
                     border: 1px solid $borderColor-1;
+                    outline: none;
                 }
 
                 label{
@@ -155,6 +158,10 @@
                 border: 1px solid $borderColor-1;
                 padding: 5px;
                 justify-content: space-between;
+
+                p{
+                    @include font-option(roboto, $primaryColor-4, 17px, 100);
+                }
 
                 .increment, .decrement{
                     width: 50px;
@@ -191,8 +198,7 @@
             border: 1px solid $borderColor-1;
             border-radius: 5px;
             transition: 0.3s ease-in-out;
-            color: $primaryColor-1;
-            font-size: 17px;
+            @include font-option(roboto, $buttonTextColor-1, 17px, 100);
             cursor: pointer;
 
             &:hover{
