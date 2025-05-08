@@ -34,6 +34,7 @@ export class CustomersComponent implements OnInit{
   public sortedWagonSeats:any[] = [];
   public selectedSeat:any;
   public selectedSeatNumber:string[] = [];
+  public selectedSeatPrice:number[] = [];
   public wagonName:string = '';
 
   public selectedSeatIds: Map<number, string> = new Map();
@@ -42,6 +43,7 @@ export class CustomersComponent implements OnInit{
   public previousSeat:any;
   public totalPrice:number = 0;
 
+  public invoiceCheckbox:boolean = false;
 
   public formPersonalInfo!:FormGroup;
 
@@ -138,7 +140,7 @@ export class CustomersComponent implements OnInit{
     })
   }
 
-  sendSeatInfo(seatNumber:any){
+  sendSeatInfo(seatNumber:any, seatPrice:number){
     this.selectedSeat = this.wagonById[0]?.seats.find(
       (seat:any) => seat.number === seatNumber
     )
@@ -147,6 +149,8 @@ export class CustomersComponent implements OnInit{
     if(this.selectedSeat){
       this.selectedSeatNumber[this.selectedPassengerIndex] = this.selectedSeat.number;
       console.log('selected seat number:', this.selectedSeatNumber);
+      this.selectedSeatPrice[this.selectedPassengerIndex] = this.selectedSeat.price;
+      console.log('selected seat price:', this.selectedSeatPrice);
 
       if(this.selectedPassengerIndex !== null && this.selectedPassengerIndex !== undefined){
         if(this.selectedSeatIds.has(this.selectedPassengerIndex)){
@@ -187,22 +191,7 @@ export class CustomersComponent implements OnInit{
 
       }
     }
-    // let nextAvailableIndex = -1;
-    // const peopleArray = this.people;
 
-    // nextAvailableIndex = peopleArray.controls.findIndex(control => !control.get('seatId')?.value);
-
-    // if (nextAvailableIndex !== -1) {
-    //   peopleArray.at(nextAvailableIndex).patchValue({
-    //     seatId: seat.seatId,
-    //   });
-
-    //   console.log(`Seat assigned to person ${nextAvailableIndex + 1}`);
-    // } else {
-    //   alert('All passengers already have assigned seats!');
-    // }
-
-    // console.log(this.formPersonalInfo.value.people);
     this.showPopup = false;
   }
 
@@ -241,6 +230,11 @@ export class CustomersComponent implements OnInit{
       }
     })
 
+  }
+
+  checkCheckbox(event:Event){
+    event.stopPropagation();
+    this.invoiceCheckbox = !this.invoiceCheckbox;
   }
 
   console(formPersonalInfo:any){

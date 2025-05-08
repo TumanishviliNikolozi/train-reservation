@@ -225,6 +225,115 @@ main{
                 border: none;
                 border-radius: 8px;
                 background-color: $backgroundColor-4;
+
+                .invoice-title{
+                    width: 100%;
+                    margin-bottom: 10px;
+                    @include display-flex-all-center;
+
+                    h3 span{
+                        @include font-option(roboto, $primaryColor-5, 1.2rem, 300);
+                    }
+                }
+
+                .invoice-price{
+                    width: 100%;
+
+                    .place-price-title{
+                        width: 100%;
+                        margin-bottom: 15px;
+                        @include display-flex-align-items(center);
+                        justify-content: space-between;
+                        padding: 10px;
+
+                        span{
+                            @include font-option(roboto, $primaryColor-4, 1rem, 100);
+                        };
+                    }
+
+                    .invoise-devider{
+                        width: 100%;
+                        height: 5px;
+                        border-top: 1px solid $borderColor-4;
+                        margin-bottom: 10px;
+                    }
+
+                    .full-amount{
+                        width: 100%;
+                        padding: 10px;
+                        background-color: $backgroundColor-1;
+                        @include display-flex-align-items(center);
+                        justify-content: space-between;
+
+                        span{
+                            @include font-option(roboto, $primaryColor-4, 1rem, 100);
+                            
+                            .total-price{
+                                @include font-option(roboto, $primaryColor-5, 1rem, 500);
+                            }
+                        }
+                    }
+                }
+
+                .each-price-container{
+                    width: 100%;
+                    margin: 20px 0px;
+
+                    .seat-price{
+                        width: 100%;
+                        padding: 10px;
+                        @include display-flex-align-items(center);
+                        justify-content: space-between;
+
+                        span{
+                            @include font-option(roboto, $primaryColor-4, 1rem, 100);
+                            
+                            .each-price{
+                                @include font-option(roboto, $primaryColor-5, 1rem, 500);
+                            }
+                        }
+                    }
+                }
+
+                .invoice-checkbox{
+                    width: 100%;
+                    @include display-flex-align-items(center);
+                    padding: 10px;
+
+                    .custom-checkbox{
+                        width: 20px;
+                        height: 20px;
+                        border: 1px solid $borderColor-6;
+                        border-radius: 4px;
+                        @include display-flex-all-center;
+                        background-color: $backgroundColor-1;
+                        margin-right: 10px;
+                        cursor: pointer;
+
+                        i{
+                            color: rgb(6, 209, 6);
+                            font-size: 0.9rem;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .checked{
+                        border: 1px solid $borderColor-4;
+                    }
+
+                    .custom-checkbox-label{
+                        @include font-option(roboto, $primaryColor-4, 0.8rem, 100);
+                        cursor: pointer;
+                    }
+                }
+
+                button{
+                    width: 100%;
+                    height: 50px;
+                    background-color: $buttonColor-1;
+                    border: 1px solid $borderColor-6;
+                    @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
+                }
             }
         }
 
@@ -344,7 +453,7 @@ main{
                         .select-seat{
                             margin: 3px;
                             @include font-option(roboto, $primaryColor-4, 1.1rem, 100);
-                            
+
                         }
 
                         .vagon-start{
@@ -389,10 +498,5 @@ main{
                 }
             }
         }
-    }
-
-    .invoice-container{
-        grid-column: 4/5;
-        width: 100%;
     }
 }

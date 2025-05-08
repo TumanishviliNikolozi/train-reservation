@@ -80,11 +80,25 @@
                     <div class="invoise-devider"></div>
                     <p class="full-amount">
                         <span>სულ:</span>
-                        <span>{{calculateFullPrice()}}</span>
+                        <span><span class="total-price">{{totalPrice}}</span> Gel</span>
                     </p>
                 </div>
+                
+                <div class="each-price-container">
+                    @for (seatPrice of selectedSeatPrice; track $index; let i = $index) {
+                        <p class="seat-price">
+                            <span>მგზავრი {{ i + 1}}:</span>
+                            <span><span class="each-price">{{selectedSeatPrice[i]}}</span> Gel</span>
+                        </p>
+                    }
+                </div>
+                
+                <div class="invoice-checkbox" (click)="checkCheckbox($event)">
+                    <p class="custom-checkbox"  (click)="checkCheckbox($event)" [class.checked]="invoiceCheckbox"><i class="fa-solid fa-check" [style.display]="invoiceCheckbox ? 'block' : 'none'" (click)="checkCheckbox($event)"></i></p>
+                    <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">წავიკითხე და ვეთანხმები წესებს</p>
+                </div>
 
-                <button type="submit" [disabled]="formPersonalInfo.invalid">დაჯავშნა</button>
+                <button type="submit"  [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false">დაჯავშნა</button>
 
                 <div (click)="console(formPersonalInfo)">click</div>
             </div>
@@ -102,7 +116,7 @@
                             @for (vagon of vagonImages; track $index; let i = $index) {
                                 <div class="wagon-img-name">
                                     @if(trainById){
-                                        <img [src]="vagon" [alt]="" (click)="getWagonById(trainById.vagons[i].id)">
+                                        <img [src]="vagon" [alt]="trainById.vagons[i].name" (click)="getWagonById(trainById.vagons[i].id)">
                                         <div class="vagon-name-holder">
                                             <span>{{trainById.vagons[i].name}}</span>
                                         </div>
@@ -119,7 +133,7 @@
                                     <p><span>საპირფარეშო</span></p>
                                 </div>
                                 @for (seat of sortedWagonSeats; track $index; let i = $index) {
-                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)">{{seat.number}}</button>
+                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number, seat.price)">{{seat.number}}</button>
                                 }
                                 <div class="seat-space"></div>
                                 <div class="vagon-end">
