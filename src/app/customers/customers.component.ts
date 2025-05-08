@@ -13,6 +13,20 @@ import { HttpClient } from '@angular/common/http';
 export class CustomersComponent implements OnInit{
   constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient){
     this.getWagons();
+
+    if(history.state){
+      this.trainInfo = history.state.trainInfo;
+      this.date = history.state.rawDate;
+      this.passengers = +history.state.passengers;
+
+      // console.log('trainInfo: ', this.trainInfo);
+      // console.log('rawDare: ', this.date);
+      // console.log('Passengers', this.passengers);
+    }
+
+    for(let i=0; i<this.passengers; i++){
+      this.selectedSeatPrice[i] = 0;
+    }
   }
 
   public vagonImages:string[] = [
@@ -51,17 +65,6 @@ export class CustomersComponent implements OnInit{
   public tktIdSaver:any[] = [];
 
   ngOnInit(): void {
-
-    if(history.state){
-      this.trainInfo = history.state.trainInfo;
-      this.date = history.state.rawDate;
-      this.passengers = +history.state.passengers;
-
-      // console.log('trainInfo: ', this.trainInfo);
-      // console.log('rawDare: ', this.date);
-      // console.log('Passengers', this.passengers);
-    }
-
 
     this.formPersonalInfo = new FormGroup({
       trainId: new FormControl(this.trainInfo.id),
@@ -140,7 +143,7 @@ export class CustomersComponent implements OnInit{
     })
   }
 
-  sendSeatInfo(seatNumber:any, seatPrice:number){
+  sendSeatInfo(seatNumber:any){
     this.selectedSeat = this.wagonById[0]?.seats.find(
       (seat:any) => seat.number === seatNumber
     )

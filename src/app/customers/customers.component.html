@@ -86,10 +86,12 @@
                 
                 <div class="each-price-container">
                     @for (seatPrice of selectedSeatPrice; track $index; let i = $index) {
-                        <p class="seat-price">
-                            <span>მგზავრი {{ i + 1}}:</span>
-                            <span><span class="each-price">{{selectedSeatPrice[i]}}</span> Gel</span>
-                        </p>
+                        @if(selectedSeatPrice[i] !== 0){
+                            <p class="seat-price">
+                                <span>მგზავრი {{ i + 1}}:</span>
+                                <span><span class="each-price">{{selectedSeatPrice[i]}}</span> Gel</span>
+                            </p>
+                        }
                     }
                 </div>
                 
@@ -100,7 +102,7 @@
 
                 <button type="submit"  [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false">დაჯავშნა</button>
 
-                <div (click)="console(formPersonalInfo)">click</div>
+                <!-- <div (click)="console(formPersonalInfo)">click</div> -->
             </div>
         </section>
 
@@ -133,7 +135,7 @@
                                     <p><span>საპირფარეშო</span></p>
                                 </div>
                                 @for (seat of sortedWagonSeats; track $index; let i = $index) {
-                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number, seat.price)">{{seat.number}}</button>
+                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)">{{seat.number}}</button>
                                 }
                                 <div class="seat-space"></div>
                                 <div class="vagon-end">
