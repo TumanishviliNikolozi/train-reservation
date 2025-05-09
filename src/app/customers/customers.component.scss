@@ -56,7 +56,7 @@ main{
                 margin-bottom: 30px;
                 background-color: $backgroundColor-4;
     
-                .train-info-segment{
+                .train-info-segment-name, .train-info-segment-from, .train-info-segment-to{
                     @include width-height-100;
                     @include display-flex-align-items(center);
     
@@ -327,12 +327,20 @@ main{
                     }
                 }
 
-                button{
+                .submit-button{
                     width: 100%;
                     height: 50px;
                     background-color: $buttonColor-1;
                     border: 1px solid $borderColor-6;
                     @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
+                    cursor: pointer;
+                    transition: 0.5s;
+                }
+
+                .submit-button:disabled{
+                    cursor: not-allowed;
+                    background-color: $backgroundColor-5;
+                    transition: 0.5s;
                 }
             }
         }
@@ -420,6 +428,8 @@ main{
                                 transform: translate(-50%);
                                 background-color: $trainBackgroundColor-2;
                                 border-radius: 20px;
+                                z-index: 999;
+                                cursor: pointer;
 
                                 span{
                                     @include font-option(roboto, $primaryColor-1, 1.1rem, 100);
@@ -452,8 +462,29 @@ main{
 
                         .select-seat{
                             margin: 3px;
-                            @include font-option(roboto, $primaryColor-4, 1.1rem, 100);
+                            @include font-option(roboto, $primaryColor-5, 1.1rem, 500);
+                            background-color: transparent;
+                            box-shadow: inset 10px 10px 10px $passengerSeatsColor-3, 2px 2px 2px $passengerSeatsColor-3;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
 
+                        .select-seat:hover{
+                            transform: translateY(-5px);
+                            transition: 0.3s;
+                        }
+
+                        .select-seat:disabled{
+                            border: 1px solid $borderColor-2;
+                            box-shadow: inset 10px 10px 10px $passengerSeatsColor-4, 2px 2px 2px $passengerSeatsColor-4;
+                            background-color: transparent;
+                            cursor: not-allowed;
+                        }
+
+                        .select-seat.active {
+                            box-shadow: inset 10px 10px 10px $passengerSeatsColor-1, 2px 2px 2px $passengerSeatsColor-1;
+                            background-color: transparent;
+                            color: $primaryColor-5;
                         }
 
                         .vagon-start{
@@ -494,6 +525,183 @@ main{
                             @include width-height-100;
 
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1280px) {
+    main{
+        max-width: 950px;
+
+        .formPersonalInfo{
+            grid-template-columns: repeat(3, 1fr);
+
+            .info-gathering{
+                padding: 30px;
+
+                .each-train{
+                    height: auto;
+                    grid-template-columns: repeat(2, 1fr);
+
+                    .train-info-segment-name{
+                        grid-column: 1/3;
+                        border-bottom: 1px dashed $borderColor-3;
+                    }
+                }
+
+                .form-header{
+                    height: auto;
+                }
+            }
+
+            .invoice-section{
+                grid-column: 1/4;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 550px) and (max-width: 1023px) {
+    main{
+        .formPersonalInfo{
+            .info-gathering{
+                .passenger-info-container{
+                    .passenger-info{
+                        .passenger-inputs{
+                            height: auto;
+                            grid-template-columns: repeat(6, 1fr);
+                            grid-template-rows: repeat(2, 40px);
+
+                            .passenger-place{
+                                grid-column: 1/4;
+                            }
+
+                            .passenger-seats{
+                                grid-column: 4/7;
+                                grid-row: 1/2;
+                            }
+
+                            .passenger-name{
+                                grid-column: 1/3;
+                            }
+
+                            .passenger-surname{
+                                grid-column: 3/5;
+                            }
+
+                            .passenger-phone{
+                                grid-column: 5/7;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 549px) {
+    main{
+        .formPersonalInfo{
+            .info-gathering{
+                padding: 30px 0px;
+
+                .main-title, .dotted-line, .form-header, .contact-info-container, .passenger-info-title, .passenger-info-container{
+                    padding: 0px 30px;
+                }
+
+                .each-train{
+                    .train-info-segment-name, .train-info-segment-to{
+                        p{
+                            padding-right: 5px;
+                        }
+                    }
+                }
+
+                .dotted-line{
+                    width: calc(100% - 60px);
+                    margin: 0px auto 40px;
+                }
+
+                .contact-info-container{
+                    height: auto;
+                    grid-template-columns: 1fr;
+                    row-gap: 20px;
+                }
+
+                .passenger-info-container{
+                    .passenger-info{
+                        .passenger-inputs{
+                            height: auto;
+                            grid-template-columns: 1fr;
+                            grid-template-rows: repeat(5, 40px);
+                        }
+                    }
+                }
+            }
+
+            .popup-container .popup-card .get-seats-container{
+
+                .vagon-container{
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 50px;
+                    padding-bottom: 50px;
+
+                    .wagon-img-name{
+                        img{
+                            opacity: 1;
+                        }
+
+                        .vagon-name-holder{
+                            display: flex;
+                            width: 30vw;
+
+                            span{
+                                font-size: 3.5vw;
+                            }
+                        }
+                    }
+                }
+                
+                .seat-container{
+                    .vagon-start, .vagon-end{
+                        p{
+                            padding: 0px 10px;
+
+                            span{
+                                font-size: 3vw;
+                            }
+                        }
+                    }
+                }
+            }       
+        }
+    }
+}
+
+@media screen and (max-width: 379px) {
+    main{
+        .formPersonalInfo{
+            .popup-container .popup-card .get-seats-container{
+
+                .wagon-name{
+                    p{
+                        font-size: 5vw;
+                    }
+                }
+
+                .seat-container{
+                    .seat-space{
+                        min-width: 10px;
+                    }
+
+                    .select-seat{
+                        font-size: 4vw;
                     }
                 }
             }

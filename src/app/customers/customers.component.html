@@ -10,19 +10,19 @@
             </header>
     
             <section class="each-train">
-                <div class="train-info-segment">
+                <div class="train-info-segment-name">
                     <p>
                         <span>#{{trainInfo.number}}</span>
                         <span>{{trainInfo.name}} <span>Express</span></span>
                     </p>
                 </div>
-                <div class="train-info-segment">
+                <div class="train-info-segment-from">
                     <p>
                         <span>{{trainInfo.departure}}</span>
                         <span>{{trainInfo.from}}</span>
                     </p>
                 </div>
-                <div class="train-info-segment">
+                <div class="train-info-segment-to">
                     <p>
                         <span>{{trainInfo.arrive}}</span>
                         <span>{{trainInfo.to}}</span>
@@ -56,11 +56,11 @@
                                 <span>{{selectedSeatNumber[i]}}</span>
                             </div>
 
-                            <input type="text" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
-                            <input type="text" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
-                            <input type="text" pattern="^[0-9]{11}$" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
+                            <input type="text" class="passenger-name" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
+                            <input type="text" class="passenger-surname" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
+                            <input type="text" class="passenger-phone" pattern="^[0-9]{11}$" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
 
-                            <button type="button" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">ადგილის არჩევა</button>
+                            <button type="button" class="passenger-seats" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">ადგილის არჩევა</button>
                         </div>
                     </div>
                 }
@@ -100,7 +100,7 @@
                     <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">წავიკითხე და ვეთანხმები წესებს</p>
                 </div>
 
-                <button type="submit"  [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false">დაჯავშნა</button>
+                <button type="submit" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false">დაჯავშნა</button>
 
                 <!-- <div (click)="console(formPersonalInfo)">click</div> -->
             </div>
@@ -119,7 +119,7 @@
                                 <div class="wagon-img-name">
                                     @if(trainById){
                                         <img [src]="vagon" [alt]="trainById.vagons[i].name" (click)="getWagonById(trainById.vagons[i].id)">
-                                        <div class="vagon-name-holder">
+                                        <div class="vagon-name-holder" (click)="getWagonById(trainById.vagons[i].id)">
                                             <span>{{trainById.vagons[i].name}}</span>
                                         </div>
                                     }
@@ -135,7 +135,7 @@
                                     <p><span>საპირფარეშო</span></p>
                                 </div>
                                 @for (seat of sortedWagonSeats; track $index; let i = $index) {
-                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)">{{seat.number}}</button>
+                                    <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)" [disabled]="isSeatTaken(seat.number, seat.vagonId)" [class.active]="seat.number === selectedSeatNumber[selectedPassengerIndex] && seat.vagonId === selectedSeatVagonId[selectedPassengerIndex]">{{seat.number}}</button>
                                 }
                                 <div class="seat-space"></div>
                                 <div class="vagon-end">

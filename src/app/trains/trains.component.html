@@ -17,19 +17,19 @@
         @for(train of trains; track train){
             @if(train){
                 <section class="each-train">
-                    <div class="train-info-segment">
+                    <div class="train-info-segment-name">
                         <p>
                             <span>#{{train.number}}</span>
                             <span>{{train.name}} <span>Express</span></span>
                         </p>
                     </div>
-                    <div class="train-info-segment">
+                    <div class="train-info-segment-from">
                         <p>
                             <span>{{train.departure}}</span>
                             <span>{{train.from}}</span>
                         </p>
                     </div>
-                    <div class="train-info-segment">
+                    <div class="train-info-segment-to">
                         <p>
                             <span>{{train.arrive}}</span>
                             <span>{{train.to}}</span>

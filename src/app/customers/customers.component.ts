@@ -49,6 +49,7 @@ export class CustomersComponent implements OnInit{
   public selectedSeat:any;
   public selectedSeatNumber:string[] = [];
   public selectedSeatPrice:number[] = [];
+  public selectedSeatVagonId:number[] = [];
   public wagonName:string = '';
 
   public selectedSeatIds: Map<number, string> = new Map();
@@ -56,6 +57,7 @@ export class CustomersComponent implements OnInit{
   public previousWagon:any;
   public previousSeat:any;
   public totalPrice:number = 0;
+  public seatVagonId:number = 0;
 
   public invoiceCheckbox:boolean = false;
 
@@ -89,7 +91,7 @@ export class CustomersComponent implements OnInit{
       )
     }
 
-    console.log(this.formPersonalInfo.value.people)
+    // console.log(this.formPersonalInfo.value.people)
   }
 
   get people(): FormArray{
@@ -101,14 +103,14 @@ export class CustomersComponent implements OnInit{
 
     this.services.getTrainsById(trainId).subscribe((data:any) => {
       this.trainById = data;
-      console.log('get train:', this.trainById);
+      // console.log('get train:', this.trainById);
     })
   }
 
   getWagons(){
     this.services.getAllVagons().subscribe((data:any) => {
       this.getFullWagonList = data;
-      console.log(this.getFullWagonList)
+      // console.log(this.getFullWagonList)
     })
   }
 
@@ -139,7 +141,7 @@ export class CustomersComponent implements OnInit{
         return aSeat.localeCompare(bSeat)
       })
 
-      console.log(this.sortedWagonSeats)
+      // console.log(this.sortedWagonSeats)
     })
   }
 
@@ -151,9 +153,13 @@ export class CustomersComponent implements OnInit{
 
     if(this.selectedSeat){
       this.selectedSeatNumber[this.selectedPassengerIndex] = this.selectedSeat.number;
+      this.selectedSeatVagonId[this.selectedPassengerIndex] = this.selectedSeat.vagonId;
       console.log('selected seat number:', this.selectedSeatNumber);
+      console.log('selected seat vagon id:', this.selectedSeatVagonId);
       this.selectedSeatPrice[this.selectedPassengerIndex] = this.selectedSeat.price;
       console.log('selected seat price:', this.selectedSeatPrice);
+      this.seatVagonId = this.selectedSeat.vagonId;
+      console.log('selected vagon id:', this.seatVagonId);
 
       if(this.selectedPassengerIndex !== null && this.selectedPassengerIndex !== undefined){
         if(this.selectedSeatIds.has(this.selectedPassengerIndex)){
@@ -196,6 +202,10 @@ export class CustomersComponent implements OnInit{
     }
 
     this.showPopup = false;
+  }
+
+  isSeatTaken(seatNumber: string, vagonId: number): boolean {
+    return this.selectedSeatNumber.some((seatNum, index) => index !== this.selectedPassengerIndex && seatNum === seatNumber && this.selectedSeatVagonId[index] === vagonId);
   }
 
   preventClose(event:Event){

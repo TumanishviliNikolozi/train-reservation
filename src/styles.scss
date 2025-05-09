@@ -13,3 +13,29 @@ body{
     position: relative;
     padding: 100px 0px 70px;
 }
+
+.flatpickr-calendar{
+    width: auto;
+
+    .flatpickr-months{
+        .flatpickr-month{
+            .flatpickr-current-month{
+                .flatpickr-monthDropdown-months{
+                    width: 80px;
+                }
+            }
+        }
+    }
+
+    .flatpickr-innerContainer{
+
+        .flatpickr-rContainer .flatpickr-days{
+            width: auto;
+
+            .dayContainer{
+                min-width: 0px;
+                width: auto;
+            }
+        }
+    }
+}
