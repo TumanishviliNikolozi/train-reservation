@@ -100,16 +100,69 @@
                     <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">წავიკითხე და ვეთანხმები წესებს</p>
                 </div>
 
-                <button type="submit" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false">დაჯავშნა</button>
+                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false" (click)="showPayment(); preventClose($event)">გადახდა</button>
 
-                <!-- <div (click)="console(formPersonalInfo)">click</div> -->
+                <!-- <div (click)="getConsole(formPersonalInfo)">click</div>  -->
             </div>
+        </section>
+
+        <section class="popup-container" [style.display]="showPaymentPopup? 'flex' : 'none'">
+            <section class="popup-card">
+                <div class="popup-cls">
+                    <i class="fa-solid fa-circle-xmark" (click)="closePopup()"></i>
+                </div>
+
+                <section class="get-payment-container">
+                    <form class="payment-form" [formGroup]="paymentForm">
+                        <div class="card-number">
+                            <label for="cardNumber">ბარათის ნომერი</label>
+                            <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" (input)="formatCardNumber($event)" autocomplete="off" [class.input-error]="paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid">
+                            @if (paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid) {
+                                <div class="error">Card number is required and must be 16 digits.</div>
+                            }
+                        </div>
+
+                        <div class="card-date">
+                            <label for="expiryDate">ვადა</label>
+                            <input id="expiryDate" type="text" formControlName="expiryDate" placeholder="MM/YY" autocomplete="off" [class.input-error]="paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors">
+                            @if (paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors) {
+                                <div class="error">
+                                    @if (paymentForm.get('expiryDate')?.errors?.['required']) {
+                                        Expiry date is required.
+                                    }
+                                    @if (paymentForm.get('expiryDate')?.errors?.['invalidFormat']) {
+                                        Invalid format. Use MM/YY.
+                                    }
+                                    @if (paymentForm.get('expiryDate')?.errors?.['expired']) {
+                                        Card is expired.
+                                    }
+                                    @if (paymentForm.get('expiryDate')?.errors?.['tooFar']) {
+                                        Expiry date is too far in future.
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <div class="card-pin">
+                            <label for="cvv">CVV</label>
+                            <input id="cvv" type="text" formControlName="cvv" placeholder="123" autocomplete="off" [class.input-error]="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
+                            @if (paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid) {
+                                <div class="error">CVV is required and must be 3 or 4 digits.</div>
+                            }
+                        </div>
+
+                        <button type="button" (click)="getConsolePay(paymentForm)">console</button>
+                    </form>
+
+                    <button type="submit" class="submit-button" [disabled]="paymentForm.invalid">დაჯავშნა</button>
+                </section>
+            </section>
         </section>
 
         <section class="popup-container" [style.display]="showPopup? 'flex' : 'none'">
             <section class="popup-card">
-                <div class="popup-cls" (click)="closePopup()">
-                    <i class="fa-solid fa-circle-xmark"></i>
+                <div class="popup-cls">
+                    <i class="fa-solid fa-circle-xmark"  (click)="closePopup()"></i>
                 </div>
                 
                 <section class="get-seats-container">

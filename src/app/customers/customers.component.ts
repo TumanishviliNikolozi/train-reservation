@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { cardExpiryDateValidator } from '../validators/card-expiry.validator';
 
 @Component({
   selector: 'app-customers',
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './customers.component.scss'
 })
 export class CustomersComponent implements OnInit{
-  constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient){
+  constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient, private fb: FormBuilder){
     this.getWagons();
 
     if(history.state){
@@ -62,8 +63,10 @@ export class CustomersComponent implements OnInit{
   public invoiceCheckbox:boolean = false;
 
   public formPersonalInfo!:FormGroup;
+  public paymentForm!:FormGroup;
 
   public showPopup:boolean = false;
+  public showPaymentPopup:boolean = false;
   public tktIdSaver:any[] = [];
 
   ngOnInit(): void {
@@ -91,11 +94,33 @@ export class CustomersComponent implements OnInit{
       )
     }
 
-    // console.log(this.formPersonalInfo.value.people)
+    console.log(this.formPersonalInfo.value.people)
+
+
+    this.paymentForm = this.fb.group({
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      expiryDate: ['', [Validators.required, cardExpiryDateValidator()]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
+    });
+
   }
 
   get people(): FormArray{
     return this.formPersonalInfo.get('people') as FormArray;
+  }
+
+  formatCardNumber(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let rawValue = input.value.replace(/\D/g, '');
+
+    if (rawValue.length > 16) {
+      rawValue = rawValue.substring(0, 16);
+    }
+
+    const formatted = rawValue.replace(/(\d{4})(?=\d)/g, '$1 ');
+    this.paymentForm.get('cardNumber')?.setValue(rawValue, { emitEvent: false });
+
+    input.value = formatted;
   }
 
   getTrainById(trainId:any){
@@ -208,6 +233,10 @@ export class CustomersComponent implements OnInit{
     return this.selectedSeatNumber.some((seatNum, index) => index !== this.selectedPassengerIndex && seatNum === seatNumber && this.selectedSeatVagonId[index] === vagonId);
   }
 
+  showPayment(){
+    this.showPaymentPopup = !this.showPaymentPopup;
+  }
+
   preventClose(event:Event){
     event.stopPropagation()
   }
@@ -221,15 +250,20 @@ export class CustomersComponent implements OnInit{
         console.log("click outside", this.showPopup)
       }
     }
+
+    if(this.showPaymentPopup){
+      let clickedInside = (event.target as HTMLElement).closest(".popup-card");
+      if(!clickedInside){
+        this.showPaymentPopup = !this.showPaymentPopup;
+      }
+    }
   }
 
   closePopup(){
     this.showPopup = false;
+    this.showPaymentPopup = false;
   }
   
-  calculateFullPrice(){
-
-  }
 
   onSubmit(){
     this.http.post("https://railway.stepprojects.ge/api/tickets/register", this.formPersonalInfo.value, {responseType: 'text'})
@@ -243,6 +277,7 @@ export class CustomersComponent implements OnInit{
       }
     })
 
+    this.showPaymentPopup = false;
   }
 
   checkCheckbox(event:Event){
@@ -250,7 +285,13 @@ export class CustomersComponent implements OnInit{
     this.invoiceCheckbox = !this.invoiceCheckbox;
   }
 
-  console(formPersonalInfo:any){
+  
+
+  getConsole(formPersonalInfo:any){
     console.log(formPersonalInfo.value)
+  }
+
+  getConsolePay(paymentForm:any){
+    console.log(paymentForm.value)
   }
 }

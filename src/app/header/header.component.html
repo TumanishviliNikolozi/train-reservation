@@ -2,7 +2,9 @@
     <nav>
         <ul>
             <li>
-                <a routerLink="/საწყისი" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><span>STEP RAILWAY</span></a>
+                <a class="home-img" routerLink="/საწყისი">
+                    <img src="https://railway.stepprojects.ge/assets/img/logo/logo.png" alt="STEP RAILWAY">
+                </a>
             </li>
             <!-- <li>
                 <a routerLink="/რეისები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><span>რეისები</span></a>
@@ -14,7 +16,27 @@
                 <a routerLink="/გადახდა" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><span>გადახდა</span></a>
             </li> -->
             <li>
-                <a routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><span>ბილეთის შემოწმება/დაბრუნება</span></a>
+                <div class="about-me">
+                    <p class="about-me-title" (click)="showAboutMe()">
+                        <span>ჩემს შესახებ</span>
+                        <i class="fa-solid fa-circle-user"></i>
+                    </p>
+
+                    <p class="burger" (click)="showAboutMe()">
+                        <i class="fa-solid fa-bars"></i>
+                    </p>
+
+                    <div class="about-me-dropdown" [style.display]="isDropActive() ? 'flex' : 'none'" #aboutMeDrop>
+                        <div class="languages">
+                            languages
+                        </div>
+                        <div class="authentifications">
+                            <button class="about-me-sign-up" (click)="showAboutMe()">რეგისტრაცია</button>
+                            <button class="about-me-sign-in" (click)="showAboutMe()">ავტორიზაცია</button>
+                        </div>
+                        <a class="check-tkt" routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ბილეთის შემოწმება/დაბრუნება</span></a>
+                    </div>
+                </div>
             </li>
         </ul>
     </nav>

@@ -5,8 +5,6 @@ header{
     width: 100%;
     height: 100px;
     @include display-flex-align-items(center);
-    padding: 0px 120px;
-    background-color: $backgroundColor-1;
     position: fixed;
     top: 0px;
     z-index: 9999;
@@ -20,35 +18,193 @@ header{
         ul{
             width: 100%;
             @include display-flex-align-items(center);
+            padding: 0px 30px;
             gap: 30px;
             justify-content: space-between;
 
             li{
                 list-style-type: none;
 
-                a{
-                    height: 50px;
-                    padding: 0px 25px;
-                    background-color: $buttonColor-1;
+                .home-img{
                     @include display-flex-align-items(center);
-                    text-decoration: none;
-                    border-radius: 5px;
-                    transition: 0.3s ease;
-
-                    span{
-                        display: block;
-                        @include font-option(roboto, $buttonTextColor-1, 17px, 100);
-                    }
-
-                    &:hover{
-                        background-color: $buttonHoverColor-1;
-                        transition: 0.3s ease;
-                    }
                 }
 
-                .active-link{
-                    background-color: $buttonHoverColor-1;
-                    transition: 0.3s ease;
+                
+
+                .about-me{
+                    @include width-height-100;
+                    position: relative;
+
+                    .about-me-title{
+                        width: 100%;
+                        height: 56px;
+                        padding: 0px 20px;
+                        @include display-flex-align-items(center);
+                        gap: 10px;
+                        border-radius: 8px;
+                        transition: 0.5s ease;
+                        cursor: pointer;
+
+                        span{
+                            @include font-option(roboto, $primaryColor-4, 1.25rem, 400);
+                        }
+
+                        i{
+                            font-size: 23px;
+                            color: $primaryColor-5;
+                            transition: 0.2s ease;
+                        }
+
+                        &:hover{
+                            background-color: $backgroundColor-5;
+                            border-radius: 8px;
+                            transform: translateY(-5px);
+                            transition: 0.5s ease;
+
+                            span{
+                                color: $primaryColor-5;
+                            }
+
+                            i{
+                                color: $buttonHoverColor-1;
+                                transition: 0.2s ease;
+                            }
+                        }
+                    }
+
+                    .burger{
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                        width: 80px;
+                        cursor: pointer;
+
+                        i{
+                            font-size: 40px;
+                            color: $burgerColor;
+                        }
+
+                        &:hover{
+                            i{
+                                color: $burgerHoverColor;
+                            }
+                        }
+
+                        &:active{
+                            i{
+                                color: $buttonActiveColor;
+                            }
+                        }
+                    }
+
+                    .about-me-dropdown{
+                        @include display-flex-direction-column(start, center);
+                        position: absolute;
+                        top: 60px;
+                        right: 0px;
+                        min-width: 250px;
+                        width: 100%;
+                        padding: 25px;
+                        background-color: $backgroundColor-1;
+                        border: 1px solid $borderColor-5;
+                        border-radius: 8px;
+                        box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
+
+                        .languages{
+                            width: 100%;
+                            height: 40px;
+                        }
+
+                        .authentifications{
+                            width: 100%;
+                            display: grid;
+                            grid-template-rows: repeat(2, 1fr);
+                            gap: 10px;
+                            margin: 10px 0px;
+                        
+                            button{
+                                width: 100%;
+                                height: 40px;
+                                background-color: $buttonColor-1;
+                                border: 1px solid $borderColor-5;
+                                @include font-option(roboto, $primaryColor-1, 0.8rem, 300);
+                                cursor: pointer;
+                                border-radius: 5px;
+                                transition: 0.3s ease;
+
+                                &:hover{
+                                    transform: translateY(-5px);
+                                    background-color: $buttonHoverColor-1;
+                                    transition: 0.3s ease;
+                                }
+                            }
+                        }
+
+                        .check-tkt{
+                            width: 100%;
+                            height: 40px;
+                            padding: 0px 15px;
+                            background-color: $buttonColor-1;
+                            @include display-flex-align-items(center);
+                            text-decoration: none;
+                            border-radius: 5px;
+                            transition: 0.3s ease;
+                            text-align: center;
+
+                            span{
+                                display: block;
+                                @include font-option(roboto, $buttonTextColor-1, 0.8rem, 100);
+                            }
+
+                            &:hover{
+                                transform: translateY(-5px);
+                                background-color: $buttonHoverColor-1;
+                                transition: 0.3s ease;
+                            }
+                        }
+
+                        .active-link{
+                            background-color: $buttonHoverColor-1;
+                            transition: 0.3s ease;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1023px) {
+    header{
+        nav{
+            ul{
+                li{
+                    .about-me{
+                        .about-me-title{
+                            display: none;
+                        }
+
+                        .burger{
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 499px) {
+    header{
+        nav{
+            ul{
+                li{
+                    .home-img{
+                        img{
+                            width: 40vw;
+                        }
+                    }
                 }
             }
         }
