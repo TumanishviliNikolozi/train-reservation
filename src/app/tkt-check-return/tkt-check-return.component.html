@@ -1,50 +1,161 @@
-<p>tkt-check-return works!</p>
-
-<!-- 
-<form #form="ngForm" (ngSubmit)="onSubmit()">
-    <h2><span>დაჯავშნეთ მატარებლის ბილეთი</span></h2>
-
-    <div class="input-holder" #departureElement>
-        <input type="hidden" name="whereFrom" [(ngModel)]="whereFrom" #whereFromModel="ngModel" required>
-        <div class="selection" data-value="whereFrom" [class.invalid]="whereFromModel.invalid && whereFromModel.touched">
-            <p (click)="toggleDepartureClass()">{{whereFrom === ""? "საიდან" : whereFrom}}</p>
-            <div class="select-arrow" (click)="toggleDepartureClass()" [class.active-arrow]="isActiveDeparture()">
-                <i class="fa-solid fa-square-caret-down"></i>
-            </div>
-            <div class="select-dropdown" [class.active-dropdown]="isActiveDeparture()">
-                @for(station of myStations; track station){
-                    <div class="city-name" (click)="startingStation(station.name); whereFromModel.control.markAsTouched(); toggleDepartureClass()">{{station.name}}</div>
+<section class="payment-check-container">
+    <header class="payment-succesfull">
+        <h1>გადაამოწმე ბილეთი</h1>
+        <form class="check-ticket-form" [formGroup]="checkTicket">
+            <div class="check-input-container">
+                <input type="text" formControlName="ticketId" placeholder="ბილეთის ID">
+                @if ((checkTicket.get('ticketId')?.touched && checkTicket.get('ticketId')?.invalid)) {
+                    <div class="error">არასწორი ID</div>
                 }
             </div>
-        </div>
-    </div>
+            <button class="check-button" (click)="checkMyTicketId(checkTicket.value.ticketId)">შემოწმება</button>
+        </form>
+    </header>
 
-    <div class="input-holder" #ArrivalElement>
-        <input type="hidden" name="destination" [(ngModel)]="destination" #destinationModel="ngModel" required>
-        <div class="selection" data-value="destination" [class.invalid]="destinationModel.invalid && destinationModel.touched">
-            <p (click)="toggleArrivalClass()">{{destination === ""? "საიდან" : destination}}</p>
-            <div class="select-arrow"  (click)="toggleArrivalClass()" [class.active-arrow]="isActiveArrival()">
-                <i class="fa-solid fa-square-caret-down"></i>
-            </div>
-            <div class="select-dropdown" [class.active-dropdown]="isActiveArrival()">
-                @for(station of myStations; track station){
-                    <div class="city-name" (click)="endingStation(station.name); destinationModel.control.markAsTouched(); toggleArrivalClass()">{{station.name}}</div>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="input-holder">
-        <label for="date"></label>
-        <input [(ngModel)]="date" name="date" type="date" id="date" required>
-    </div>
-    <div class="input-holder">
-        <label for="passengers"></label>
-        <input [(ngModel)]="passengers" name="passengers" type="number" id="passengers" required>
-        <div class="inc-dec-container">
-        </div>
-    </div>
+    <section class="ticket-sheet-container">
+        @if (ticketInfo) {
+            <section class="ticket-sheet">
+                <div class="ticket-sheet-header">
+                    <h3>Step Railway</h3>
+                    <img src="https://railway.stepprojects.ge/assets/img/stepLogo.jpg" alt="It Step">
+                </div>
+    
+                <div class="ticket-id-and-date">
+                    <div class="ticket-id">
+                        <p>
+                            <span class="property-name">ბილეთის ID: </span>
+                            <span class="property-itself">{{ticketInfo?.id}}</span>
+                        </p>
+                    </div>
+    
+                    <div class="ticket-bought-date">
+                        <p>
+                            <span class="property-name">ყიდვის თარიღი: </span>
+                            <span class="property-itself">{{ticketBoughtOn}}</span>
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="from-to-when">
+                    <div class="info-segment-from">
+                        <p>
+                            <span class="property-name">გამგზავრება:</span>
+                            <span class="property-itself">
+                                <span>{{ticketInfo?.train?.from}} </span>
+                                <span>{{ticketInfo?.train?.departure}}</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="info-segment-to">
+                        <p>
+                            <span class="property-name">ჩასვლა:</span>
+                            <span class="property-itself">
+                                <span>{{ticketInfo?.train?.to}} </span>
+                                <span>{{ticketInfo.train?.arrive}}</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="info-segment-when">
+                        <p>
+                            <span class="property-name">გასვლის თარიღი:</span>
+                            <span class="property-itself">{{ticketInfo?.date}}</span>
+                        </p>
+                    </div>
+                </div>
 
-    <button type="submit" [disabled]="form.invalid">მატარებლის მოძებნა</button>
-    <button type="reset" (click)="reset()">ახლიდან</button>
-</form> -->
+                <div class="contact-info">
+                    <h4><span>საკონტაქტო ინფორმაცია:</span></h4>
+                    <div class="contact-info-container">
+                        <div class="contact-email">
+                            <p>
+                                <span class="property-name">იმეილი: </span>
+                                <span class="property-itself">{{ticketInfo?.email}}</span>
+                            </p>
+                        </div>
 
+                        <div class="contact-phone">
+                            <p>
+                                <span class="property-name">ტელ ნომერი: </span>
+                                <span class="property-itself">{{ticketInfo?.phone}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="passenger-info">
+                    <h4><span>მგზავრები:</span></h4>
+                    <div class="passenger-info-container">
+                        @for (passenger of ticketInfo.persons; track passenger; let i = $index) {
+                            <div class="each-passenger">
+                                <div class="passenger-name">
+                                    <p>
+                                        <span class="property-name">სახელი: </span>
+                                        <span class="property-itself">{{ticketInfo.persons[i].name}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-surname">
+                                    <p>
+                                        <span class="property-name">გვარი: </span>
+                                        <span class="property-itself">{{ticketInfo.persons[i].surname}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-personal-id">
+                                    <p>
+                                        <span class="property-name">პირადი ნომერი: </span>
+                                        <span class="property-itself">{{ticketInfo.persons[i].idNumber}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-seat">
+                                    <p>
+                                        <span class="property-name">ადგილი: </span>
+                                        <span class="property-itself">{{ticketInfo.persons[i].seat.number}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-vagon">
+                                    <p>
+                                        <span class="property-name">ვაგონის ნომერი: </span>
+                                        <span class="property-itself">{{ticketInfo.persons[i].seat.vagonId}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="payment-info">
+                    <div class="card-info">
+                        <h4>ბარათის ინფორმაცია:</h4>
+                        <div class="owner-info">
+                            <div class="owner-name">
+                                <p>
+                                    <span class="property-name">მფლობელის სახელი: </span>
+                                    <span class="property-itself"></span>
+                                </p>
+                            </div>
+
+                            <div class="card-number">
+                                <p>
+                                    <span class="property-name">ბარათის ნომერი: </span>
+                                    <span class="property-itself"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-summary">
+                        <div class="summary">
+                            <p>
+                                <span class="property-name">სულ გადახდილი: </span>
+                                <span class="property-itself">{{ticketInfo.ticketPrice}} Gel</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    </section>
+</section>
