@@ -67,7 +67,7 @@ export class CustomersComponent implements OnInit{
 
   public showPopup:boolean = false;
   public showPaymentPopup:boolean = false;
-  public tktIdSaver:any[] = [];
+  public trueIdSaver!:string;
 
   ngOnInit(): void {
 
@@ -99,6 +99,7 @@ export class CustomersComponent implements OnInit{
 
     this.paymentForm = this.fb.group({
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cardHolder: ['', [Validators.required]],
       expiryDate: ['', [Validators.required, cardExpiryDateValidator()]],
       cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
     });
@@ -121,6 +122,18 @@ export class CustomersComponent implements OnInit{
     this.paymentForm.get('cardNumber')?.setValue(rawValue, { emitEvent: false });
 
     input.value = formatted;
+  }
+
+  formatCustomerName(event: Event) {
+    const input = event.target as HTMLInputElement;
+  
+    let value = input.value.replace(/\s+/g, ' ').trim();
+  
+    value = value.replace(/\b\w/g, char => char.toUpperCase());
+  
+    input.value = value;
+  
+    this.paymentForm.get('customerName')?.setValue(value, { emitEvent: false });
   }
 
   getTrainById(trainId:any){
@@ -269,9 +282,20 @@ export class CustomersComponent implements OnInit{
     this.http.post("https://railway.stepprojects.ge/api/tickets/register", this.formPersonalInfo.value, {responseType: 'text'})
     .subscribe((response) => {
       try{
-        this.tktIdSaver.push(response)
         console.log(response)
-        console.log(this.tktIdSaver)
+
+        const splitResponse = response.split(':');
+        this.trueIdSaver = splitResponse[1]?.trim();
+        console.log(this.trueIdSaver);
+
+        this.router.navigate(['/დადასტურება'], {
+          state: {
+            trueTktId: this.trueIdSaver,
+            paymentInfo: this.paymentForm.value,
+            tktBoughtOn: new Date().toISOString()
+          }
+        })
+
       }catch(error){
         console.error("response error:", error)
       }

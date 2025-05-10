@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { APIsService } from '../services/apis.service';
 
 @Component({
   selector: 'app-tkt-check-return',
@@ -6,26 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './tkt-check-return.component.html',
   styleUrl: './tkt-check-return.component.scss'
 })
-export class TktCheckReturnComponent {
+export class TktCheckReturnComponent{
 
   
-      // this.route.queryParams.subscribe(params => {
-      //   if(params){
-      //     if(params['trainInfo']){
-      //       this.trainInfo = JSON.parse(params['trainInfo'])
-      //     }
-  
-      //     if(params['rawDate']){
-      //       this.date = params['rawDate']
-      //     }
-  
-      //     if (params['passengers']) {
-      //       this.passengers = +params['passengers'];
-      //     }
-      //   }
-  
-      //   console.log('trainInfo: ', this.trainInfo);
-      //   console.log('rawDare: ', this.date)
-      //   console.log('Passengers', this.passengers);
-      // })
 }

@@ -38,7 +38,7 @@
 
             <section class="contact-info-container">
                 <input type="email" name="email" formControlName="email" autocomplete="off" placeholder="მეილი">
-                <input type="tel" pattern="^[0-9]{9}$" inputmode="numeric" name="phoneNumber" formControlName="phoneNumber" autocomplete="tel" placeholder="ტელეფონის ნომერი">
+                <input type="tel" pattern="^[0-9]{9}$" inputmode="numeric" name="phoneNumber" maxlength="9" formControlName="phoneNumber" autocomplete="tel" placeholder="ტელეფონის ნომერი">
             </section>
 
             <div class="passenger-info-title">
@@ -58,7 +58,7 @@
 
                             <input type="text" class="passenger-name" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
                             <input type="text" class="passenger-surname" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
-                            <input type="text" class="passenger-phone" pattern="^[0-9]{11}$" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
+                            <input type="text" class="passenger-phone" pattern="^[0-9]{11}$" maxlength="11" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
 
                             <button type="button" class="passenger-seats" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">ადგილის არჩევა</button>
                         </div>
@@ -102,7 +102,7 @@
 
                 <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false" (click)="showPayment(); preventClose($event)">გადახდა</button>
 
-                <!-- <div (click)="getConsole(formPersonalInfo)">click</div>  -->
+                <!-- <div (click)="getConsole(formPersonalInfo)">click</div>   -->
             </div>
         </section>
 
@@ -118,26 +118,34 @@
                             <label for="cardNumber">ბარათის ნომერი</label>
                             <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" (input)="formatCardNumber($event)" autocomplete="off" [class.input-error]="paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid">
                             @if (paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid) {
-                                <div class="error">Card number is required and must be 16 digits.</div>
+                                <div class="error">ბარათის ნომერი აუცილებელია რომ იყოს 16 ციფრი.</div>
+                            }
+                        </div>
+
+                        <div class="card-holder">
+                            <label for="">მფლობელი</label>
+                            <input type="text" formControlName="cardHolder" placeholder="ჯონ დოუ" autocomplete="name" pattern="^[a-zA-Z\s' ]+$" (input)="formatCustomerName($event)" [class.input-error]="paymentForm.get('cardHolder')?.touched && paymentForm.get('cardHolder')?.invalid">
+                            @if (paymentForm.get('cardHolder')?.touched && paymentForm.get('cardHolder')?.invalid) {
+                                <div class="error">შეიყვანეთ სწორი სახელი.</div>
                             }
                         </div>
 
                         <div class="card-date">
                             <label for="expiryDate">ვადა</label>
-                            <input id="expiryDate" type="text" formControlName="expiryDate" placeholder="MM/YY" autocomplete="off" [class.input-error]="paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors">
+                            <input id="expiryDate" type="text" formControlName="expiryDate" placeholder="MM/YY" maxlength="5" autocomplete="off" [class.input-error]="paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors">
                             @if (paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors) {
                                 <div class="error">
                                     @if (paymentForm.get('expiryDate')?.errors?.['required']) {
-                                        Expiry date is required.
+                                        ბარათის ვადა აუცილებელია.
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['invalidFormat']) {
-                                        Invalid format. Use MM/YY.
+                                        არასწორი ფორმა, გამოიყენე MM/YY.
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['expired']) {
-                                        Card is expired.
+                                        ბარათი ვადაგასულია.
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['tooFar']) {
-                                        Expiry date is too far in future.
+                                        ბარათის ვადა არარეალურად შორსაა.
                                     }
                                 </div>
                             }
@@ -145,9 +153,9 @@
 
                         <div class="card-pin">
                             <label for="cvv">CVV</label>
-                            <input id="cvv" type="text" formControlName="cvv" placeholder="123" autocomplete="off" [class.input-error]="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
+                            <input id="cvv" type="text" formControlName="cvv" placeholder="123" autocomplete="off" maxlength="4" [class.input-error]="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
                             @if (paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid) {
-                                <div class="error">CVV is required and must be 3 or 4 digits.</div>
+                                <div class="error">CVV აუცილებელია რომ იყოს 3 ან 4 ციფრი.</div>
                             }
                         </div>
 

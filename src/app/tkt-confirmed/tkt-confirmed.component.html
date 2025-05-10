@@ -1,0 +1,153 @@
+<section class="payment-check-container">
+    <header class="payment-succesfull">
+        <i class="fa-solid fa-circle-check"></i>
+        <h1>გადახდა წარმატებულია</h1>
+    </header>
+
+    <section class="ticket-sheet-container">
+        @if (ticketInfo) {
+            <section class="ticket-sheet">
+                <div class="ticket-sheet-header">
+                    <h3>Step Railway</h3>
+                    <img src="https://railway.stepprojects.ge/assets/img/stepLogo.jpg" alt="It Step">
+                </div>
+    
+                <div class="ticket-id-and-date">
+                    <div class="ticket-id">
+                        <p>
+                            <span class="property-name">ბილეთის ID: </span>
+                            <span class="property-itself">{{ticketInfo?.id}}</span>
+                        </p>
+                    </div>
+    
+                    <div class="ticket-bought-date">
+                        <p>
+                            <span class="property-name">ყიდვის თარიღი: </span>
+                            <span class="property-itself">{{ticketBoughtOn}}</span>
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="from-to-when">
+                    <div class="info-segment-from">
+                        <p>
+                            <span class="property-name">გამგზავრება:</span>
+                            <span class="property-itself">
+                                <span>{{ticketInfo?.train?.from}} </span>
+                                <span>{{ticketInfo?.train?.departure}}</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="info-segment-to">
+                        <p>
+                            <span class="property-name">ჩასვლა:</span>
+                            <span class="property-itself">
+                                <span>{{ticketInfo?.train?.to}} </span>
+                                <span>{{ticketInfo.train?.arrive}}</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="info-segment-when">
+                        <p>
+                            <span class="property-name">გასვლის თარიღი:</span>
+                            <span class="property-itself">{{ticketInfo?.date}}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h4><span>საკონტაქტო ინფორმაცია:</span></h4>
+                    <div class="contact-info-container">
+                        <div class="contact-email">
+                            <p>
+                                <span class="property-name">იმეილი: </span>
+                                <span class="property-itself">{{ticketInfo?.email}}</span>
+                            </p>
+                        </div>
+
+                        <div class="contact-phone">
+                            <p>
+                                <span class="property-name">ტელ ნომერი: </span>
+                                <span class="property-itself">{{ticketInfo?.phone}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="passenger-info">
+                    <h4><span>მგზავრები:</span></h4>
+                    <div class="passenger-info-container">
+                        @for (passenger of ticketInfo?.persons; track passenger; let i = $index) {
+                            <div class="each-passenger">
+                                <div class="passenger-name">
+                                    <p>
+                                        <span class="property-name">სახელი: </span>
+                                        <span class="property-itself">{{ticketInfo?.persons[i]?.name}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-surname">
+                                    <p>
+                                        <span class="property-name">გვარი: </span>
+                                        <span class="property-itself">{{ticketInfo?.persons[i]?.surname}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-personal-id">
+                                    <p>
+                                        <span class="property-name">პირადი ნომერი: </span>
+                                        <span class="property-itself">{{ticketInfo?.persons[i]?.idNumber}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-seat">
+                                    <p>
+                                        <span class="property-name">ადგილი: </span>
+                                        <span class="property-itself">{{ticketInfo?.persons[i]?.seat?.number}}</span>
+                                    </p>
+                                </div>
+
+                                <div class="passenger-vagon">
+                                    <p>
+                                        <span class="property-name">ვაგონის ნომერი: </span>
+                                        <span class="property-itself">{{ticketInfo?.persons[i]?.seat?.vagonId}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="payment-info">
+                    <div class="card-info">
+                        <h4>ბარათის ინფორმაცია:</h4>
+                        <div class="owner-info">
+                            <div class="owner-name">
+                                <p>
+                                    <span class="property-name">მფლობელის სახელი: </span>
+                                    <span class="property-itself">{{paymentInfo.cardHolder}}</span>
+                                </p>
+                            </div>
+
+                            <div class="card-number">
+                                <p>
+                                    <span class="property-name">ბარათის ნომერი: </span>
+                                    <span class="property-itself">{{hiddenCardNumber}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-summary">
+                        <div class="summary">
+                            <p>
+                                <span class="property-name">სულ გადახდილი: </span>
+                                <span class="property-itself">{{ticketInfo.ticketPrice}} Gel</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        }
+    </section>
+</section>

@@ -1,0 +1,607 @@
+@use "helper-collector" as *;
+
+.payment-check-container{
+    max-width: 1280px;
+    width: 100%;
+    margin: 100px auto;
+    padding: 40px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
+
+    .payment-succesfull{
+        width: 100%;
+        padding: 40px;
+        @include display-flex-direction-column(start, center);
+
+        i{
+            font-size: 7rem;
+            color: $successColor-1;
+        }
+
+        h1{
+            margin-top: 20px;
+            @include font-option(roboto, $primaryColor-4, 2rem, 400);
+        }
+    }
+
+    .ticket-sheet-container{
+        width: 100%;
+        border: none;
+        border-radius: 15px;
+        background-color: $backgroundColor-4;
+        @include display-flex-all-center;
+        padding: 150px 0px;
+
+        .ticket-sheet{
+            max-width: 850px;
+            width: 100%;
+            background-color: $backgroundColor-1;
+            border-radius: 10px;
+            padding: 70px 50px;
+            display: grid;
+            grid-template-rows: repeat(6, auto);
+
+            .ticket-sheet-header{
+                width: 100%;
+                height: 80px;
+                @include display-flex-align-items(center);
+                justify-content: space-between;
+                padding: 0px 20px;
+
+                h3{
+                    @include font-option(roboto, $primaryColor-4, 1.5rem, 400);
+                }
+
+                img{
+                    height: 100%;
+                }
+            }
+
+            .ticket-id-and-date{
+                width: 100%;
+                height: 40px;
+                margin-top: 40px;
+                @include display-flex-align-items(center);
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .ticket-id, .ticket-bought-date{
+
+                    .property-name{
+                        @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                    }
+
+                    .property-itself{
+                        @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                    }
+                }
+            }
+
+            .from-to-when{
+                width: 100%;
+                padding: 20px;
+                margin-top: 40px;
+                border: 1px solid $borderColor-5;
+                border-radius: 8px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+
+                .info-segment-from, .info-segment-to, .info-segment-when{
+                    @include width-height-100;
+                    @include display-flex-align-items(center);
+
+                    p{
+                        width: 100%;
+                        @include display-flex-direction-column(center, start);
+                        row-gap: 5px;
+                        padding: 0px 20px;
+
+                        .property-name{
+                            @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                        }
+
+                        .property-itself{
+                            @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                        }
+                    }
+                }
+
+                .info-segment-from, .info-segment-to{
+                    p{
+                        border-right: 2px solid $borderColor-5;
+                    }
+                }
+            }
+
+            .contact-info{
+                width: 100%;
+                margin-top: 40px;
+                display: grid;
+                grid-template-rows: repeat(2, auto);
+
+                h4{
+                    width: 100%;
+                    padding: 15px 0px;
+                    @include font-option(roboto, $primaryColor-4, 1.1rem, 600);
+                }
+
+                .contact-info-container{
+                    width: 100%;
+                    padding: 20px;
+                    border: 1px solid $borderColor-5;
+                    border-radius: 8px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+
+                    .contact-email, .contact-phone{
+                        @include width-height-100;
+                        @include display-flex-align-items(center);
+
+                        p{
+                            width: 100%;
+                            @include display-flex-align-items(center);
+                            gap: 5px;
+                            padding: 0px 20px;
+
+                            .property-name{
+                                @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                            }
+
+                            .property-itself{
+                                @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                            }
+                        }
+                    }
+
+                    .contact-email{
+                        p{
+                            border-right: 2px solid $borderColor-5;
+                        }
+                    }
+                }
+            }
+
+            .passenger-info{
+                width: 100%;
+                margin-top: 40px;
+                display: grid;
+                grid-template-rows: repeat(2, auto);
+
+                h4{
+                    width: 100%;
+                    padding: 15px 0px;
+                    @include font-option(roboto, $primaryColor-4, 1.1rem, 600);
+                }
+
+                .passenger-info-container{
+                    width: 100%;
+                    gap: 20px;
+
+                    .each-passenger{
+                        width: 100%;
+                        padding: 20px;
+                        border: 1px solid $borderColor-5;
+                        border-radius: 8px;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(3, auto);
+
+                        .passenger-name{
+                            grid-column: 1/2;
+
+                            p{
+                                border-right: 2px solid $borderColor-5;
+
+                            }
+                        }
+
+                        .passenger-surname{
+                            grid-column: 2/3;
+                        }
+
+                        .passenger-personal-id{
+                            grid-column: 1/3;
+                            p{
+                                height: 50px;
+                            }
+                        }
+
+                        .passenger-seat{
+                            grid-column: 1/2;
+
+                            p{
+                                border-right: 2px solid $borderColor-5;
+                            }
+                        }
+
+                        .passenger-vagon{
+                            grid-column: 2/3;
+                        }
+
+                        .passenger-name, .passenger-surname, .passenger-personal-id, .passenger-seat, .passenger-vagon{
+                            @include width-height-100;
+                            @include display-flex-align-items(center);
+
+                            p{
+                                width: 100%;
+                                @include display-flex-align-items(center);
+                                gap: 5px;
+                                padding: 10px 20px;
+
+                                .property-name{
+                                    @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                                }
+
+                                .property-itself{
+                                    @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                                }
+                            }
+                        }
+
+                        .passenger-name, .passenger-surname, .passenger-personal-id{
+                            border-bottom: 2px dashed $borderColor-5;
+                        }
+                    }
+                }
+            }
+
+            .payment-info{
+                width: 100%;
+                margin-top: 40px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+
+                .card-info{
+                    width: 100%;
+                    display: grid;
+                    grid-template-rows: repeat(2, auto);
+
+                    h4{
+                        width: 100%;
+                        padding: 15px 0px;
+                        @include font-option(roboto, $primaryColor-4, 1.1rem, 600);
+                    }
+
+                    .owner-info{
+                        width: 100%;
+                        padding: 20px;
+                        border: 1px solid $borderColor-5;
+                        border-radius: 8px;
+                        display: grid;
+                        grid-template-rows: repeat(2, auto);
+                        gap: 20px;
+
+                        .owner-name, .card-number{
+                            @include width-height-100;
+                            @include display-flex-align-items(center);
+
+                            p{
+                                width: 100%;
+                                @include display-flex-direction-column(center, start);
+                                row-gap: 5px;
+                                padding: 0px 20px;
+
+                                .property-name{
+                                    @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                                }
+
+                                .property-itself{
+                                    @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .payment-summary{
+                    width: 100%;
+                    margin-top: 55px;
+
+                    .summary{
+                        width: 100%;
+                        padding: 20px;
+                        border-top: 2px solid $borderColor-5;
+
+                        p{
+                            width: 100%;
+                            @include display-flex-align-items(center);
+                            justify-content: space-between;
+                            row-gap: 5px;
+
+                            .property-name{
+                                @include font-option(roboto, $primaryColor-4, 1rem, 600);
+                            }
+
+                            .property-itself{
+                                @include font-option(roboto, $primaryColor-5, 1rem, 400);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .payment-check-container{
+        margin: 0px 0px 100px;
+        padding: 40px 0px;
+
+        .payment-succesfull{
+            padding: 4vw;
+            i{
+                font-size: 10vw;
+            }
+
+            h1{
+                font-size: 4vw;
+            }
+        }
+
+        .ticket-sheet-container{
+            padding: 7vw 0px;
+
+            .ticket-sheet{
+                padding: 5.5vw 4.8vw;
+
+                .ticket-sheet-header{
+                    height: auto;
+                    h3{
+                        font-size: 2.5vw;
+                    }
+
+                    img{
+                        height: 6vw;
+                    }
+                }
+
+                .ticket-id-and-date{
+                    margin-top: 2.5vw;
+
+                    .ticket-id, .ticket-bought-date{
+                        p{
+                            .property-name, .property-itself{
+                                font-size: 1.6vw;
+                            }
+                        }
+                    }
+                }
+
+                .from-to-when{
+                    margin-top: 3vw;
+
+                    .info-segment-from, .info-segment-to, .info-segment-when{
+                        p{
+                            .property-name, .property-itself{
+                                font-size: 1.6vw;
+                            }
+                        }
+                    }
+                }
+
+                .contact-info{
+                    margin-top: 3vw;
+
+                    h4{
+                        font-size: 1.7vw;
+                    }
+
+                    .contact-info-container{
+                        .contact-email, .contact-phone{
+                            p{
+                                .property-name, .property-itself{
+                                    font-size: 1.6vw;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .passenger-info{
+                    margin-top: 3vw;
+
+                    h4{
+                        font-size: 1.7vw;
+                    }
+
+                    .passenger-info-container{
+
+                        .each-passenger{
+                            .passenger-name, .passenger-surname, .passenger-personal-id, .passenger-seat, .passenger-vagon{
+                                p{
+                                    .property-name, .property-itself{
+                                        font-size: 1.6vw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .payment-info{
+                    margin-top: 3vw;
+
+                    .card-info{
+                        h4{
+                            font-size: 1.7vw;
+                        }
+
+                        .owner-info{
+                            .owner-name, .card-number{
+                                p{
+                                    .property-name, .property-itself{
+                                        font-size: 1.6vw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .payment-summary{
+                        margin-top: 6.5vw;
+
+                        .summary{
+                            p{
+                                .property-name, .property-itself{
+                                    font-size: 1.6vw;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .payment-check-container{
+        margin: 0px 0px 100px;
+        padding: 40px 0px;
+
+        .payment-succesfull{
+            padding: 4vw;
+            i{
+                font-size: 10vw;
+            }
+
+            h1{
+                font-size: 4vw;
+            }
+        }
+
+        .ticket-sheet-container{
+            padding: 7vw 0px;
+
+            .ticket-sheet{
+                padding: 5.5vw 4.8vw;
+
+                .ticket-sheet-header{
+                    height: auto;
+                    h3{
+                        font-size: 3vw;
+                    }
+
+                    img{
+                        height: 6vw;
+                    }
+                }
+
+                .ticket-id-and-date{
+                    margin-top: 2.5vw;
+                    height: 4vw;
+
+                    .ticket-id, .ticket-bought-date{
+                        p{
+                            .property-name, .property-itself{
+                                font-size: 2.2vw;
+                            }
+                        }
+                    }
+                }
+
+                .from-to-when{
+                    margin-top: 3vw;
+                    padding: 3vw;
+
+                    .info-segment-from, .info-segment-to, .info-segment-when{
+                        p{
+                            padding: 0px 2vw;
+
+                            .property-name, .property-itself{
+                                font-size: 2.5vw;
+                            }
+                        }
+                    }
+                }
+
+                .contact-info{
+                    margin-top: 3vw;
+
+                    h4{
+                        font-size: 2.2vw;
+                    }
+
+                    .contact-info-container{
+                        padding: 3vw;
+                        
+                        .contact-email, .contact-phone{
+                            p{
+                                padding: 0px 2vw;
+
+                                .property-name, .property-itself{
+                                    font-size: 2.5vw;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .passenger-info{
+                    margin-top: 3vw;
+
+                    h4{
+                        font-size: 2.2vw;
+                    }
+
+                    .passenger-info-container{
+
+                        .each-passenger{
+                            padding: 3vw;
+
+                            .passenger-name, .passenger-surname, .passenger-personal-id, .passenger-seat, .passenger-vagon{
+                                p{
+                                    padding: 0px 2vw;
+                                    height: 4vw;
+
+                                    .property-name, .property-itself{
+                                        font-size: 2.5vw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .payment-info{
+                    margin-top: 3vw;
+
+                    .card-info{
+                        h4{
+                            font-size: 2.2vw;
+                        }
+
+                        .owner-info{
+                            padding: 3vw;
+                            .owner-name, .card-number{
+                                p{
+                                    padding: 0px 2vw;
+
+                                    .property-name, .property-itself{
+                                        font-size: 2.5vw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .payment-summary{
+                        margin-top: 8.3vw;
+
+                        .summary{
+                            p{
+                                .property-name, .property-itself{
+                                    font-size: 2.5vw;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
