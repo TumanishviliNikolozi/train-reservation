@@ -183,19 +183,20 @@ header.scrolled{
 
 .register-popup{
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100% - 100px);
     position: absolute;
     background-color: $popupBackgroundColor;
     z-index: 8999;
     @include display-flex-all-center;
+    padding: 150px 0px 100px;
 
     .register-popup-card{
-        max-width: 850px;
+        max-width: 400px;
         width: 100%;
-        height: 500px;
         position: relative;
         border-radius: 8px;
         background-color: $backgroundColor-1;
+        overflow: hidden;
 
         .popup-cls{
             width: 100%;
@@ -215,6 +216,181 @@ header.scrolled{
 
                 &:active{
                     color: $primaryColor-2;
+                }
+            }
+        }
+
+        .forms-section{
+            width: 100%;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 100%);
+            gap: 30px;
+            transition: 1s;
+
+            .form-holer{
+                @include width-height-100;
+                @include display-flex-direction-column(center, center);
+
+                .sign-up-form, .sign-in-form{
+                    width: 100%;
+
+                    .sign-type{
+                        width: 100%;
+                        padding: 10px 0px 20px;
+                        text-align: center;
+                        @include font-option(roboto, $primaryColor-4, 1.5rem, 600);
+                    }
+
+                    .sign-up-form-segment{
+                        width: 100%;
+                        @include display-flex-direction-column(start, start);
+                        margin-bottom: 5px;
+
+                        label{
+                            padding: 5px 20px;
+                            @include font-option(roboto, $primaryColor-4, 1rem, 400);
+                        }
+
+                        input{
+                            width: 100%;
+                            padding: 5px 20px;
+                            @include font-option(roboto, $primaryColor-4, 1rem, 300);
+                            border: 1px solid $borderColor-6;
+
+                            &:focus{
+                                outline-color: $borderColor-4;
+                            }
+                        }
+
+                        .error{
+                            @include font-option(roboto, $warningColor-1, 1rem, 500);
+                        }
+
+                        .input-error{
+                            border: 1px solid $warningColor-1;
+                        }
+
+                        .selection{
+                            width: 100%;
+                            padding: 5px 0px;
+                            position: relative;
+                            border: 1px solid $borderColor-6;
+
+                            p{
+                                @include width-height-100;
+                                @include font-option(roboto, $primaryColor-4, 1rem, 300);
+                                display: grid;
+                                align-items: center;
+                                padding-left: 20px;
+                                cursor: pointer;
+                            }
+
+                            .select-arrow{
+                                width: 30px;
+                                height: 30px;
+                                position: absolute;
+                                top: 0px;
+                                right: 10px;
+                                @include display-flex-all-center;
+                                cursor: pointer;
+                                transition: 0.2s;
+
+                                i{
+                                    font-size: 23px;
+                                    color: $buttonColor-1;
+                                }
+                            }
+
+                            .active-arrow{
+                                transition: 0.2s;
+                                transform: rotate(180deg);
+                                
+                                i{
+                                    color: $buttonHoverColor-1;
+                                }
+                            }
+
+                            .select-dropdown{
+                                width: 100%;
+                                position: absolute;
+                                top: 30px;
+                                background-color: $backgroundColor-1;
+                                border: 1px solid $borderColor-6;
+                                display: none;
+                                z-index: 999;
+
+                                .gender-name{
+                                    width: 100%;
+                                    display: grid;
+                                    align-items: center;
+                                    padding: 5px 20px;
+                                    cursor: pointer;
+
+                                    span{
+                                        @include font-option(roboto, $primaryColor-4, 1rem, 100);
+                                    }
+                                }
+                            }
+
+                            .active-dropdown{
+                                display: block;
+                            }
+
+                            
+                        }
+                    }
+
+                    .submit-button{
+                        width: 100%;
+                        height: 50px;
+                        margin-top: 20px;
+                        background-color: $buttonColor-1;
+                        border: 1px solid $borderColor-6;
+                        @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
+                        cursor: pointer;
+                        transition: 0.5s;
+
+                        &:hover{
+                            background-color: $buttonHoverColor-1;
+                            transform: translateY(-5px);
+                            transition: 0.3s;
+                        }
+                    }
+
+                    .submit-button:disabled{
+                        cursor: not-allowed;
+                        background-color: $backgroundColor-5;
+                        transition: 0.5s;
+                    }
+                }
+
+                .go-to-sign-in, .go-to-sign-up{
+                    width: 100%;
+                    @include display-flex-direction-column(start, center);
+                    padding: 30px 0px;
+                    gap: 20px;
+
+                    p{
+                        @include font-option(roboto, $primaryColor-4, 1.5rem, 600);
+                    }
+
+                    button{
+                        width: 100%;
+                        height: 50px;
+                        margin-top: 10px;
+                        background-color: $buttonColor-1;
+                        border: 1px solid $borderColor-6;
+                        @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
+                        cursor: pointer;
+                        transition: 0.5s;
+
+                        &:hover{
+                            background-color: $buttonHoverColor-1;
+                            transform: translateY(-5px);
+                            transition: 0.3s;
+                        }
+                    }
                 }
             }
         }
@@ -253,6 +429,14 @@ header.scrolled{
                     }
                 }
             }
+        }
+    }
+
+    .register-popup{
+        height: auto;
+
+        .register-popup-card{
+            // height: 100%;
         }
     }
 }

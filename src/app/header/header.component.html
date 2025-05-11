@@ -42,12 +42,117 @@
     </nav>
 </header>
 
-<!-- RegisterPopup? 'flex' : 'none' -->
+<!--  -->
 
-<section class="register-popup" [style.display]="'flex'">
+<section class="register-popup" [style.display]="RegisterPopup? 'flex' : 'none'">
     <section class="register-popup-card" (click)="$event.stopPropagation()">
         <div class="popup-cls">
             <i class="fa-solid fa-circle-xmark" (click)="closePopup()"></i>
         </div>
+
+        <section class="forms-section" [style.translate]="iAmRegistered? 'calc(-100% + 30px)' : '0px'">
+            <div class="form-holer">
+                <form class="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
+                    <h3 class="sign-type">
+                        რეგისტრაცია
+                    </h3>
+                    <div class="sign-up-form-segment">
+                        <label for="firstName">FirstName:</label>
+                        <input type="text" id="firstName" formControlName="firstName">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="lastName">LastName:</label>
+                        <input type="text" id="lastName" formControlName="lastName">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" formControlName="age">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" formControlName="email">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="password">Password:</label>
+                        <input type="text" id="password" formControlName="password">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" formControlName="address">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" formControlName="phone">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="zipcode">Zipcode:</label>
+                        <input type="text" id="zipcode" formControlName="zipcode">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="avatar">Avatar:</label>
+                        <input type="text" id="avatar" formControlName="avatar">
+                    </div>
+
+                    <div class="sign-up-form-segment" #genderlist>
+                        <label for="gender">Gender:</label>
+                        <input type="hidden" id="gender" formControlName="gender">
+                        <div class="selection" data-value="whereFrom">
+                            <p (click)="toggleGenderClass()">{{chosenGender === ""? "Gender" : chosenGender}}</p>
+                            <div class="select-arrow" (click)="toggleGenderClass()" [class.active-arrow]="seeGenderList()">
+                                <i class="fa-solid fa-square-caret-down"></i>
+                            </div>
+                            <div class="select-dropdown" [class.active-dropdown]="seeGenderList()">
+                                @for(gender of genderHolder; track gender; let i = $index){
+                                    <div class="gender-name" (click)="getGender(genderHolder[i]); toggleGenderClass()"><span>{{genderHolder[i]}}</span></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="submit-button">Sign Up</button>
+
+                    <!-- <button type="button" (click)="showStorage()">check</button> -->
+                </form>
+
+                <div class="go-to-sign-in">
+                    <p>უკვე გაქვს აქაუნთი?</p>
+                    <button (click)="areYouRegistered()">ავტირიზაციისკენ</button>
+                </div>
+            </div>
+            
+            <div class="form-holer">
+                <form class="sign-in-form" [formGroup]="signInForm" (ngSubmit)="submitSignIn()">
+                    <h3 class="sign-type">
+                        ავტორიზაცია
+                    </h3>
+                    <div class="sign-up-form-segment">
+                        <label for="auth-email">Email:</label>
+                        <input type="text" id="auth-email" formControlName="email">
+                    </div>
+
+                    <div class="sign-up-form-segment">
+                        <label for="auth-password">Password:</label>
+                        <input type="text" id="auth-password" formControlName="password">
+                    </div>
+
+                    <button class="submit-button">Sign In</button>
+
+                    <!-- <button type="button" (click)="showtokenStorage()">check</button> -->
+                </form>
+
+                <div class="go-to-sign-up">
+                    <p>არ გაქვს აქაუნთი?</p>
+                    <button (click)="areYouRegistered()">დარეგისტრაციისკენ</button>
+                </div>
+            </div>
+        </section>
     </section>
 </section>
