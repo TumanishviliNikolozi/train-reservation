@@ -52,4 +52,8 @@ export class APIsService {
   getTicketConfirmedById(){
     // return this.apis.get(`https://railway.stepprojects.ge/api/tickets/confirm/${}`);
   }
+
+  deleteTicketById(tktId:string){
+    return this.apis.delete(`https://railway.stepprojects.ge/api/tickets/cancel/${tktId}`, {responseType: 'text'});
+  }
 }

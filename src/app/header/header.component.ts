@@ -9,6 +9,19 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
+  constructor(){
+
+  }
+
+  public RegisterPopup:boolean = false;
+  public isScrolled:boolean = false;
+
+  @HostListener('window:scroll', [])
+
+  onWindowScroll(){
+    this.isScrolled = window.scrollY > 50;
+  }
+
   aboutMeDrop = viewChild<ElementRef>('aboutMeDrop');
   isDropActive = signal(false);
 
@@ -18,7 +31,7 @@ export class HeaderComponent {
 
   @HostListener('document:click', ['$event'])
 
-  handleOutsideClick(event: MouseEvent){
+  handleOutsideClick(event:Event){
     const aboutMeDropdownContainer = this.aboutMeDrop();
 
     const aboutMeClickedInside = aboutMeDropdownContainer?.nativeElement.contains(event.target);
@@ -26,10 +39,21 @@ export class HeaderComponent {
     if(!aboutMeClickedInside){
       this.isDropActive.set(false);
     }
+
+    if(this.RegisterPopup){
+      let clickedInside = (event.target as HTMLElement).closest(".register-popup-card");
+      if(!clickedInside){
+        this.RegisterPopup = !this.RegisterPopup;
+        console.log("click outside", this.RegisterPopup)
+      }
+    }
   }
 
-  @HostListener('click', ['$event'])
-  preventClose(event: Event) {
-    event.stopPropagation();
+  showRegisterPopuo(){
+    this.RegisterPopup = !this.RegisterPopup;
+  }
+
+  closePopup(){
+    this.RegisterPopup = false;
   }
 }

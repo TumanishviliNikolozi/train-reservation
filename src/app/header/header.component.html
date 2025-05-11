@@ -1,4 +1,4 @@
-<header >
+<header [class.scrolled]="isScrolled">
     <nav>
         <ul>
             <li>
@@ -16,7 +16,7 @@
                 <a routerLink="/გადახდა" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><span>გადახდა</span></a>
             </li> -->
             <li>
-                <div class="about-me">
+                <div class="about-me" (click)="$event.stopPropagation()">
                     <p class="about-me-title" (click)="showAboutMe()">
                         <span>ჩემს შესახებ</span>
                         <i class="fa-solid fa-circle-user"></i>
@@ -31,7 +31,7 @@
                             languages
                         </div>
                         <div class="authentifications">
-                            <button class="about-me-sign-up" (click)="showAboutMe()">რეგისტრაცია</button>
+                            <button class="about-me-sign-up" (click)="showAboutMe(); showRegisterPopuo()">რეგისტრაცია</button>
                             <button class="about-me-sign-in" (click)="showAboutMe()">ავტორიზაცია</button>
                         </div>
                         <a class="check-tkt" routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ბილეთის შემოწმება/დაბრუნება</span></a>
@@ -41,3 +41,13 @@
         </ul>
     </nav>
 </header>
+
+<!-- RegisterPopup? 'flex' : 'none' -->
+
+<section class="register-popup" [style.display]="'flex'">
+    <section class="register-popup-card" (click)="$event.stopPropagation()">
+        <div class="popup-cls">
+            <i class="fa-solid fa-circle-xmark" (click)="closePopup()"></i>
+        </div>
+    </section>
+</section>

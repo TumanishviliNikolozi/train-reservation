@@ -18,10 +18,12 @@ export class TktCheckReturnComponent implements OnInit{
   public checkTicket!:FormGroup;
 
   public trueIdSaver!:string;
-  public paymentInfo:any;
-  public hiddenCardNumber!:string;
-  public ticketBoughtOn!:string;
+  // public paymentInfo:any;
+  // public hiddenCardNumber!:string;
+  // public ticketBoughtOn!:string;
 
+  public deleteComplited:any;
+  // public deleteComplited:any = "aaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaa aaaaaa aaaaaaaaaaaaaaa aaaaaaa ";
   public ticketInfo:any;
 
   ngOnInit(): void {
@@ -29,24 +31,6 @@ export class TktCheckReturnComponent implements OnInit{
     this.checkTicket = new FormGroup({
       ticketId: new FormControl('', [Validators.required])
     });
-
-    // this.trueIdSaver = this.checkTicket.ticketId;
-    // if(history.state){
-    //   this.trueIdSaver = history.state.trueTktId;
-    //   this.paymentInfo = history.state.paymentInfo;
-    //   this.ticketBoughtOn = new Date().toISOString().slice(0, 10);
-
-    //   console.log('racieved id:', this.trueIdSaver);
-    //   console.log('payment info:', this.paymentInfo);
-    //   console.log('ticket sold on:', this.ticketBoughtOn);
-
-    //   this.hiddenCardNumber = this.maskCardNumber(this.paymentInfo.cardNumber);
-    // }
-
-    // this.services.getTicketCheckStatusById(this.trueIdSaver).subscribe((data:any) => {
-    //   this.ticketInfo = data;
-    //   console.log('my ticket info:', this.ticketInfo);
-    // })
   }
 
   checkMyTicketId(ticketId:any){
@@ -60,9 +44,11 @@ export class TktCheckReturnComponent implements OnInit{
     })
   }
 
-
-  // maskCardNumber(cardNumber:string){
-  //   return cardNumber.slice(0, 4) + '********' + cardNumber.slice(-4);
-  // }
-
+  deleteMyTicket(ticketId:any){
+    this.services.deleteTicketById(ticketId).subscribe((response) => {
+      this.deleteComplited = response;
+      console.log(this.deleteComplited);
+      this.ticketInfo = '';
+    })
+  }
 }

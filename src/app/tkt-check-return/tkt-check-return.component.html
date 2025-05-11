@@ -13,6 +13,9 @@
     </header>
 
     <section class="ticket-sheet-container">
+        @if (deleteComplited) {
+            <p class="delete-complited">{{deleteComplited}}</p>
+        }
         @if (ticketInfo) {
             <section class="ticket-sheet">
                 <div class="ticket-sheet-header">
@@ -28,12 +31,12 @@
                         </p>
                     </div>
     
-                    <div class="ticket-bought-date">
+                    <!-- <div class="ticket-bought-date">
                         <p>
                             <span class="property-name">ყიდვის თარიღი: </span>
                             <span class="property-itself">{{ticketBoughtOn}}</span>
                         </p>
-                    </div>
+                    </div> -->
                 </div>
     
                 <div class="from-to-when">
@@ -128,7 +131,7 @@
 
                 <div class="payment-info">
                     <div class="card-info">
-                        <h4>ბარათის ინფორმაცია:</h4>
+                        <!-- <h4>ბარათის ინფორმაცია:</h4>
                         <div class="owner-info">
                             <div class="owner-name">
                                 <p>
@@ -143,7 +146,7 @@
                                     <span class="property-itself"></span>
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="payment-summary">
@@ -157,5 +160,9 @@
                 </div>
             </section>
         }
+    </section>
+
+    <section class="remove-ticket-container">
+        <button class="delete-ticket" (click)="deleteMyTicket(checkTicket.value.ticketId)">წაშალე</button>
     </section>
 </section>

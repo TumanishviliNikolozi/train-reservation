@@ -8,6 +8,7 @@ header{
     position: fixed;
     top: 0px;
     z-index: 9999;
+    transition: 1s;
 
     nav{
         max-width: 1280px;
@@ -174,6 +175,51 @@ header{
     }
 }
 
+header.scrolled{
+    background-color: $backgroundColor-1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);;
+    transition: 1s;
+}
+
+.register-popup{
+    width: 100%;
+    height: calc(100vh - 100px);
+    position: absolute;
+    background-color: $popupBackgroundColor;
+    z-index: 8999;
+    @include display-flex-all-center;
+
+    .register-popup-card{
+        max-width: 850px;
+        width: 100%;
+        height: 500px;
+        position: relative;
+        border-radius: 8px;
+        background-color: $backgroundColor-1;
+
+        .popup-cls{
+            width: 100%;
+            @include display-flex-justify-content(end);
+            padding: 10px;
+            border-bottom: 1px solid $borderColor-3;
+
+            i{
+                font-size: 30px;
+                color: $buttonColor-1;
+                transition: 0.2s ease;
+                
+                &:hover{
+                    color: $primaryColor-4;
+                    transition: 0.2s ease;
+                }
+
+                &:active{
+                    color: $primaryColor-2;
+                }
+            }
+        }
+    }
+}
 
 @media screen and (max-width: 1023px) {
     header{
