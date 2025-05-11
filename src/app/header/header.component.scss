@@ -111,15 +111,52 @@ header{
                         border-radius: 8px;
                         box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
 
-                        .languages{
+                        .languages-and-my-page{
                             width: 100%;
                             height: 40px;
+                            display: grid;
+                            grid-template-columns: repeat(5, 1fr);
+                            gap: 10px;
+
+                            .languages{
+                                grid-column: 1/3;
+                                width: 100%;
+                                height: 40px;
+                            }
+
+                            .my-page{
+                                grid-column: 3/6;
+                                width: 100%;
+                                height: 40px;
+                                @include display-flex-all-center;
+                                background-color: $buttonColor-1;
+                                border: 1px solid $borderColor-5;
+                                cursor: pointer;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                transition: 0.3s ease;
+
+                                span{
+                                    @include font-option(roboto, $primaryColor-1, 0.8rem, 300);
+                                }
+
+                                &:hover{
+                                    transform: translateY(-5px);
+                                    background-color: $buttonHoverColor-1;
+                                    transition: 0.3s ease;
+                                }
+                            }
+
+                            .active-link{
+                                background-color: $buttonHoverColor-1;
+                                transition: 0.3s ease;
+                            }
                         }
 
                         .authentifications{
                             width: 100%;
                             display: grid;
-                            grid-template-rows: repeat(2, 1fr);
+                            grid-template-rows: 1fr;
                             gap: 10px;
                             margin: 10px 0px;
                         
@@ -222,7 +259,7 @@ header.scrolled{
 
         .forms-section{
             width: 100%;
-            padding: 30px;
+            padding:  0px 30px;
             display: grid;
             grid-template-columns: repeat(2, 100%);
             gap: 30px;
@@ -232,12 +269,13 @@ header.scrolled{
                 @include width-height-100;
                 @include display-flex-direction-column(center, center);
 
-                .sign-up-form, .sign-in-form{
+                .sign-up-form, .sign-in-form, .email-varification-form{
                     width: 100%;
 
                     .sign-type{
                         width: 100%;
                         padding: 10px 0px 20px;
+                        margin-top: 20px;
                         text-align: center;
                         @include font-option(roboto, $primaryColor-4, 1.5rem, 600);
                     }
@@ -341,7 +379,7 @@ header.scrolled{
                         }
                     }
 
-                    .submit-button{
+                    .submit-button, .email-varification{
                         width: 100%;
                         height: 50px;
                         margin-top: 20px;
@@ -436,7 +474,7 @@ header.scrolled{
         height: auto;
 
         .register-popup-card{
-            // height: 100%;
+            height: 100%;
         }
     }
 }

@@ -1,0 +1,82 @@
+@use 'helper-collector' as *;
+
+.error-container{
+    width: 100%;
+    height: calc(100vh - 200px);
+    padding: 50px 0px;
+    
+    .inner-error{
+        width: 85%;
+        height: 100%;
+        margin: auto;
+        background-color: $backgroundColor-4;
+        border-radius: 100px;
+        @include display-flex-all-center;
+
+        div{
+            @include display-flex-direction-column(start, center);
+            gap: 30px;
+
+            p{
+                @include display-flex-direction-column(start, center);
+                gap: 20px;
+
+                i{
+                    font-size: 150px;
+                    color: $warningColor-1;
+                }
+
+                .error{
+                    @include font-option(roboto, $primaryColor-4, 3rem, 300);
+                }
+
+                .error-text{
+                    @include font-option(roboto, $primaryColor-4, 2rem, 300);
+                }
+            }
+
+            button{
+                width: 100%;
+                height: 50px;
+                margin-top: 20px;
+                background-color: $buttonColor-1;
+                border: 1px solid $borderColor-6;
+                @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
+                cursor: pointer;
+                transition: 0.5s;
+
+                &:hover{
+                    background-color: $buttonHoverColor-1;
+                    transform: translateY(-5px);
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .error-container{
+        .inner-error{
+            div{
+                p{
+                    i{
+                        font-size: 15vw;
+                    }
+
+                    .error{
+                        font-size: 6vw;
+                    }
+
+                    .error-text{
+                        font-size: 5vw;
+                    }
+                }
+
+                button{
+                    font-size: 4vw;
+                }
+            }
+        }
+    }
+}

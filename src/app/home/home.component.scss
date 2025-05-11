@@ -216,10 +216,54 @@
 }
 
 
+.additional-info{
+    max-width: 1280px;
+    width: 100%;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .main-img{
+        width: 100%;
+    }
+
+    .info-container{
+        width: 100%;
+        padding: 50px;
+        @include display-flex-direction-column(center, start);
+        gap: 20px;
+
+        h3{
+            @include font-option(roboto, $primaryColor-4, 30px, 600);
+        }
+
+        p{
+            @include font-option(roboto, $primaryColor-4, 17px, 400);
+        }
+
+        .info-icons{
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            
+            .each-icon{
+                @include display-flex-align-items(center);
+                gap: 10px;
+
+                p{
+                    @include font-option(roboto, $primaryColor-4, 16px, 300);
+                }
+            }
+        }
+    }
+}
+
+
 
 @media screen and (max-width: 1280px){
     .bg-gradiant{
-        margin-bottom: 300px;
+        margin-bottom: 150px;
 
         form{
             max-width: 800px;
@@ -241,10 +285,20 @@
     }
 }
 
+@media screen and (max-width: 800px) {
+    .additional-info{
+        grid-template-columns: 1fr;
+
+        .main-img{
+            display: none;
+        }
+    }
+}
+
 @media screen and (max-width: 500px){
     .bg-gradiant{
         height: 400px;
-        margin-bottom: 420px;
+        margin-bottom: 350px;
 
         .bg-gradiant-text{
             h1{
@@ -281,6 +335,15 @@
             .submit-button{
                 grid-column: 1/2;
                 height: 50px;
+            }
+        }
+    }
+
+    .additional-info{
+        .info-container{
+            .info-icons{
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
             }
         }
     }

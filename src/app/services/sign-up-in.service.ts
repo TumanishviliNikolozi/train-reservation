@@ -11,8 +11,8 @@ export class SignUpInService {
   everrestSignUp(signUpForm:any){
     return this.signUpOrIn.post('https://api.everrest.educata.dev/auth/sign_up', signUpForm, {
       headers:{
-        'accept' : '*/*',
-        'Content-Type' : 'application/json'
+        'accept': '*/*',
+        'Content-Type': 'application/json'
       }
     });
   }
@@ -20,9 +20,37 @@ export class SignUpInService {
   everrestSignIn(signInForm:any){
     return this.signUpOrIn.post('https://api.everrest.educata.dev/auth/sign_in', signInForm, {
       headers:{
-        'accept' : '*/*',
-        'Content-Type' : 'application/json'
+        'accept': '*/*',
+        'Content-Type': 'application/json'
       }
     });
+  }
+
+  everrestVerification(verifyEmailForm:any){
+    return this.signUpOrIn.post('https://api.everrest.educata.dev/auth/verify_email', verifyEmailForm, {
+      headers:{
+        'accept': '*/*',
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
+  refreshEverrestToken(refreshToken: string) {
+    return this.signUpOrIn.post('https://api.everrest.educata.dev/auth/refresh', {
+      refresh_token: refreshToken
+    }, {
+      headers: {
+        'accept': '*/*'
+      }
+    });
+  }
+
+  getEverrestCurrentUser(accessToken:string){
+    return this.signUpOrIn.get('https://api.everrest.educata.dev/auth', {
+      headers:{
+        'accept': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
   }
 }

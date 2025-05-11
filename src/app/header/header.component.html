@@ -27,12 +27,12 @@
                     </p>
 
                     <div class="about-me-dropdown" [style.display]="isDropActive() ? 'flex' : 'none'" #aboutMeDrop>
-                        <div class="languages">
-                            languages
+                        <div class="languages-and-my-page">
+                            <button class="languages">ენა</button>
+                            <a class="my-page" routerLink="/მომხმარებლის გვერდი" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ჩემი ვერდი</span></a>
                         </div>
                         <div class="authentifications">
-                            <button class="about-me-sign-up" (click)="showAboutMe(); showRegisterPopuo()">რეგისტრაცია</button>
-                            <button class="about-me-sign-in" (click)="showAboutMe()">ავტორიზაცია</button>
+                            <button class="about-me-sign-in" (click)="showAboutMe(); showRegisterPopuo()">ავტორიზაცია</button>
                         </div>
                         <a class="check-tkt" routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ბილეთის შემოწმება/დაბრუნება</span></a>
                     </div>
@@ -78,7 +78,7 @@
 
                     <div class="sign-up-form-segment">
                         <label for="password">Password:</label>
-                        <input type="text" id="password" formControlName="password">
+                        <input type="password" id="password" formControlName="password">
                     </div>
 
                     <div class="sign-up-form-segment">
@@ -124,7 +124,7 @@
 
                 <div class="go-to-sign-in">
                     <p>უკვე გაქვს აქაუნთი?</p>
-                    <button (click)="areYouRegistered()">ავტირიზაციისკენ</button>
+                    <button (click)="areYouRegistered()">ავტორიზაციისკენ</button>
                 </div>
             </div>
             
@@ -140,7 +140,7 @@
 
                     <div class="sign-up-form-segment">
                         <label for="auth-password">Password:</label>
-                        <input type="text" id="auth-password" formControlName="password">
+                        <input type="password" id="auth-password" formControlName="password">
                     </div>
 
                     <button class="submit-button">Sign In</button>
@@ -148,9 +148,20 @@
                     <!-- <button type="button" (click)="showtokenStorage()">check</button> -->
                 </form>
 
+                <form class="email-varification-form" [formGroup]="verifyEmailForm">
+                    <h3 class="sign-type">
+                        მეილის ვერიფიკაცია
+                    </h3>
+                    <div class="sign-up-form-segment">
+                        <label for="verify-email">Email:</label>
+                        <input type="text" id="verify-email" formControlName="email">
+                    </div>
+                    <button class="email-varification" (click)="verifyEmail()">ვერიფიკაცია</button>
+                </form>
+
                 <div class="go-to-sign-up">
                     <p>არ გაქვს აქაუნთი?</p>
-                    <button (click)="areYouRegistered()">დარეგისტრაციისკენ</button>
+                    <button (click)="areYouRegistered()">რეგისტრაციისკენ</button>
                 </div>
             </div>
         </section>

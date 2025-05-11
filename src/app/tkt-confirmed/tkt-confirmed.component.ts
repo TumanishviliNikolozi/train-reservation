@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-tkt-confirmed',
@@ -43,6 +45,21 @@ export class TktConfirmedComponent implements OnInit {
 
   maskCardNumber(cardNumber:string){
     return cardNumber.slice(0, 4) + '********' + cardNumber.slice(-4);
+  }
+
+
+  printTicket(){
+    const printContent = document.querySelector('.ticket-sheet')?.innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    if(printContent){
+      document.body.innerHTML = printContent;
+      window.print();
+      document.body.innerHTML = originalContent;
+      location.reload()
+    } else {
+      console.error('could not find ticket content');
+    }
   }
 
 }

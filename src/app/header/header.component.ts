@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, signal, viewChild } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { SignUpInService } from '../services/sign-up-in.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { SignUpInService } from '../services/sign-up-in.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private everrest:SignUpInService){
+  constructor(private everrest:SignUpInService, private router:Router, private route:ActivatedRoute){
 
   }
 
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   public signUpForm!:FormGroup;
   public signInForm!:FormGroup;
+  public verifyEmailForm!:FormGroup;
 
   public genderHolder:string[] = ['MALE', "FEMALE", 'OTHER'];
   public chosenGender:string = '';
@@ -44,23 +45,36 @@ export class HeaderComponent implements OnInit {
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     })
+
+    this.verifyEmailForm = new FormGroup({
+      email: new FormControl('', [Validators.required])
+    })
   }
 
   submitSignUp(){
-    console.log(this.signUpForm.value);
+    console.log('sign up form:', this.signUpForm.value);
 
     this.everrest.everrestSignUp(this.signUpForm.value).subscribe((response) => {
       localStorage.setItem('registerResponse', JSON.stringify(response));
-      console.log('registerResponse', response);
+      // console.log('registerResponse', response);
     })
   }
 
   submitSignIn(){
-    console.log(this.signInForm.value);
+    console.log('sign in form:', this.signInForm.value);
 
     this.everrest.everrestSignIn(this.signInForm.value).subscribe((response) => {
       localStorage.setItem('accessToken', JSON.stringify(response));
-      console.log('accessToken', response);
+      // console.log('accessToken', response);
+    })
+  }
+
+  verifyEmail(){
+    console.log('verify email:', this.verifyEmailForm.value);
+
+    this.everrest.everrestVerification(this.verifyEmailForm.value).subscribe((response) => {
+      localStorage.setItem('verificationInfo', JSON.stringify(response));
+      // console.log('verificationInfo', response);
     })
   }
 
@@ -103,12 +117,12 @@ export class HeaderComponent implements OnInit {
 
     if(!aboutMeClickedInside){
       this.isDropActive.set(false);
-      console.log(this.isDropActive())
+      // console.log(this.isDropActive());
     }
 
     if(!genderDropdownClickedInside){
       this.seeGenderList.set(false);
-      console.log(this.seeGenderList())
+      // console.log(this.seeGenderList());
     }
 
     if(this.RegisterPopup){
@@ -132,6 +146,10 @@ export class HeaderComponent implements OnInit {
     this.iAmRegistered = !this.iAmRegistered;
   }
 
+  goToUserPage(){
+    this.router.navigate(['/მომხმარებლის გვერდი']);
+  }
+
   showStorage(){
     let saved = localStorage.getItem('registerResponse')
 
@@ -151,4 +169,8 @@ export class HeaderComponent implements OnInit {
       console.log('No accessToken found in storage.');
     }
   }
+
+  // gotoerror(){
+  //   this.router.navigate(['/error'])
+  // }
 }
