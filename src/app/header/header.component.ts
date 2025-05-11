@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { SignUpInService } from '../services/sign-up-in.service';
@@ -9,7 +9,7 @@ import { SignUpInService } from '../services/sign-up-in.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private everrest:SignUpInService, private router:Router, private route:ActivatedRoute){
 
@@ -65,6 +65,14 @@ export class HeaderComponent implements OnInit {
 
     this.everrest.everrestSignIn(this.signInForm.value).subscribe((response) => {
       localStorage.setItem('accessToken', JSON.stringify(response));
+
+      setTimeout(() => {
+        this.closePopup();
+      }, 1000);
+
+      setTimeout(() => {
+        location.reload()
+      }, 2000);
       // console.log('accessToken', response);
     })
   }
@@ -134,7 +142,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  showRegisterPopuo(){
+  showRegisterPopup(){
     this.RegisterPopup = !this.RegisterPopup;
   }
 
@@ -169,6 +177,12 @@ export class HeaderComponent implements OnInit {
       console.log('No accessToken found in storage.');
     }
   }
+
+  ngOnDestroy(): void {
+    
+  }
+
+  
 
   // gotoerror(){
   //   this.router.navigate(['/error'])

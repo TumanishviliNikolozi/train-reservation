@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SignUpInService } from '../services/sign-up-in.service';
 import { interval, Subscription } from 'rxjs';
+import { Event } from '@angular/router';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-page',
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss'
 })
@@ -18,9 +20,13 @@ export class UserPageComponent implements OnInit {
   private accessToken:any;
   private refreshToken:any;
 
-  private getCurrentUser:any;
+  public getCurrentUser:any;
 
   private refreshSubscription!: Subscription;
+
+  public passwordCheckBox:Boolean = false;
+
+  public changePasswordForm!: FormGroup;
 
 
   ngOnInit(): void {
@@ -35,10 +41,15 @@ export class UserPageComponent implements OnInit {
       console.log('refresh token:', this.refreshToken);
     }
 
-    if(this.accessToken && this.refreshToken){
+    if(this.accessToken){
       this.getUser();
       this.startAutoRefresh(8 * 60 * 1000);
     }
+
+    this.changePasswordForm = new FormGroup({
+      oldPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [Validators.required])
+    })
   }
 
   getUser(){
@@ -70,6 +81,24 @@ export class UserPageComponent implements OnInit {
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }
+  }
+
+
+  checkCheckbox(event:MouseEvent){
+    event.stopPropagation();
+    this.passwordCheckBox = !this.passwordCheckBox;
+  }
+
+  changePassword(){
+    this.everrest.changeEverrestPassword(this.changePasswordForm.value).subscribe((response) => {
+      console.log('changed accessToken:', response)
+      localStorage.setItem('accessToken', JSON.stringify(response));
+    })
+  }
+
+  leaveAccount(){
+    localStorage.removeItem('accessToken');
+    location.reload();
   }
 
 }

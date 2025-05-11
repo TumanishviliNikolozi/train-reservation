@@ -69,6 +69,9 @@ export class CustomersComponent implements OnInit{
   public showPaymentPopup:boolean = false;
   public trueIdSaver!:string;
 
+  public getBothAccessToken:any;
+  public getAccessToken:any;
+
   ngOnInit(): void {
 
     this.formPersonalInfo = new FormGroup({
@@ -103,6 +106,15 @@ export class CustomersComponent implements OnInit{
       expiryDate: ['', [Validators.required, cardExpiryDateValidator()]],
       cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
     });
+
+
+    this.getBothAccessToken = localStorage.getItem('accessToken');
+    // console.log('both tokens:', this.getBothAccessToken)
+
+    if(this.getBothAccessToken){
+      this.getAccessToken = JSON.parse(this.getBothAccessToken);
+      // console.log('access token:', this.getAccessToken);
+    }
 
   }
 

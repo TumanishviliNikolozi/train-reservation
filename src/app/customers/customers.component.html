@@ -100,7 +100,7 @@
                     <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">წავიკითხე და ვეთანხმები წესებს</p>
                 </div>
 
-                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false" (click)="showPayment(); preventClose($event)">გადახდა</button>
+                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false || getBothAccessToken.invalid" (click)="showPayment(); preventClose($event)">გადახდა</button>
 
                 <!-- <div (click)="getConsole(formPersonalInfo)">click</div>   -->
             </div>

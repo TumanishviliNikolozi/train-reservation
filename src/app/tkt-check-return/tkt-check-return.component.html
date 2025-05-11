@@ -17,6 +17,15 @@
             <p class="delete-complited">{{deleteComplited}}</p>
         }
         @if (ticketInfo) {
+            <section class="print-and-pdf">
+                <div class="printer" (click)="printTicket()">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+                <div class="download" (click)="downloadPDF()">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                </div>
+            </section>
+            
             <section class="ticket-sheet">
                 <div class="ticket-sheet-header">
                     <h3>Step Railway</h3>

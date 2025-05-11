@@ -1,2 +1,87 @@
-<!-- <p><button (click)="showtokenStorage()">click</button></p> -->
-<button (click)="refreshTokenCall()">refresh</button>
+<section class="user-page-container">
+    <header class="user-info-header">
+        <h1>მომხმარებლის მონაცემები</h1>
+    </header>
+
+    <section class="user-info-container">
+        <section class="user-container">
+            <section class="user-avatar">
+                <div class="avatar-info">
+                    <div class="avatar">
+                        <h3>ავატარი</h3>
+                    </div>
+                    <div class="user-img">
+                        <img [src]="getCurrentUser?.avatar || 'https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg'" alt="User Avatar">
+                    </div>
+                    <div class="user-name">
+                        <h4>სახელი: </h4>
+                        <p>{{getCurrentUser?.firstName}}</p>
+                    </div>
+                    <div class="user-surname">
+                        <h4>გვარი: </h4>
+                        <p>{{getCurrentUser?.lastName}}</p>
+                    </div>
+                    <div class="user-age">
+                        <h4>ასაკი: </h4>
+                        <p>{{getCurrentUser?.age}}</p>
+                    </div>
+                    <div class="user-age">
+                        <h4>სქესი: </h4>
+                        <p>{{getCurrentUser?.gender}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="password">
+                <div class="change-password">
+                    <div class="password-checkbox" (click)="checkCheckbox($event)">
+                        <p class="custom-checkbox"  (click)="checkCheckbox($event)" [class.checked]="passwordCheckBox"><i class="fa-solid fa-check" [style.display]="passwordCheckBox ? 'block' : 'none'" (click)="checkCheckbox($event)"></i></p>
+                        <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">გსურს პაროლი შეცვალო?</p>
+                    </div>
+                </div>
+
+                <form class="change-password-form" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" >
+                    <div class="user-old-password">
+                        <label for="old-password">ძველი პაროლი</label>
+                        <input type="password" id="old-password" formControlName="oldPassword">
+                    </div>
+
+                    <div class="user-new-password">
+                        <label for="new-password">ახალი პაროლი</label>
+                        <input type="password" id="new-password" formControlName="newPassword">
+                    </div>
+
+                    <button class="change-password-submit"  [disabled]="!passwordCheckBox">პაროლის შეცვლა</button>
+                </form>
+            </section>
+
+            <section class="contact-info">
+                <div class="avatar-info">
+                    <div class="avatar">
+                        <h3>კონტაქტი</h3>
+                    </div>
+                    <div class="user-name">
+                        <h4>მეილი: </h4>
+                        <p>{{getCurrentUser?.email}}</p>
+                    </div>
+                    <div class="user-surname">
+                        <h4>ნომერი: </h4>
+                        <p>{{getCurrentUser?.phone}}</p>
+                    </div>
+                    <div class="user-age">
+                        <h4>მისამართი: </h4>
+                        <p>{{getCurrentUser?.address}}</p>
+                    </div>
+                    <div class="user-age">
+                        <h4>ZIP-კოდი: </h4>
+                        <p>{{getCurrentUser?.zipcode}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="leave-account">
+                <button class="leave-account-button" (click)="leaveAccount()">აქაუნთიდან გამოსვლა</button>
+            </section>
+        </section>
+    </section>
+</section>

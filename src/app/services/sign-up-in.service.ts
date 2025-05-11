@@ -45,6 +45,15 @@ export class SignUpInService {
     });
   }
 
+  changeEverrestPassword(changePasswordForm:any){
+    return this.signUpOrIn.patch('https://api.everrest.educata.dev/auth/change_password', changePasswordForm, {
+      headers:{
+        'accept': '*/*',
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
   getEverrestCurrentUser(accessToken:string){
     return this.signUpOrIn.get('https://api.everrest.educata.dev/auth', {
       headers:{

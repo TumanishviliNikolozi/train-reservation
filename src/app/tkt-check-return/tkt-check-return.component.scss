@@ -71,8 +71,42 @@
         border: none;
         border-radius: 15px;
         background-color: $backgroundColor-4;
-        @include display-flex-all-center;
+        @include display-flex-direction-column(center, center);
         padding: 150px 0px;
+        gap: 10px;
+
+        .print-and-pdf{
+            max-width: 850px;
+            width: 100%;
+            @include display-flex-align-items(center);
+            gap: 20px;
+
+            .printer, .download{
+                width: 80px;
+                height: 50px;
+                @include display-flex-all-center;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+
+            .printer{
+                background-color: $printerColor-1;
+
+                i{
+                    font-size: 1.5rem;
+                    color: $printerColor-2;
+                }
+            }
+
+            .download{
+                background-color: $downloadColor-1;
+
+                i{
+                    font-size: 1.5rem;
+                    color: $downloadColor-2;
+                }
+            }
+        }
 
         .delete-complited{
             max-width: 850px;
@@ -416,6 +450,10 @@
         .ticket-sheet-container{
             padding: 7vw 0px;
 
+            .print-and-pdf{
+                padding: 0px 4.8vw;
+            }
+
             .delete-complited{
                 padding: 70px 70px;
             }
@@ -566,6 +604,33 @@
 
         .ticket-sheet-container{
             padding: 7vw 0px;
+
+            .print-and-pdf{
+                max-width: 850px;
+                padding: 0px 4.8vw;
+                gap: 4vw;
+
+                .printer, .download{
+                    width: 9vw;
+                    height: 6vw;
+                }
+
+                .printer{
+                    background-color: $printerColor-1;
+
+                    i{
+                        font-size: 3.5vw;
+                    }
+                }
+
+                .download{
+                    background-color: $downloadColor-1;
+
+                    i{
+                        font-size: 3.5vw;
+                    }
+                }
+            }
 
             .delete-complited{
                 padding: 5.5vw 4.8vw;

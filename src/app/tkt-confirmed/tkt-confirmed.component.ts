@@ -57,8 +57,30 @@ export class TktConfirmedComponent implements OnInit {
       window.print();
       document.body.innerHTML = originalContent;
       location.reload()
+      
     } else {
       console.error('could not find ticket content');
+    }
+  }
+
+  downloadPDF(){
+    const element = document.querySelector('.ticket-sheet') as HTMLElement | null;
+
+    if(element){
+      html2canvas(element).then((carvas) => {
+        const imgData = carvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (carvas.height * pdfWidth) / carvas.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('ticket-sheet.pdf');
+      }).catch((error) => {
+        console.error('error generating pdf:', error);
+      })
+    } else {
+      console.log('could not find ticket content');
     }
   }
 
