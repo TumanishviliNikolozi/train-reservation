@@ -18,7 +18,7 @@
             <li>
                 <div class="about-me" (click)="$event.stopPropagation()">
                     <p class="about-me-title" (click)="showAboutMe()">
-                        <span>ჩემს შესახებ</span>
+                        <span>{{'HEADER.ABOUTME' | translate }}</span>
                         <i class="fa-solid fa-circle-user"></i>
                     </p>
 
@@ -28,13 +28,13 @@
 
                     <div class="about-me-dropdown" [style.display]="isDropActive() ? 'flex' : 'none'" #aboutMeDrop>
                         <div class="languages-and-my-page">
-                            <button class="languages">ენა</button>
-                            <a class="my-page" routerLink="/მომხმარებლის გვერდი" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ჩემი ვერდი</span></a>
+                            <button class="languages" (click)="changeLang()">{{'HEADER.LANG' | translate }}</button>
+                            <a class="my-page" routerLink="/მომხმარებლის გვერდი" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>{{'HEADER.MYPAGE' | translate }}</span></a>
                         </div>
                         <div class="authentifications">
-                            <button class="about-me-sign-in" (click)="showAboutMe(); showRegisterPopup()">ავტორიზაცია</button>
+                            <button class="about-me-sign-in" (click)="showAboutMe(); showRegisterPopup()">{{'HEADER.AUTH' | translate }}</button>
                         </div>
-                        <a class="check-tkt" routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>ბილეთის შემოწმება/დაბრუნება</span></a>
+                        <a class="check-tkt" routerLink="/ჯავშნები" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="showAboutMe()"><span>{{'HEADER.CHECKTICKET' | translate }}</span></a>
                     </div>
                 </div>
             </li>
@@ -54,55 +54,55 @@
             <div class="form-holer">
                 <form class="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
                     <h3 class="sign-type">
-                        რეგისტრაცია
+                        {{ 'HEADER.REGISTER' | translate }}
                     </h3>
                     <div class="sign-up-form-segment">
-                        <label for="firstName">FirstName:</label>
+                        <label for="firstName">{{ 'HEADER.FIRSTNAME' | translate }}:</label>
                         <input type="text" id="firstName" formControlName="firstName">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="lastName">LastName:</label>
+                        <label for="lastName">{{ 'HEADER.FIRSTNAME' | translate }}:</label>
                         <input type="text" id="lastName" formControlName="lastName">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="age">Age:</label>
+                        <label for="age">{{ 'HEADER.AGE' | translate }}:</label>
                         <input type="number" id="age" formControlName="age">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="email">Email:</label>
+                        <label for="email">{{ 'HEADER.EMAIL' | translate }}:</label>
                         <input type="text" id="email" formControlName="email">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="password">Password:</label>
+                        <label for="password">{{ 'HEADER.PASSWORD' | translate }}:</label>
                         <input type="password" id="password" formControlName="password">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="address">Address:</label>
+                        <label for="address">{{ 'HEADER.ADDRESS' | translate }}:</label>
                         <input type="text" id="address" formControlName="address">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="phone">Phone:</label>
+                        <label for="phone">{{ 'HEADER.PHONE' | translate }}:</label>
                         <input type="text" id="phone" formControlName="phone">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="zipcode">Zipcode:</label>
+                        <label for="zipcode">{{ 'HEADER.ZIPCODE' | translate }}:</label>
                         <input type="text" id="zipcode" formControlName="zipcode">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="avatar">Avatar:</label>
+                        <label for="avatar">{{ 'HEADER.AVATAR' | translate }}:</label>
                         <input type="text" id="avatar" formControlName="avatar">
                     </div>
 
                     <div class="sign-up-form-segment" #genderlist>
-                        <label for="gender">Gender:</label>
+                        <label for="gender">{{ 'HEADER.GENDER' | translate }}:</label>
                         <input type="hidden" id="gender" formControlName="gender">
                         <div class="selection" data-value="whereFrom">
                             <p (click)="toggleGenderClass()">{{chosenGender === ""? "Gender" : chosenGender}}</p>
@@ -117,51 +117,51 @@
                         </div>
                     </div>
 
-                    <button class="submit-button">Sign Up</button>
+                    <button class="submit-button">{{ 'HEADER.SIGNUP' | translate }}</button>
 
                     <!-- <button type="button" (click)="showStorage()">check</button> -->
                 </form>
 
                 <div class="go-to-sign-in">
-                    <p>უკვე გაქვს აქაუნთი?</p>
-                    <button (click)="areYouRegistered()">ავტორიზაციისკენ</button>
+                    <p>{{ 'HEADER.HAVEACCOUNT' | translate }}</p>
+                    <button (click)="areYouRegistered()">{{ 'HEADER.TOSIGNIN' | translate }}</button>
                 </div>
             </div>
             
             <div class="form-holer">
                 <form class="sign-in-form" [formGroup]="signInForm" (ngSubmit)="submitSignIn()">
                     <h3 class="sign-type">
-                        ავტორიზაცია
+                        {{ 'HEADER.AUTORIZATION' | translate }}
                     </h3>
                     <div class="sign-up-form-segment">
-                        <label for="auth-email">Email:</label>
+                        <label for="auth-email">{{ 'HEADER.EMAIL' | translate }}:</label>
                         <input type="text" id="auth-email" formControlName="email">
                     </div>
 
                     <div class="sign-up-form-segment">
-                        <label for="auth-password">Password:</label>
+                        <label for="auth-password">{{ 'HEADER.PASSWORD' | translate }}:</label>
                         <input type="password" id="auth-password" formControlName="password">
                     </div>
 
-                    <button class="submit-button">Sign In</button>
+                    <button class="submit-button">{{ 'HEADER.SIGNIN' | translate }}</button>
 
                     <!-- <button type="button" (click)="showtokenStorage()">check</button> -->
                 </form>
 
                 <form class="email-varification-form" [formGroup]="verifyEmailForm">
                     <h3 class="sign-type">
-                        მეილის ვერიფიკაცია
+                        {{'HEADER.EMAILVERIFICATION' | translate }}
                     </h3>
                     <div class="sign-up-form-segment">
-                        <label for="verify-email">Email:</label>
+                        <label for="verify-email">{{ 'HEADER.EMAIL' | translate}}:</label>
                         <input type="text" id="verify-email" formControlName="email">
                     </div>
-                    <button class="email-varification" (click)="verifyEmail()">ვერიფიკაცია</button>
+                    <button class="email-varification" (click)="verifyEmail()">{{'HEADER.VERIFY' | translate }}</button>
                 </form>
 
                 <div class="go-to-sign-up">
-                    <p>არ გაქვს აქაუნთი?</p>
-                    <button (click)="areYouRegistered()">რეგისტრაციისკენ</button>
+                    <p>{{'HEADER.DONTHAVEACCOUNT' | translate }}</p>
+                    <button (click)="areYouRegistered()">{{'HEADER.TOSIGNUP' | translate }}</button>
                 </div>
             </div>
         </section>

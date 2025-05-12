@@ -3,16 +3,19 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { WeekDay } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-trains',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './trains.component.html',
   styleUrl: './trains.component.scss'
 })
 export class TrainsComponent implements OnInit{
-  constructor(private router:Router, private route:ActivatedRoute, private api:HttpClient){
-
+  constructor(private router:Router, private route:ActivatedRoute, private api:HttpClient, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
   }
 
   public whereFrom!:string;

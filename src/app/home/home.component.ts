@@ -4,17 +4,20 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule, NgClass } from '@angular/common';
 import flatpickr from 'flatpickr';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, RouterModule, CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 
 export class HomeComponent implements AfterViewInit {
-  constructor(private service:APIsService, private router:Router){
+  constructor(private service:APIsService, private router:Router, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
     this.AllStations();
   }
 

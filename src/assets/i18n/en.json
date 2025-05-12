@@ -1,0 +1,130 @@
+{
+    "HEADER":{
+        "ABOUTME": "About me",
+        "LANG": "EN",
+        "MYPAGE": "My Page",
+        "AUTH": "Authentification",
+        "CHECKTICKET": "Check Tichet",
+
+
+        "REGISTER": "Registration",
+        "FIRSTNAME": "FirstName",
+        "LASTNAME": "LastName",
+        "AGE": "Age",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "ADDRESS": "Address",
+        "PHONE": "Phone",
+        "ZIPCODE": "Zipcode",
+        "AVATAR": "Avatar",
+        "GENDER": "Gender",
+        "SIGNUP": "Sign Up",
+        "HAVEACCOUNT": "Have Account?",
+        "TOSIGNIN": "To Sign In",
+
+
+        "AUTORIZATION": "Authorisation",
+        "SIGNIN": "Sign In",
+        "EMAILVERIFICATION": "Email Verification",
+        "VERIFY": "Verify",
+
+
+        "DONTHAVEACCOUNT": "Don't have Account?",
+        "TOSIGNUP": "To Sign Up"
+    },
+
+
+    "HOME":{
+        "HEADERMAIN": "Buy Train Tickets Online.",
+        "HEADERSECOND": "Wish You Safe Way.",
+        "BUYTICKET": "Reserve Train Ticket",
+        "WHEREFROM": "Where From?",
+        "WHERETO": "Where To?",
+        "WHEN": "When?",
+        "FINDTRAIN": "Find Train",
+        "TRAINTICKETINFO": "Train Tickets",
+        "TICKETINFO": "To Buy Train Tickets You'll Need Each Passenger's ID Number, Please Prepare Them Earlier.",
+        "UNLIMITEDOPTIONS": "Unlimited Offers",
+        "FULLDAYSUPPORT": "24X7 Support",
+        "SAFE": "100% Safe",
+        "SAFEPAYMENT": "100% Safe Payment"
+    },
+
+
+    "FOOTER":{
+        "RIGHTS": "All Right Preserved."
+    },
+
+
+    "TRAINS":{
+        "CHOOSETRAIN": "Choose Train",
+        "TRAINLIST": "Train List",
+        "TRAINNAME": "Train Number",
+        "DEPARTURE": "Departure",
+        "ARRIVAL": "Arrival",
+        "RESERVE": "Reserve",
+        "TRAINNOTFOUND": "Train Not Found!"
+    },
+
+
+    "CUSTUMERS":{
+        "PASSENGERINFO": "Passengers Data",
+        "ENTERYOURINFO": "Enter Your Data",
+        "CONTACTINFO": "Contact Info",
+        "EMAIL": "Email",
+        "PHONENUMBER": "Phone Number",
+        "TRAVELERINFO": "Passengers Info",
+        "TRAVELER": "Passenger",
+        "SEAT": "Seat:",
+        "NAME": "Name",
+        "SURNAME": "Surname",
+        "IDNUMBER": "ID Number",
+        "CHOOSESEAT": "Choose Seat",
+
+        "INVOICE": "Invoice",
+        "PRICE": "Price",
+        "SUM": "Sum:",
+        "GEL": "Gel",
+        "READANDAGREE": "Read And Agree.",
+        "CHECKOUT": "Check Out",
+
+        "CARDNUMBER": "Card Number",
+        "CARDNUMBERERROR": "Card Number Must Be 16 Digits!",
+        "CARDOWNER": "Card Owner",
+        "CARDOWNERNAME": "John Doe",
+        "CARDOWNERERROR": "Please Enter Right Name!",
+        "DATE": "Date",
+        "DATEERROR1": "Card Date Mandatory!",
+        "DATEERROR2": "Invalid Form, Please Enter MM/YY!",
+        "DATEERROR3": "Card Expired!",
+        "DATEERROR4": "Card Date Unrealisrically Far! ",
+        "CVVERROR": "CVV Must Be 3 or 4 Digits",
+        "RESERVE": "Reserve",
+
+        "CHOOSEVAGON": "Choose Vagon",
+        "RESTROOM": "Restroom"
+    },
+
+    "TKTCONFIRMED":{
+        "PAYMENTSUCCESS": "Payment Successful",
+        "TICKETID": "Ticket ID:",
+        "PURCHASEDATE": "Purchase Date:",
+        "DEPARTURE": "Departure:",
+        "ARRIVAL": "Arrival:",
+        "DEPARTUREDATE": "Departure Date:",
+        "CONTACTINFO": "Contact Info",
+        "EMAIL": "Email:",
+        "PHONENUMBER": "Phone Number:",
+        "PASSENGERS": "Passengers:",
+        "NAME": "Name:",
+        "SURNAME": "Surname:",
+        "IDNUMBER": "ID Number:",
+        "SEAT": "Seat:",
+        "VAGONNUMBER": "Vagon Number:",
+        "CARDINFO": "Card Info:",
+        "CARDOWNER": "Card Owner:",
+        "CARDNUMBER": "Card Number:",
+        "SUM": "Sum:",
+        "GEL": "Gel"
+    }
+}

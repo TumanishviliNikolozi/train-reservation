@@ -4,17 +4,20 @@ import { APIsService } from '../services/apis.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-tkt-check-return',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './tkt-check-return.component.html',
   styleUrl: './tkt-check-return.component.scss'
 })
 export class TktCheckReturnComponent implements OnInit{
 
-  constructor(private route:ActivatedRoute, private router:Router, private services:APIsService){
-
+  constructor(private route:ActivatedRoute, private router:Router, private services:APIsService, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
   }
 
   public checkTicket!:FormGroup;

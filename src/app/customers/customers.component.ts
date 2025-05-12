@@ -4,15 +4,19 @@ import { APIsService } from '../services/apis.service';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { cardExpiryDateValidator } from '../validators/card-expiry.validator';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-customers',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss'
 })
 export class CustomersComponent implements OnInit{
-  constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient, private fb: FormBuilder){
+  constructor(private router:Router, private route:ActivatedRoute, private services:APIsService, private http:HttpClient, private fb: FormBuilder, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
     this.getWagons();
 
     if(history.state){

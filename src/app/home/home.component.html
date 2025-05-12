@@ -1,16 +1,16 @@
 <section class="bg-gradiant">
     <div class="bg-gradiant-text">
-        <h1><span>შეიძინეთ მატარებლის ბილეთები ონლაინ</span></h1>
-        <p><span>გისურვებთ ბედნიერ მგზავრობას</span></p>
+        <h1><span>{{ 'HOME.HEADERMAIN' | translate }}</span></h1>
+        <p><span>{{ 'HOME.HEADERSECOND' | translate }}</span></p>
     </div>
 
     <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <h2><span>დაჯავშნეთ მატარებლის ბილეთი</span></h2>
+        <h2><span>{{ 'HOME.BUYTICKET' | translate }}</span></h2>
     
         <div class="input-holder" #departureElement>
             <input type="hidden" name="whereFrom" [(ngModel)]="whereFrom" #whereFromModel="ngModel" required>
             <div class="selection" data-value="whereFrom" [class.invalid]="whereFromModel.invalid && whereFromModel.touched">
-                <p (click)="toggleDepartureClass()">{{whereFrom === ""? "საიდან?" : whereFrom}}</p>
+                <p (click)="toggleDepartureClass()">{{whereFrom === ""? ('HOME.WHEREFROM' | translate) : whereFrom}}</p>
                 <div class="select-arrow" (click)="toggleDepartureClass()" [class.active-arrow]="isActiveDeparture()">
                     <i class="fa-solid fa-square-caret-down"></i>
                 </div>
@@ -27,7 +27,7 @@
         <div class="input-holder" #ArrivalElement>
             <input type="hidden" name="destination" [(ngModel)]="destination" #destinationModel="ngModel" required>
             <div class="selection" data-value="destination" [class.invalid]="destinationModel.invalid && destinationModel.touched">
-                <p (click)="toggleArrivalClass()">{{destination === ""? "სად?" : destination}}</p>
+                <p (click)="toggleArrivalClass()">{{destination === ""? ('HOME.WHERETO' | translate) : destination}}</p>
                 <div class="select-arrow"  (click)="toggleArrivalClass()" [class.active-arrow]="isActiveArrival()">
                     <i class="fa-solid fa-square-caret-down"></i>
                 </div>
@@ -43,7 +43,7 @@
         <div class="input-holder">
             <div class="calendar-container">
                 <label for="date"><i class="fa-solid fa-calendar-days"></i></label>
-                <input type="text" class="flat-picker" #dateInput id="date" [(ngModel)]="date" name="date" placeholder="როდის?" required> 
+                <input type="text" class="flat-picker" #dateInput id="date" [(ngModel)]="date" name="date" placeholder="{{ 'HOME.WHEN' | translate }}" required> 
             </div>
         </div>
         <div class="input-holder">
@@ -54,7 +54,7 @@
             </div>
         </div>
     
-        <button class="submit-button" type="submit" [disabled]="form.invalid">მატარებლის მოძებნა</button>
+        <button class="submit-button" type="submit" [disabled]="form.invalid">{{ 'HOME.FINDTRAIN' | translate }}</button>
     </form>
 </section>
 
@@ -62,28 +62,28 @@
     <img class="main-img" src="https://railway.stepprojects.ge/assets/img/train/trainticket.png" alt="Step Railway">
 
     <div class="info-container">
-        <h3>მატარებლის ბილეთები</h3>
-        <p>რკინიგზის ბილეთების შესაძენად თქვენ დაგჭირდებათ თითოეული მგზავრის პირადი ნომერი. გთხოვთ მოამზადოთ ეს ინფორმაცია წინასწარ.</p>
+        <h3>{{ 'HOME.TRAINTICKETINFO' | translate }}</h3>
+        <p>{{ 'HOME.TICKETINFO' | translate }}</p>
 
         <div class="info-icons">
             <div class="each-icon">
                 <img src="https://railway.stepprojects.ge/assets/img/train/unoffer.png" alt="შეუზღუდავი შეთავაზებები">
-                <p>შეუზღუდავი შეთავაზებები</p>
+                <p>{{ 'HOME.UNLIMITEDOPTIONS' | translate }}</p>
             </div>
 
             <div class="each-icon">
                 <img src="https://railway.stepprojects.ge/assets/img/train/suppor24.png" alt="24X7 მხარდაჭერა">
-                <p>24X7 მხარდაჭერა</p>
+                <p>{{ 'HOME.FULLDAYSUPPORT' | translate }}</p>
             </div>
 
             <div class="each-icon">
                 <img src="https://railway.stepprojects.ge/assets/img/train/secure100.png" alt="100% უსაფრთხო">
-                <p>100% უსაფრთხო</p>
+                <p>{{ 'HOME.SAFE' | translate }}</p>
             </div>
 
             <div class="each-icon">
                 <img src="https://railway.stepprojects.ge/assets/img/train/truspay.png" alt="100% უსაფრთხო გადახდა">
-                <p>100% უსაფრთხო გადახდა</p>
+                <p>{{ 'HOME.SAFEPAYMENT' | translate }}</p>
             </div>
         </div>
     </div>

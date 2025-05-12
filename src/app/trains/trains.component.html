@@ -1,15 +1,15 @@
 <header class="page-title">
-    <h1><span>აირჩიეთ სასურველი მატარებელი</span></h1>
+    <h1><span>{{ 'TRAINS.CHOOSETRAIN' | translate }}</span></h1>
 </header>
 
 <main>
     <header class="main-title">
-        <h2><span>მატარებლების ჩამონათვალი</span></h2>
+        <h2><span>{{ 'TRAINS.TRAINLIST' | translate }}</span></h2>
     </header>
     <section class="train-list-header">
-        <p><span>მატარებლის სახელი</span></p>
-        <p><span>გამგზავრება</span></p>
-        <p><span>ჩასვლა</span></p>
+        <p><span>{{ 'TRAINS.TRAINNAME' | translate }}</span></p>
+        <p><span>{{ 'TRAINS.DEPARTURE' | translate }}</span></p>
+        <p><span>{{ 'TRAINS.ARRIVAL' | translate }}</span></p>
         <p></p>
     </section>
 
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                     <div class="train-batton-segment">
-                        <button (click)="chosenTrainInfo(train)">დაჯავშნა</button>
+                        <button (click)="chosenTrainInfo(train)">{{ 'TRAINS.RESERVE' | translate }}</button>
                     </div>
                 </section>
             }
@@ -44,7 +44,7 @@
         <div class="no-trains" [style.display]="ifEmptyTrains? 'flex' : 'none'">
             <p>
                 <i class="fa-solid fa-circle-exclamation"></i>
-                <span>მატარებელი ვერ მოიძებნა!</span>
+                <span>{{ 'TRAINS.TRAINNOTFOUND' | translate }}</span>
             </p>
         </div>
     </section>

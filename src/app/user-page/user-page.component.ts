@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { SignUpInService } from '../services/sign-up-in.service';
 import { interval, Subscription } from 'rxjs';
 import { Event } from '@angular/router';
@@ -10,7 +10,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss'
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit, OnDestroy {
 
   constructor(private everrest:SignUpInService){
 
@@ -41,7 +41,7 @@ export class UserPageComponent implements OnInit {
       console.log('refresh token:', this.refreshToken);
     }
 
-    if(this.accessToken){
+    if(this.accessToken && this.refreshToken){
       this.getUser();
       this.startAutoRefresh(8 * 60 * 1000);
     }
@@ -77,11 +77,7 @@ export class UserPageComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
-  }
+  
 
 
   checkCheckbox(event:MouseEvent){
@@ -99,6 +95,12 @@ export class UserPageComponent implements OnInit {
   leaveAccount(){
     localStorage.removeItem('accessToken');
     location.reload();
+  }
+
+  ngOnDestroy() {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
 }

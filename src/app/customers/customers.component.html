@@ -1,12 +1,12 @@
 <header class="page-title">
-    <h1><span>მგზავრების მონაცემები</span></h1>
+    <h1><span>{{ 'CUSTUMERS.PASSENGERINFO' | translate }}</span></h1>
 </header>
 
 <main>
     <form class="formPersonalInfo" [formGroup]="formPersonalInfo" (ngSubmit)="onSubmit()">
         <section class="info-gathering">
             <header class="main-title">
-                <h2><span>შეიყვანეთ თქვენი მონაცემები</span></h2>
+                <h2><span>{{ 'CUSTUMERS.ENTERYOURINFO' | translate }}</span></h2>
             </header>
     
             <section class="each-train">
@@ -33,34 +33,34 @@
             <div class="dotted-line"></div>
 
             <header class="form-header">
-                <h3><span>საკონტაქტო ინფორმაცია</span></h3>
+                <h3><span>{{ 'CUSTUMERS.CONTACTINFO' | translate }}</span></h3>
             </header>
 
             <section class="contact-info-container">
-                <input type="email" name="email" formControlName="email" autocomplete="off" placeholder="მეილი">
-                <input type="tel" pattern="^[0-9]{9}$" inputmode="numeric" name="phoneNumber" maxlength="9" formControlName="phoneNumber" autocomplete="tel" placeholder="ტელეფონის ნომერი">
+                <input type="email" name="email" formControlName="email" autocomplete="off" placeholder="{{ 'CUSTUMERS.EMAIL' | translate }}">
+                <input type="tel" pattern="^[0-9]{9}$" inputmode="numeric" name="phoneNumber" maxlength="9" formControlName="phoneNumber" autocomplete="tel" placeholder="{{ 'CUSTUMERS.PHONENUMBER' | translate }}">
             </section>
 
             <div class="passenger-info-title">
-                <h3><span>მგზავრების ინფორმაცია</span></h3>
+                <h3><span>{{ 'CUSTUMERS.TRAVELERINFO' | translate }}</span></h3>
             </div>
 
             <section class="passenger-info-container" formArrayName="people">
                 @for(passenger of people.controls; track passenger; let i = $index){
                     <div class="passenger-info" [formGroupName]="i">
-                        <p class="passenger-count"><span>მგზავრი {{i + 1}}</span></p>
+                        <p class="passenger-count"><span>{{ 'CUSTUMERS.TRAVELER' | translate }}{{i + 1}}</span></p>
 
                         <div class="passenger-inputs">
                             <div class="passenger-place">
-                                <span>ადგილი:</span>
+                                <span>{{ 'CUSTUMERS.SEAT' | translate }}</span>
                                 <span>{{selectedSeatNumber[i]}}</span>
                             </div>
 
-                            <input type="text" class="passenger-name" name="name" formControlName="name" autocomplete="off" placeholder="სახელი">
-                            <input type="text" class="passenger-surname" name="surname" formControlName="surname" autocomplete="off" placeholder="გვარი">
-                            <input type="text" class="passenger-phone" pattern="^[0-9]{11}$" maxlength="11" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="პირადი ნომერი">
+                            <input type="text" class="passenger-name" name="name" formControlName="name" autocomplete="off" placeholder="{{ 'CUSTUMERS.NAME' | translate }}">
+                            <input type="text" class="passenger-surname" name="surname" formControlName="surname" autocomplete="off" placeholder="{{ 'CUSTUMERS.SURNAME' | translate }}">
+                            <input type="text" class="passenger-phone" pattern="^[0-9]{11}$" maxlength="11" inputmode="numeric" name="idNumber" formControlName="idNumber" autocomplete="tel" placeholder="{{ 'CUSTUMERS.IDNUMBER' | translate }}">
 
-                            <button type="button" class="passenger-seats" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">ადგილის არჩევა</button>
+                            <button type="button" class="passenger-seats" (click)="getTrainById(trainInfo.id); getPassengerIndex($event, i); preventClose($event)">{{ 'CUSTUMERS.CHOOSESEAT' | translate }}</button>
                         </div>
                     </div>
                 }
@@ -70,17 +70,17 @@
         <section class="invoice-section">
             <div class="invoice-container">
                 <header class="invoice-title">
-                    <h3><span>ინვოისი</span></h3>
+                    <h3><span>{{ 'CUSTUMERS.INVOICE' | translate }}</span></h3>
                 </header>
                 <div class="invoice-price">
                     <p class="place-price-title">
-                        <span>ადგილი</span>
-                        <span>ფასი</span>
+                        <span>{{ 'CUSTUMERS.PRICE' | translate }}</span>
+                        <span>{{ 'CUSTUMERS.SEAT' | translate }}</span>
                     </p>
                     <div class="invoise-devider"></div>
                     <p class="full-amount">
-                        <span>სულ:</span>
-                        <span><span class="total-price">{{totalPrice}}</span> Gel</span>
+                        <span>{{ 'CUSTUMERS.SUM' | translate }}</span>
+                        <span><span class="total-price">{{totalPrice}}</span> {{ 'CUSTUMERS.GEL' | translate }}</span>
                     </p>
                 </div>
                 
@@ -88,8 +88,8 @@
                     @for (seatPrice of selectedSeatPrice; track $index; let i = $index) {
                         @if(selectedSeatPrice[i] !== 0){
                             <p class="seat-price">
-                                <span>მგზავრი {{ i + 1}}:</span>
-                                <span><span class="each-price">{{selectedSeatPrice[i]}}</span> Gel</span>
+                                <span>{{ 'CUSTUMERS.TRAVELER' | translate }} {{ i + 1}}:</span>
+                                <span><span class="each-price">{{selectedSeatPrice[i]}}</span> {{ 'CUSTUMERS.GEL' | translate }}</span>
                             </p>
                         }
                     }
@@ -97,10 +97,10 @@
                 
                 <div class="invoice-checkbox" (click)="checkCheckbox($event)">
                     <p class="custom-checkbox"  (click)="checkCheckbox($event)" [class.checked]="invoiceCheckbox"><i class="fa-solid fa-check" [style.display]="invoiceCheckbox ? 'block' : 'none'" (click)="checkCheckbox($event)"></i></p>
-                    <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">წავიკითხე და ვეთანხმები წესებს</p>
+                    <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">{{ 'CUSTUMERS.READANDAGREE' | translate }}</p>
                 </div>
 
-                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false || getBothAccessToken.invalid" (click)="showPayment(); preventClose($event)">გადახდა</button>
+                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false || getBothAccessToken.invalid" (click)="showPayment(); preventClose($event)">{{ 'CUSTUMERS.CHECKOUT' | translate }}</button>
 
                 <!-- <div (click)="getConsole(formPersonalInfo)">click</div>   -->
             </div>
@@ -115,37 +115,37 @@
                 <section class="get-payment-container">
                     <form class="payment-form" [formGroup]="paymentForm">
                         <div class="card-number">
-                            <label for="cardNumber">ბარათის ნომერი</label>
+                            <label for="cardNumber">{{ 'CUSTUMERS.CARDNUMBER' | translate }}</label>
                             <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" (input)="formatCardNumber($event)" autocomplete="off" [class.input-error]="paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid">
                             @if (paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid) {
-                                <div class="error">ბარათის ნომერი აუცილებელია რომ იყოს 16 ციფრი.</div>
+                                <div class="error">{{ 'CUSTUMERS.CARDNUMBERERROR' | translate }}</div>
                             }
                         </div>
 
                         <div class="card-holder">
-                            <label for="">მფლობელი</label>
-                            <input type="text" formControlName="cardHolder" placeholder="ჯონ დოუ" autocomplete="name" pattern="^[a-zA-Z\s' ]+$" (input)="formatCustomerName($event)" [class.input-error]="paymentForm.get('cardHolder')?.touched && paymentForm.get('cardHolder')?.invalid">
+                            <label for="">{{ 'CUSTUMERS.CARDOWNER' | translate }}</label>
+                            <input type="text" formControlName="cardHolder" placeholder="{{ 'CUSTUMERS.CARDOWNERNAME' | translate }}" autocomplete="name" pattern="^[a-zA-Z\s' ]+$" (input)="formatCustomerName($event)" [class.input-error]="paymentForm.get('cardHolder')?.touched && paymentForm.get('cardHolder')?.invalid">
                             @if (paymentForm.get('cardHolder')?.touched && paymentForm.get('cardHolder')?.invalid) {
-                                <div class="error">შეიყვანეთ სწორი სახელი.</div>
+                                <div class="error">{{ 'CUSTUMERS.CARDOWNERERROR' | translate }}</div>
                             }
                         </div>
 
                         <div class="card-date">
-                            <label for="expiryDate">ვადა</label>
+                            <label for="expiryDate">{{ 'CUSTUMERS.DATE' | translate }}</label>
                             <input id="expiryDate" type="text" formControlName="expiryDate" placeholder="MM/YY" maxlength="5" autocomplete="off" [class.input-error]="paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors">
                             @if (paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors) {
                                 <div class="error">
                                     @if (paymentForm.get('expiryDate')?.errors?.['required']) {
-                                        ბარათის ვადა აუცილებელია.
+                                        {{ 'CUSTUMERS.DATEERROR1' | translate }}
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['invalidFormat']) {
-                                        არასწორი ფორმა, გამოიყენე MM/YY.
+                                        {{ 'CUSTUMERS.DATEERROR2' | translate }}
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['expired']) {
-                                        ბარათი ვადაგასულია.
+                                        {{ 'CUSTUMERS.DATEERROR3' | translate }}
                                     }
                                     @if (paymentForm.get('expiryDate')?.errors?.['tooFar']) {
-                                        ბარათის ვადა არარეალურად შორსაა.
+                                        {{ 'CUSTUMERS.DATEERROR4' | translate }}
                                     }
                                 </div>
                             }
@@ -155,14 +155,14 @@
                             <label for="cvv">CVV</label>
                             <input id="cvv" type="text" formControlName="cvv" placeholder="123" autocomplete="off" maxlength="4" [class.input-error]="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
                             @if (paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid) {
-                                <div class="error">CVV აუცილებელია რომ იყოს 3 ან 4 ციფრი.</div>
+                                <div class="error">{{ 'CUSTUMERS.CVVERROR' | translate }}</div>
                             }
                         </div>
 
                         <!-- <button type="button" (click)="getConsolePay(paymentForm)">console</button> -->
                     </form>
 
-                    <button type="submit" class="submit-button" [disabled]="paymentForm.invalid">დაჯავშნა</button>
+                    <button type="submit" class="submit-button" [disabled]="paymentForm.invalid">{{ 'CUSTUMERS.RESERVE' | translate }}</button>
                 </section>
             </section>
         </section>
@@ -188,19 +188,19 @@
                             }
                         </div>
                         <div class="wagon-name">
-                            <p>აირჩიე ვაგონი: {{wagonName}}</p>
+                            <p>{{ 'CUSTUMERS.CHOOSEVAGON' | translate }} {{wagonName}}</p>
                         </div>
                         <div class="seat-container">
                             @if(wagonById){
                                 <div class="vagon-start">
-                                    <p><span>საპირფარეშო</span></p>
+                                    <p><span>{{ 'CUSTUMERS.RESTROOM' | translate }}</span></p>
                                 </div>
                                 @for (seat of sortedWagonSeats; track $index; let i = $index) {
                                     <button class="select-seat" type="button" (click)="sendSeatInfo(seat.number)" [disabled]="isSeatTaken(seat.number, seat.vagonId)" [class.active]="seat.number === selectedSeatNumber[selectedPassengerIndex] && seat.vagonId === selectedSeatVagonId[selectedPassengerIndex]">{{seat.number}}</button>
                                 }
                                 <div class="seat-space"></div>
                                 <div class="vagon-end">
-                                    <p><span>საპირფარეშო</span></p>
+                                    <p><span>{{ 'CUSTUMERS.RESTROOM' | translate }}</span></p>
                                 </div>
                             }
                         </div>

@@ -2,17 +2,19 @@ import { Component, ElementRef, HostListener, OnDestroy, OnInit, signal, viewChi
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { SignUpInService } from '../services/sign-up-in.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, RouterModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit{
 
-  constructor(private everrest:SignUpInService, private router:Router, private route:ActivatedRoute){
-
+  constructor(private everrest:SignUpInService, private router:Router, private route:ActivatedRoute, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
   }
 
   public RegisterPopup:boolean = false;
@@ -26,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public genderHolder:string[] = ['MALE', "FEMALE", 'OTHER'];
   public chosenGender:string = '';
 
+  public genderList:string[] = [];
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -178,10 +181,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    
+  changeLang(){
+    this.translate.use('en')
   }
-
   
 
   // gotoerror(){

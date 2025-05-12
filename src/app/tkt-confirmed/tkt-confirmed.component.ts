@@ -3,17 +3,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-tkt-confirmed',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './tkt-confirmed.component.html',
   styleUrl: './tkt-confirmed.component.scss'
 })
 export class TktConfirmedComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute, private router:Router, private services:APIsService){
-
+  constructor(private route:ActivatedRoute, private router:Router, private services:APIsService, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
   }
 
   public trueIdSaver!:string;
