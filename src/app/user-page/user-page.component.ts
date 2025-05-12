@@ -3,17 +3,20 @@ import { SignUpInService } from '../services/sign-up-in.service';
 import { interval, Subscription } from 'rxjs';
 import { Event } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-user-page',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss'
 })
 export class UserPageComponent implements OnInit, OnDestroy {
 
-  constructor(private everrest:SignUpInService){
-
+  constructor(private everrest:SignUpInService, private translate:TranslateService){
+    translate.setDefaultLang('ka');
+    translate.use('ka');
   }
 
   private bothTokens:any;
@@ -27,10 +30,16 @@ export class UserPageComponent implements OnInit, OnDestroy {
   public passwordCheckBox:Boolean = false;
 
   public changePasswordForm!: FormGroup;
+  public domElement:any;
 
 
   ngOnInit(): void {
-    this.bothTokens = localStorage.getItem('accessToken');
+    this.domElement = document.querySelector('.user-page-container');
+
+    if(this.domElement){
+      this.bothTokens = localStorage.getItem('accessToken');
+    }
+    
 
     if(this.bothTokens){
       this.bothTokens = JSON.parse(this.bothTokens);

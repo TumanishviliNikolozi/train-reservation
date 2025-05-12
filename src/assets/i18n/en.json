@@ -126,5 +126,32 @@
         "CARDNUMBER": "Card Number:",
         "SUM": "Sum:",
         "GEL": "Gel"
+    },
+
+    "TICKETCHECK":{
+        "CHECKTKT": "Check Ticket",
+        "TICKETID": "Ticket ID",
+        "WRONGID": "Wrong ID",
+        "CHECK": "Check",
+        "DELETE": "Delete"
+    },
+
+    "USERPAGE":{
+        "USERINFO": "User Info",
+        "AVATAR": "Avatar",
+        "NAME": "Name:",
+        "SURNAME": "Surname:",
+        "AGE": "Age:",
+        "GENDER": "Gender:",
+        "WANTTOPASSWORDCHANGE": "Do You Want To Change Password?",
+        "OLDPASSWORD": "Old Password",
+        "NEWPASSWORD": "New Password",
+        "CHANGEPASSWORD": "Change Password",
+        "CONTACT": "Contact Info",
+        "EMAIL": "Email:",
+        "PHONENUMBER": "Phone Number:",
+        "ADDRESS": "Address:",
+        "ZIPCODE": "Zipcode:",
+        "EXITACCOUNT": "Exit Account" 
     }
 }

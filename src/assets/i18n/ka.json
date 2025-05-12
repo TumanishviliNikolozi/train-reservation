@@ -126,5 +126,32 @@
         "CARDNUMBER": "ბარათის ნომერი",
         "SUM": "სულ:",
         "GEL": "₾"
+    },
+
+    "TICKETCHECK":{
+        "CHECKTKT": "გადაამოწმე ბილეთი",
+        "TICKETID": "ბილეთის ID",
+        "WRONGID": "არასწორი ID",
+        "CHECK": "შემოწმება",
+        "DELETE": "წაშალე"
+    },
+
+    "USERPAGE":{
+        "USERINFO": "მომხმარებლის მონაცემები",
+        "AVATAR": "ავატარი",
+        "NAME": "სახელი:",
+        "SURNAME": "გვარი:",
+        "AGE": "ასაკი:",
+        "GENDER": "სქესი:",
+        "WANTTOPASSWORDCHANGE": "გსურს პაროლი შეცვალო?",
+        "OLDPASSWORD": "ძველი პაროლი",
+        "NEWPASSWORD": "ახალი პაროლი",
+        "CHANGEPASSWORD": "პაროლის შეცვლა",
+        "CONTACT": "კონტაქტი",
+        "EMAIL": "მეილი:",
+        "PHONENUMBER": "ტელ. ნომერი:",
+        "ADDRESS": "მისამართი:",
+        "ZIPCODE": "საფოსტო კოდი:",
+        "EXITACCOUNT": "აქაუნთოდან გასვლა" 
     }
 }

@@ -1,6 +1,6 @@
 <section class="user-page-container">
     <header class="user-info-header">
-        <h1>მომხმარებლის მონაცემები</h1>
+        <h1>{{ 'USERPAGE.USERINFO' | translate }}</h1>
     </header>
 
     <section class="user-info-container">
@@ -8,25 +8,25 @@
             <section class="user-avatar">
                 <div class="avatar-info">
                     <div class="avatar">
-                        <h3>ავატარი</h3>
+                        <h3>{{ 'USERPAGE.AVATAR' | translate }}</h3>
                     </div>
                     <div class="user-img">
                         <img [src]="getCurrentUser?.avatar || 'https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg'" alt="User Avatar">
                     </div>
                     <div class="user-name">
-                        <h4>სახელი: </h4>
+                        <h4>{{ 'USERPAGE.NAME' | translate }} </h4>
                         <p>{{getCurrentUser?.firstName}}</p>
                     </div>
                     <div class="user-surname">
-                        <h4>გვარი: </h4>
+                        <h4>{{ 'USERPAGE.SURNAME' | translate }} </h4>
                         <p>{{getCurrentUser?.lastName}}</p>
                     </div>
                     <div class="user-age">
-                        <h4>ასაკი: </h4>
+                        <h4>{{ 'USERPAGE.AGE' | translate }} </h4>
                         <p>{{getCurrentUser?.age}}</p>
                     </div>
                     <div class="user-age">
-                        <h4>სქესი: </h4>
+                        <h4>{{ 'USERPAGE.GENDER' | translate }} </h4>
                         <p>{{getCurrentUser?.gender}}</p>
                     </div>
                 </div>
@@ -36,51 +36,51 @@
                 <div class="change-password">
                     <div class="password-checkbox" (click)="checkCheckbox($event)">
                         <p class="custom-checkbox"  (click)="checkCheckbox($event)" [class.checked]="passwordCheckBox"><i class="fa-solid fa-check" [style.display]="passwordCheckBox ? 'block' : 'none'" (click)="checkCheckbox($event)"></i></p>
-                        <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">გსურს პაროლი შეცვალო?</p>
+                        <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">{{ 'USERPAGE.WANTTOPASSWORDCHANGE' | translate }}</p>
                     </div>
                 </div>
 
                 <form class="change-password-form" [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" >
                     <div class="user-old-password">
-                        <label for="old-password">ძველი პაროლი</label>
+                        <label for="old-password">{{ 'USERPAGE.OLDPASSWORD' | translate }}</label>
                         <input type="password" id="old-password" formControlName="oldPassword">
                     </div>
 
                     <div class="user-new-password">
-                        <label for="new-password">ახალი პაროლი</label>
+                        <label for="new-password">{{ 'USERPAGE.NEWPASSWORD' | translate }}</label>
                         <input type="password" id="new-password" formControlName="newPassword">
                     </div>
 
-                    <button class="change-password-submit"  [disabled]="!passwordCheckBox">პაროლის შეცვლა</button>
+                    <button class="change-password-submit"  [disabled]="!passwordCheckBox">{{ 'USERPAGE.CHANGEPASSWORD' | translate }}</button>
                 </form>
             </section>
 
             <section class="contact-info">
                 <div class="avatar-info">
                     <div class="avatar">
-                        <h3>კონტაქტი</h3>
+                        <h3>{{ 'USERPAGE.CONTACT' | translate }}</h3>
                     </div>
                     <div class="user-name">
-                        <h4>მეილი: </h4>
+                        <h4>{{ 'USERPAGE.EMAIL' | translate }} </h4>
                         <p>{{getCurrentUser?.email}}</p>
                     </div>
                     <div class="user-surname">
-                        <h4>ნომერი: </h4>
+                        <h4>{{ 'USERPAGE.PHONENUMBER' | translate }} </h4>
                         <p>{{getCurrentUser?.phone}}</p>
                     </div>
                     <div class="user-age">
-                        <h4>მისამართი: </h4>
+                        <h4>{{ 'USERPAGE.ADDRESS' | translate }} </h4>
                         <p>{{getCurrentUser?.address}}</p>
                     </div>
                     <div class="user-age">
-                        <h4>ZIP-კოდი: </h4>
+                        <h4>{{ 'USERPAGE.ZIPCODE' | translate }} </h4>
                         <p>{{getCurrentUser?.zipcode}}</p>
                     </div>
                 </div>
             </section>
 
             <section class="leave-account">
-                <button class="leave-account-button" (click)="leaveAccount()">აქაუნთიდან გამოსვლა</button>
+                <button class="leave-account-button" (click)="leaveAccount()">{{ 'USERPAGE.EXITACCOUNT' | translate }}</button>
             </section>
         </section>
     </section>

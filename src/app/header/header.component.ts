@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit{
   public isScrolled:boolean = false;
   public iAmRegistered:boolean = true;
 
+  public changMyLanguage:boolean = false;
+
   public signUpForm!:FormGroup;
   public signInForm!:FormGroup;
   public verifyEmailForm!:FormGroup;
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit{
   public chosenGender:string = '';
 
   public genderList:string[] = [];
+
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -182,7 +185,14 @@ export class HeaderComponent implements OnInit{
   }
 
   changeLang(){
-    this.translate.use('en')
+    this.changMyLanguage = !this.changMyLanguage;
+
+    if(this.changMyLanguage){
+      this.translate.use('en')
+    } else {
+      this.translate.use('ka')
+    }
+    
   }
   
 

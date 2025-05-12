@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, FormArray } from '@angular/forms';
 
 export function cardExpiryDateValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -35,5 +35,17 @@ export function cardExpiryDateValidator(): ValidatorFn {
     }
 
     return null;
+  };
+}
+
+
+export function uniqueIdNumberValidator(): ValidatorFn {
+  return (formArray: AbstractControl): ValidationErrors | null => {
+    if (!(formArray instanceof FormArray)) return null;
+
+    const idNumbers = formArray.controls.map(control => control.get('idNumber')?.value);
+    const duplicates = idNumbers.filter((id, index) => id && idNumbers.indexOf(id) !== index);
+
+    return duplicates.length > 0 ? { duplicateIdNumber: true } : null;
   };
 }

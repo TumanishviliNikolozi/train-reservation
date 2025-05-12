@@ -3,7 +3,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { APIsService } from '../services/apis.service';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { cardExpiryDateValidator } from '../validators/card-expiry.validator';
+import { cardExpiryDateValidator, uniqueIdNumberValidator } from '../validators/card-expiry.validator';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
@@ -100,6 +100,8 @@ export class CustomersComponent implements OnInit{
         })
       )
     }
+
+    (this.formPersonalInfo.get('people') as FormArray).setValidators(uniqueIdNumberValidator());
 
     console.log(this.formPersonalInfo.value.people)
 
