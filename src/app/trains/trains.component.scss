@@ -98,8 +98,9 @@ main{
                     transition: 0.3s ease;
 
                     &:hover{
-                        transition: 0.3s ease;
+                        transform: translateY(-5px);
                         background-color: $buttonHoverColor-1;
+                        transition: 0.3s ease;
                     }
                 }
             }

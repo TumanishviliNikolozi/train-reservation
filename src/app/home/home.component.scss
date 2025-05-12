@@ -208,8 +208,9 @@
             cursor: pointer;
 
             &:hover{
-                transition: 0.3s ease-in-out;
+                transform: translateY(-5px);
                 background-color: $buttonHoverColor-1;
+                transition: 0.3s ease;
             }
         }
     }

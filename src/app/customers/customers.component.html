@@ -100,7 +100,7 @@
                     <p class="custom-checkbox-label"  (click)="checkCheckbox($event)">{{ 'CUSTUMERS.READANDAGREE' | translate }}</p>
                 </div>
 
-                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false || getBothAccessToken.invalid" (click)="showPayment(); preventClose($event)">{{ 'CUSTUMERS.CHECKOUT' | translate }}</button>
+                <button type="button" class="submit-button" [disabled]="formPersonalInfo.invalid || invoiceCheckbox === false || getBothAccessToken === null" (click)="showPayment(); preventClose($event)">{{ 'CUSTUMERS.CHECKOUT' | translate }}</button>
 
                 <!-- <div (click)="getConsole(formPersonalInfo)">click</div>   -->
             </div>

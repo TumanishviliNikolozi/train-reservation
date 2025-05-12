@@ -64,7 +64,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
   getUser(){
     this.everrest.getEverrestCurrentUser(this.accessToken).subscribe((response) => {
       this.getCurrentUser = response;
-      console.log('current user:', this.getCurrentUser);
+      // console.log('current user:', this.getCurrentUser);
     })
   }
 
@@ -76,7 +76,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   refreshTokenCall() {
     this.everrest.refreshEverrestToken(this.refreshToken).subscribe((response: any) => {
-      console.log('Refreshed token:', response);
+      // console.log('Refreshed token:', response);
 
       this.accessToken = response.access_token;
       this.refreshToken = response.refresh_token;
@@ -96,7 +96,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   changePassword(){
     this.everrest.changeEverrestPassword(this.changePasswordForm.value).subscribe((response) => {
-      console.log('changed accessToken:', response)
+      // console.log('changed accessToken:', response)
       localStorage.setItem('accessToken', JSON.stringify(response));
     })
   }

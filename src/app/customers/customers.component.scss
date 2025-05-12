@@ -86,10 +86,11 @@ main{
                         @include font-option(roboto, $buttonTextColor-1, 1.3rem, 200);
                         cursor: pointer;
                         transition: 0.3s ease;
-    
+
                         &:hover{
-                            transition: 0.3s ease;
+                            transform: translateY(-5px);
                             background-color: $buttonHoverColor-1;
+                            transition: 0.3s ease;
                         }
                     }
                 }
@@ -209,6 +210,13 @@ main{
                             text-align: center;
                             @include font-option(roboto, $buttonTextColor-1, 1rem, 100);
                             cursor: pointer;
+                            transition: 0.3s ease;
+
+                            &:hover{
+                                transform: translateY(-5px);
+                                background-color: $buttonHoverColor-1;
+                                transition: 0.3s ease;
+                            }
                         }
                     }
                 }
@@ -335,6 +343,12 @@ main{
                     @include font-option(roboto, $buttonTextColor-1, 1.2rem, 100);
                     cursor: pointer;
                     transition: 0.5s;
+
+                    &:hover{
+                        transform: translateY(-5px);
+                        background-color: $buttonHoverColor-1;
+                        transition: 0.3s ease;
+                    }
                 }
 
                 .submit-button:disabled{
