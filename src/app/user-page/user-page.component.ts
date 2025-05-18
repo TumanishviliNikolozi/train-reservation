@@ -62,27 +62,42 @@ export class UserPageComponent implements OnInit, OnDestroy {
   }
 
   getUser(){
-    this.everrest.getEverrestCurrentUser(this.accessToken).subscribe((response) => {
-      this.getCurrentUser = response;
-      // console.log('current user:', this.getCurrentUser);
+    this.everrest.getEverrestCurrentUser(this.accessToken).subscribe({
+      next: (response) => {
+        this.getCurrentUser = response;
+        // console.log('current user:', this.getCurrentUser);
+      },
+      error: (err) => {
+        console.error('get user error:', err);
+      }
     })
   }
 
   startAutoRefresh(refreshIntervalMs: number) {
-    this.refreshSubscription = interval(refreshIntervalMs).subscribe(() => {
-      this.refreshTokenCall();
+    this.refreshSubscription = interval(refreshIntervalMs).subscribe({
+      next: () => {
+        this.refreshTokenCall();
+      },
+      error(err) {
+        console.error('token auto refresh error:', err);
+      }
     });
   }
 
   refreshTokenCall() {
-    this.everrest.refreshEverrestToken(this.refreshToken).subscribe((response: any) => {
-      // console.log('Refreshed token:', response);
+    this.everrest.refreshEverrestToken(this.refreshToken).subscribe({
+      next: (response: any) => {
+        // console.log('Refreshed token:', response);
 
-      this.accessToken = response.access_token;
-      this.refreshToken = response.refresh_token;
-      this.bothTokens = response;
+        this.accessToken = response.access_token;
+        this.refreshToken = response.refresh_token;
+        this.bothTokens = response;
 
-      localStorage.setItem('accessToken', JSON.stringify(response));
+        localStorage.setItem('accessToken', JSON.stringify(response));
+      },
+      error(err) {
+        console.error('refresh all tokens:', err)
+      }
     });
   }
 
@@ -95,10 +110,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
   }
 
   changePassword(){
-    this.everrest.changeEverrestPassword(this.changePasswordForm.value).subscribe((response) => {
-      // console.log('changed accessToken:', response)
-      localStorage.setItem('accessToken', JSON.stringify(response));
-    })
+    // this.everrest.changeEverrestPassword(this.changePasswordForm.value).subscribe((response) => {
+    //   // console.log('changed accessToken:', response)
+    //   localStorage.setItem('accessToken', JSON.stringify(response));
+    // })
   }
 
   leaveAccount(){
